@@ -8,6 +8,7 @@ import MyNewScreen from '../screens/aiChatInbox.tsx';
 
 
 
+
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
@@ -76,7 +77,7 @@ const AppNavigator = () => (
       }}
     />
     <Tab.Screen name="Weather" component={HomeScreen} />
-    <Tab.Screen name="Profile" component={MyNewScreen} />
+    <Tab.Screen name="Profile" component={HomeScreen} />
   </Tab.Navigator>
 );
 

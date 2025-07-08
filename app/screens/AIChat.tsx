@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import ChatHistory from '../components/AiAdvisoryComponents/chatHistory';
 import  {VoiceChat}  from '../components/AiAdvisoryComponents/VoiceBubble';
 import ChatInputBar from '../components/AiAdvisoryComponents/chatInputBar';
+import CustomTopBar from '../components/customTopBar';
 
 const options = [
   'Where is nearest seed shop? 🌱',
@@ -60,61 +61,77 @@ const AIChat = () => {
     throw new Error('Function not implemented.');
   }
 
-  return (
-    <ImageBackground
-      source={require('../assets/images/bg2.png')}
-      style={styles.background}
-    >
-      <View style={styles.container}>
-        <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
-        <Text style={styles.subtitle}>What farming help do you need today?</Text>
+return (
 
-        <ScrollView
-          contentContainerStyle={styles.optionsContainer}
-          showsVerticalScrollIndicator={false}
-        >
-          {history.length === 0 ? (
-            options.map((option, index) => (
+    <View style={{ flex: 1, alignItems: 'center', height:'100%', justifyContent: 'center' ,backgroundColor:'#fff' }}>
+      {history.length === 0 ? (
+        <>  <ImageBackground
+              source={require('../assets/images/bg2.png')}
+              style={styles.background}
+            >
+          <View style={styles.container}>
+            <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
+            <Text style={styles.subtitle}>What farming help do you need today?</Text>
+          </View>
+
+          <ScrollView
+            contentContainerStyle={styles.optionsContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            {options.map((option, index) => (
               <MessageOption
                 key={index}
                 label={option}
                 onPress={() => console.log('Tapped:', option)}
               />
-            ))
-          ) : (
-            history.map((item, index) => {
-              if (item.type === 'voice') {
-                return <VoiceChat key={index} item={item} />;
-              } else {
-                return (
-                  <ChatHistory
-                    key={index}
-                    prompt={item.prompt ?? ''}
-                    answer={item.answer ?? ''}
-                    onPress={item.onPress ?? (() => {})}
-                    onLike={() => console.log('Liked:', item.prompt)}
-                    onDislike={() => console.log('Disliked:', item.prompt)}
-                    onRegenerate={() => console.log('Regenerate:', item.prompt)}
-                  />
-                );
-              }
-            })
-          )}
-        </ScrollView>
+            ))}
+          </ScrollView>
+          </ImageBackground>
+        </>
+      ) : (
+        <>
+          <View style={{ width: '100%' }}>
+            <CustomTopBar />
+          </View>
 
-      <ChatInputBar
-        value={inputText}
-        onChangeText={(text) => {
-          setInputText(text);
-          console.log('Typed:', text);
-        }}
-        onMicPress={() => Alert.alert('Mic pressed')}
-        onGalleryPress={() => Alert.alert('Gallery pressed')}
-      />
+          <ScrollView
+            contentContainerStyle={styles.optionsContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            {history.map((item, index) =>
+              item.type === 'voice' ? (
+                <VoiceChat key={index} item={item} />
+              ) : (
+                <ChatHistory
+                  key={index}
+                  prompt={item.prompt ?? ''}
+                  answer={item.answer ?? ''}
+                  onPress={item.onPress ?? (() => {})}
+                  onLike={() => console.log('Liked:', item.prompt)}
+                  onDislike={() => console.log('Disliked:', item.prompt)}
+                  onRegenerate={() => console.log('Regenerate:', item.prompt)}
+                />
+              )
+            )}
+          </ScrollView>
+        </>
+      )}
 
+      <View style={{ marginBottom: -14, width: '100%' }}>
+        <ChatInputBar
+          value={inputText}
+          onChangeText={(text) => {
+            setInputText(text);
+            console.log('Typed:', text);
+          }}
+          onMicPress={() => Alert.alert('Mic pressed')}
+          onGalleryPress={() => Alert.alert('Gallery pressed')}
+        />
       </View>
-    </ImageBackground>
-  );
+    </View>
+
+);
+
 };
 
 const styles = StyleSheet.create({
@@ -149,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     width: '100%',
-    paddingBottom: 140,
+    paddingBottom: 40,
   },
   inputWrapper: {
     position: 'absolute',

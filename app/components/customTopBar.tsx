@@ -1,20 +1,20 @@
-// components/CustomTopBar.tsx
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 
-const CustomTopBar = ({ onTogglePress }: { onTogglePress?: () => void }) => {
+const CustomTopBar = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.leftSection}>
-        <Image
-          source={require('../assets/images/Logo.png')}
-          style={styles.logo}
-        />
+        <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
         <Text style={styles.title}>Farme₹Pay</Text>
       </View>
-      <TouchableOpacity onPress={onTogglePress}>
+
+      <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
         <Image
-          source={require('../assets/images/toggleIcon.png')} // Replace with your toggle icon path
+          source={require('../assets/images/toggleIcon.png')}
           style={styles.toggleIcon}
         />
       </TouchableOpacity>

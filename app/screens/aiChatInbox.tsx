@@ -1,4 +1,3 @@
-// screens/MyNewScreen.tsx
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CustomTopBar from '../components/customTopBar';
@@ -6,7 +5,7 @@ import CustomTopBar from '../components/customTopBar';
 const MyNewScreen = () => {
   return (
     <View style={styles.container}>
-      <CustomTopBar onTogglePress={() => console.log('Toggle pressed')} />
+      <CustomTopBar />
       <View style={styles.content}>
         <Text>This is a new screen with a custom top bar.</Text>
       </View>
