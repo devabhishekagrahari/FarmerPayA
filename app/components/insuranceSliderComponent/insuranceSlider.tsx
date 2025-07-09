@@ -6,44 +6,56 @@ import { Insurance } from './insurance';
 const insurances: Insurance[] = [
   {
     title: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
-    emoji: '☂️✅',
-    bgColor: '#F44336',
+    emojiImage: require('../../assets/images/bimaYojna.png'),
+    bgColor1: '#FF8B8B',
+    bgColor2: '#FD0C10',
   },
   {
     title: 'Weather-Based Crop Insurance Scheme (WBCIS)',
-    emoji: '🌧️🛡️',
-    bgColor: '#9C27B0',
+    emojiImage: require('../../assets/images/weatherCrop.png'),
+    bgColor1: '#C69EFF',
+    bgColor2: '#9F00CB',
   },
   {
     title: 'Unified Package Insurance Scheme (UPIS)',
-    emoji: '👨‍🌾🐄',
-    bgColor: '#3F51B5',
+    emojiImage: require('../../assets/images/UPIS.png'),
+    bgColor1: '#6A4ED9',
+    bgColor2: '#020852',
   },
   {
-    title: 'Find More\nInsurances of your need',
-    emoji: '➡️',
-    bgColor: '#F5F5F5',
+    title: 'Find More Insurances of your need',
+    emojiImage: require('../../assets/images/nextArrow.png'),
+    bgColor1: '#FFECE5',
+    bgColor2: '#FADDDA',
+    titleColor:'#252E3D'
+  },
+    {
+    title: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
+    emojiImage: require('../../assets/images/bimaYojna.png'),
+    bgColor1: '#FF8B8B',
+    bgColor2: '#FD0C10',
   },
   {
-    title: 'NEW Pradhan Mantri Fasal Bima Yojana (PMFBY)',
-    emoji: '☂️✅',
-    bgColor: '#F44336',
+    title: 'Weather-Based Crop Insurance Scheme (WBCIS)',
+    emojiImage: require('../../assets/images/weatherCrop.png'),
+    bgColor1: '#C69EFF',
+    bgColor2: '#9F00CB',
   },
   {
-    title: 'NEW Weather-Based Crop Insurance Scheme (WBCIS)',
-    emoji: '🌧️🛡️',
-    bgColor: '#9C27B0',
+    title: 'Unified Package Insurance Scheme (UPIS)',
+    emojiImage: require('../../assets/images/UPIS.png'),
+    bgColor1: '#6A4ED9',
+    bgColor2: '#020852',
   },
   {
-    title: 'NEW Unified Package Insurance Scheme (UPIS)',
-    emoji: '👨‍🌾🐄',
-    bgColor: '#3F51B5',
+    title: 'Find More Insurances of your need',
+    emojiImage: require('../../assets/images/nextArrow.png'),
+    bgColor1: '#FFECE5',
+    bgColor2: '#FADDDA',
+    titleColor:'#252E3D'
   },
-  {
-    title: 'NEW Find More\nInsurances of your need',
-    emoji: '➡️',
-    bgColor: '#F5F5F5',
-  },
+    
+    
 ];
 
 // Helper to chunk into groups of 4
@@ -98,8 +110,9 @@ export default InsuranceSlider;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+    padding: 6,
     marginTop: 24,
+    marginBottom: 16,
   },
   title: {
     fontSize: 16,
@@ -109,7 +122,10 @@ const styles = StyleSheet.create({
   },
   page: {
     width: PAGE_WIDTH,
-    marginRight: 8,
+    marginRight: 22,
+    justifyContent: 'space-between',
+    left:-10
+
   },
   row: {
     flexDirection: 'row',

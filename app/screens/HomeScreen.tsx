@@ -43,7 +43,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f7ff',
+    backgroundColor: '#fff',
   },
   sectionTitle: {
     fontSize: 18,

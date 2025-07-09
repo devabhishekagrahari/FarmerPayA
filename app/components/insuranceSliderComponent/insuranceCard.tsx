@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Insurance } from './insurance';
+import LinearGradient from 'react-native-linear-gradient';
 
-const InsuranceCard: React.FC<Insurance> = ({ title, emoji, bgColor }) => {
+const InsuranceCard: React.FC<Insurance> = ({ title, emojiImage, bgColor1 ,bgColor2 , titleColor}) => {
   return (
-    <View style={[styles.card, { backgroundColor: bgColor }]}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.emoji}>{emoji}</Text>
+    <View style={[styles.card]}>
+      <LinearGradient
+        colors={[bgColor1, bgColor2]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.card}
+      > 
+      <Text style={[styles.title, {color:titleColor || '#FFFFFF'}]}>{title}</Text>
+      <Image source={emojiImage} style={styles.emoji}/></LinearGradient>
     </View>
   );
 };
@@ -15,16 +22,18 @@ export default InsuranceCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: 150,
-    height: 200,
+    width: 180,
+    height: 194,
     borderRadius: 16,
     padding: 12,
+    marginRight:6,
+    flexDirection:'column',
     justifyContent: 'space-between',
-    margin: 6,
+
   },
   title: {
-    fontSize: 14,
-    color: '#fff',
+    fontSize: 12,
+    fontFamily:'Inter',
     fontWeight: 'bold',
   },
   emoji: {

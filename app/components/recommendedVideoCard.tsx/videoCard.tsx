@@ -8,7 +8,7 @@ interface VideoCardProps {
 const VideoCard: React.FC<VideoCardProps> = ({ image }) => {
   return (
     <View style={styles.card}>
-      <Image source={image} style={styles.image} resizeMode="cover" />
+      <Image source={image} style={styles.image} resizeMode="stretch" />
     </View>
   );
 };
@@ -18,15 +18,15 @@ export default VideoCard;
 const styles = StyleSheet.create({
   card: {
     width: 280,
-    height: 160,
+    height: 180,
     borderRadius: 16,
-    overflow: 'hidden',
+    margin:8,
     marginRight: 16,
     elevation: 4,
     backgroundColor: '#fff',
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: 280,
+    height: 180,
   },
 });

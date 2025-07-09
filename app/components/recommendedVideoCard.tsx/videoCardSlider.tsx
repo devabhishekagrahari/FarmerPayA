@@ -12,6 +12,18 @@ const videoData = [
     id: '2',
     image: require('../../assets/images/vc1.png'),
   },
+    {
+    id: '3',
+    image: require('../../assets/images/vc1.png'),
+  },
+    {
+    id: '4',
+    image: require('../../assets/images/vc1.png'),
+  },
+    {
+    id: '5',
+    image: require('../../assets/images/vc1.png'),
+  },
   // Add more video thumbnails here
 ];
 

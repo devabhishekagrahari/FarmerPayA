@@ -2,115 +2,132 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
-  TouchableOpacity,
-  Pressable,
+  Image,
+  Dimensions,
   ImageBackground,
-  Dimensions
+  TouchableOpacity,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-const HeaderGreeting = () => (
-  <ImageBackground style={styles.container} source={require('../assets/images/bg.png')}>
-    <View style={styles.topRow}>
-      <View style={styles.headerTitleContainer}>
-        <Image source={require('../assets/images/plant.png')} style={styles.icon} />
-        <Text style={styles.appName}>FarmerPay</Text>
-      </View>
+const Header = () => {
+  return (
+    <LinearGradient
+      colors={['#4506A0', '#6929C4']}
+      start={{ x: 0.15, y: 0.5 }}
+      end={{ x: 1, y: 0.5 }}
+      style={styles.container}
+    >
+      <ImageBackground
+        source={require('../assets/images/grid.png')} // use your image path
+        resizeMode="cover"
+        style={styles.grid}
+      >
+        <View style={styles.topRow}>
+          <View style={styles.logoRow}>
+            <Image source={require('../assets/images/smLogo.png')} style={styles.logo} />
+            <Text style={styles.appName}>Farme₹Pay</Text>
+          </View>
+          <View style={styles.iconsRow}>
+            <TouchableOpacity style={styles.iconButton}>
+              <Image source={require('../assets/images/notificationIcon.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+              <Image source={require('../assets/images/signIcon.png')}/>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-      <View style={styles.headerRightContainer}>
-        <TouchableOpacity style={styles.box} onPress={() => console.log('Notifications')}>
-          <Image source={require('../assets/images/notification.png')} style={styles.iconButton} />
-        </TouchableOpacity>
-
-        <Pressable style={styles.box} onPress={() => console.log('Change Language')}>
-          <Image source={require('../assets/images/Vector.png')} style={styles.iconButton} />
-        </Pressable>
-      </View>
-    </View>
-
-    <View style={styles.greetRow}>
-      <View style={styles.greetColumn} >
-        <Text style={styles.welcomeText}>Namaste,</Text>
-        <Text style={styles.username}>Animesh 🙏</Text>
-        <Text style={styles.subtitle}>How can we help you today?</Text>
-      </View>
-      <Image source={require('../assets/images/farmer.png')} style={styles.image}  />
-    </View>
-  </ImageBackground>
-);
+        <View style={styles.contentRow}>
+          <View style={styles.textBlock}>
+            <Text style={styles.greeting}>Namaste,</Text>
+            <Text style={styles.username}>Animesh 🙏</Text>
+            <Text style={styles.subText}>How can we help you today?</Text>
+          </View>
+          <Image
+            source={require('../assets/images/farmer.png')} // illustration image
+            style={styles.farmerImg}
+            resizeMode="contain"
+          />
+        </View>
+      </ImageBackground>
+    </LinearGradient>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    overflow: 'hidden',
+    width: '100%',
+    height: height * 0.30,
+    resizeMode:'contain'
+  },
+  grid: {
+    flex: 1,
+    paddingHorizontal: 16,
+    aspectRatio:1.6,
+    paddingTop: 20,
   },
   topRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 30,
   },
-  headerTitleContainer: {
+  logoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  headerRightContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  icon: {
-    width: 28,
-    height: 80,
-    resizeMode: 'contain',
-    marginRight: 8,
   },
   appName: {
-    fontSize: 18,
     color: '#fff',
     fontWeight: 'bold',
-  },
-  box: {
-    padding: 10,
-    backgroundColor: '#fff',
-    borderRadius: 12,
+    fontSize: 18,
     marginLeft: 8,
   },
-  iconButton: {
-    width: 24,
-    height: 24,
-    resizeMode: 'contain',
+  logo: {
+    width: 30,
+    height: 40,
+    opacity:2,
+    resizeMode:'contain'
   },
-  greetRow: {
+  iconsRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: 12,
   },
-  greetColumn: {
-    flex: 1,
-    flexDirection: 'column',
+  iconButton: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 6,
   },
-  welcomeText: {
-    fontSize: 20,
-    color: '#fff',
+  contentRow: {
+    flexDirection: 'row',
+
+  },
+  textBlock: {
+   top:height*0.09,
+   height: height*0.2,
+  },
+  greeting: {
+    fontSize: 14,
+    color: 'white',
   },
   username: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFD700',
+    color: '#FFAB00',
+    marginVertical: 2,
   },
-  subtitle: {
-    fontSize: 14,
-    marginTop: 4,
-    color: '#f2f2f2',
+  subText: {
+    fontSize: 12,
+    color: 'white',
   },
-  image: {
-    width: 120,
-    height: 170,
-    marginBottom:50,
-  },
+farmerImg: {
+  width: width * 0.45,    // 195 out of 441px ≈ 0.44
+  height: height * 0.245,  // adjust based on your design
+  opacity: 1,
+},
+
 });
 
-export default HeaderGreeting;
+export default Header;

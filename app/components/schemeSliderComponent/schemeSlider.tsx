@@ -5,14 +5,14 @@ import { Scheme } from './scheme';
 
 const schemes: Scheme[] = [
   {
-    title: 'Have You Got Your Kisan\nCredit Card (KCC) Yet?',
-    subtitle: 'Instant access to low-interest\nfarm loans & subsidies.',
+    title: 'Have You Got Your Kisan Credit Card (KCC) Yet?',
+    subtitle: 'Instant access to low-interest farm loans & subsidies.',
     image: require('../../assets/images/kcc.png'),
     buttonText: 'Check Now',
   },
   {
     title: 'Get Zero-Interest Crop Loans!',
-    subtitle: 'Special seasonal credit for\nsmall and marginal farmers.',
+    subtitle: 'Special seasonal credit for small and marginal farmers.',
     image: require('../../assets/images/kcc.png'),
     buttonText: 'Apply',
   },
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   wrapper: {
     paddingHorizontal: 16,
     marginTop: 24,
+    width: '100%',
   },
   heading: {
     fontSize: 16,

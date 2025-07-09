@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import DetailCard from './detailCard';
 
 const AddDetailSlider = () => {
   return (
-    <View style={styles.container}>
+    <View >
+      <ImageBackground source={require('../../assets/images/Union.png')} style={styles.container}>
       <Text style={styles.heading}>Add your details</Text>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -22,24 +23,25 @@ const AddDetailSlider = () => {
           image={require('../../assets/images/liveStock.png')}
           onPress={() => console.log('Add Livestock')}
         />
-      </ScrollView>
-    </View>
+      
+      </ScrollView></ImageBackground>
+    </View>  
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#E9DFFB',
+
     flex: 1,
     paddingTop: 24,
     paddingHorizontal: 16,
-    paddingBottom:14
+    paddingBottom:48
   },
   heading: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#24025E',
-    marginBottom: 16,
+    color: '#1F077A',
+    marginBottom: 14,
   },
 });
 

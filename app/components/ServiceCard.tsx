@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: 'center',
   },
-  icon: { width: 40, height: 40, marginBottom: 8 },
+  icon: { width: 40, height: 40, marginBottom: 8 , resizeMode:'stretch'},
   label: { fontWeight: '500' },
 });
 

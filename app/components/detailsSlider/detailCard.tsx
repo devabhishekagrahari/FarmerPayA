@@ -7,50 +7,68 @@ const DetailCard: React.FC<DetailCardProps> = ({ title, subtitle, buttonLabel, i
   return (
     <View style={styles.card}>
       <Text style={styles.title}>{title}</Text>
+
+      <View style={{height:'75%' , flexDirection: 'row'}}>
+      <View style={{width:'65%'}}>
       <Text style={styles.subtitle}>{subtitle}</Text>
-      <Image source={image} style={styles.image} />
+
       <TouchableOpacity style={styles.button} onPress={onPress}>
         <Text style={styles.buttonText}>{buttonLabel}</Text>
       </TouchableOpacity>
+      </View> 
+      <View style={{width:'40%', alignItems: 'flex-end',justifyContent: 'center'}}>    
+      <Image source={image} style={styles.image} />
+      </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    width: 220,
-    backgroundColor: '#fff',
+    width: 238,
+    height:196,
+    backgroundColor: '#FFFDFC',
     borderRadius: 16,
     padding: 16,
     marginRight: 16,
-    elevation: 4,
+    shadowColor: '#FFFDFC',
+    elevation:4,
+    flexDirection: 'column',
   },
   title: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#24025E',
+    color: '#1F077A',
+    height:'15%'
   },
   subtitle: {
-    fontSize: 13,
-    color: '#555',
+    flex:1,
+    fontSize: 10,
+    width:'100%',
+    color: '#1F077A99',
     marginVertical: 8,
   },
   image: {
-    width: 60,
-    height: 60,
-    alignSelf: 'center',
-    marginVertical: 12,
+    width: 105,
+    height: 115,
+    resizeMode: 'contain',
   },
   button: {
-    backgroundColor: '#24025E',
-    paddingVertical: 8,
+    backgroundColor: '#1F077A',
+    width:'auto',
+    padding:6,
     borderRadius: 8,
-    marginTop: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
     fontWeight: '600',
+    fontSize:10
   },
 });
 
