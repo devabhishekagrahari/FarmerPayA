@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     padding: 6,
     marginTop: 24,
     marginBottom: 16,
+    paddingHorizontal:16
   },
   title: {
     fontSize: 16,

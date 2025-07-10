@@ -37,14 +37,14 @@ const LoanCard: React.FC<Props> = ({ title, subtitle, image, onPress, isActive, 
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
-
-
-
-        <Image
+        <View style={{width:'20%',right:16,bottom:-4}}>
+          <Image
           source={image}
           style={styles.image}
           resizeMode="contain"
         />
+        </View>
+   
       </View>
 
       {renderDots()}
@@ -54,54 +54,43 @@ const LoanCard: React.FC<Props> = ({ title, subtitle, image, onPress, isActive, 
 
 const styles = StyleSheet.create({
   container: {
+    width: (width-34),
+    aspectRatio:3,
     alignItems: 'center',
-    marginTop: 20,
-    marginRight:20,
+    marginTop: 16,
+    marginHorizontal:1
   },
   card: {
     flexDirection: 'row',
     backgroundColor: '#020852',
-    width: width * 0.9,
+    width:'100%',
+    aspectRatio:3.8,
     borderRadius: 14,
     padding: 16,
     alignItems: 'center',
     justifyContent: 'space-between',
-    position: 'relative',
   },
   textContainer: {
     flex: 1,
-    paddingRight: 10,
+    width:'70%'
   },
   title: {
     fontFamily: 'Inter-SemiBold',
-    fontSize: 16,
+    fontSize: 13,
     color: '#fff',
     letterSpacing: -0.66,
   },
   subtitle: {
     fontFamily: 'Inter-Regular',
-    fontSize: 14,
+    fontSize: 10,
     color: 'rgba(255,255,255,0.9)',
     marginTop: 4,
     letterSpacing: -0.56,
   },
-  arrowWrapper: {
-    position: 'absolute',
-    right: 100,
-    top: 16,
-  },
-  arrowCircle: {
-    backgroundColor: '#fff',
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   image: {
-    width: 70,
-    height: 70,
-    marginLeft: 10,
+    width: '100%',
+    aspectRatio:1,
+    resizeMode:'contain'
   },
   dotsContainer: {
     flexDirection: 'row',

@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('window');
 const Header = () => {
   return (
     <LinearGradient
-      colors={['#4506A0', '#6929C4']}
+      colors={[ '#6929C4','#4506A0']}
       start={{ x: 0.15, y: 0.5 }}
       end={{ x: 1, y: 0.5 }}
       style={styles.container}
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     aspectRatio:1.6,
     paddingTop: 20,
+
   },
   topRow: {
     flexDirection: 'row',

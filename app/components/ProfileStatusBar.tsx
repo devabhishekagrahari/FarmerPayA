@@ -1,15 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CircularProgress from './circularBar';
+import LinearGradient from 'react-native-linear-gradient';
 
 const ProfileStatusCard = () => {
   const progress = 70;
 
   return (
+
     <View style={styles.container}>
       <Text style={styles.title}>Onboarding</Text>
+      
+          <LinearGradient
+            colors={['#E9EBFC', '#F5F4FA', '#E9EBFC']}
+            locations={[0, 0.5029, 1]}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            style={styles.card}
+          >
 
-      <View style={styles.card}>
         <View style={styles.textSection}>
           <Text style={styles.statusTitle}>
             Profile Status: {progress}% Complete
@@ -20,8 +29,10 @@ const ProfileStatusCard = () => {
         </View>
 
         <CircularProgress progress={progress} />
-      </View>
+ 
+      </LinearGradient>
     </View>
+    
   );
 };
 
@@ -29,20 +40,20 @@ export default ProfileStatusCard;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
+    paddingHorizontal: 16,
     marginTop: 24,
   },
-  title: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#2E0B8C',
+  title: { 
+    fontWeight:'600' ,
+    fontSize: 20,
+    color: '#1F077A', 
     marginBottom: 12,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
+    aspectRatio:3.5090,
     justifyContent: 'space-between',
-    backgroundColor: '#F8F6FD',
     borderRadius: 16,
     padding: 16,
     elevation: 1,
@@ -54,11 +65,11 @@ const styles = StyleSheet.create({
   statusTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#2E0B8C',
+    color: '#1F077A',
     marginBottom: 4,
   },
   description: {
     fontSize: 12,
-    color: '#6B6B8C',
+    color: '#1F077AB2',
   },
 });

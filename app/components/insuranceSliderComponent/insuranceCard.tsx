@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image , Dimensions } from 'react-native';
 import { Insurance } from './insurance';
 import LinearGradient from 'react-native-linear-gradient';
-
+const{width, height}=Dimensions.get('window');
 const InsuranceCard: React.FC<Insurance> = ({ title, emojiImage, bgColor1 ,bgColor2 , titleColor}) => {
   return (
     <View style={[styles.card]}>
@@ -22,8 +22,8 @@ export default InsuranceCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: 180,
-    height: 194,
+    width: (width-48)/2,
+    aspectRatio:0.9303,
     borderRadius: 16,
     padding: 12,
     marginRight:6,

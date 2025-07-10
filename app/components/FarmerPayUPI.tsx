@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     gap: 12,
-    marginBottom: 24,
+    marginBottom: 4,
   },
   optionBox: {
     width: width * 0.42 ,
@@ -78,10 +78,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   label: {
-    fontSize: 13,
+    fontSize: 10,
     textAlign: 'center',
     color: '#4506A0',
     fontWeight: '500',
+    marginTop:6
   },
   banner: {
     borderRadius: 14,

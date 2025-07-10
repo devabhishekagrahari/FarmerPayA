@@ -13,8 +13,8 @@ interface Props {
 const CircularProgress = ({
   progress,
   size = 60,
-  strokeWidth = 8,
-  color = '#4B00D1',
+  strokeWidth = 6,
+  color = '#4506A0',
   backgroundColor = '#E3DFF2',
 }: Props) => {
   const radius = (size - strokeWidth) / 2;
@@ -33,7 +33,7 @@ const CircularProgress = ({
           strokeWidth={strokeWidth}
         />
         <Circle
-          fill="#FFFFFF"
+          fill="#E9EBFC"
           stroke={color}
           cx={size / 2}
           cy={size / 2}
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   progressText: {
-    color: '#4B00D1',
+    color: '#4506A0',
     fontWeight: 'bold',
   },
 });
