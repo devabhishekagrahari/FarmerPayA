@@ -10,9 +10,10 @@ import {
 
 
 interface ChatHistoryProps {
-  answer: string;
-  prompt: string;
-  onPress: () => void;
+  id:string;
+  answer?: string;
+  prompt?: string;
+  onPress?: () => void;
   onLike?: () => void;
   onDislike?: () => void;
   onRegenerate?: () => void;
@@ -20,6 +21,7 @@ interface ChatHistoryProps {
 }
 
 const ChatHistory: React.FC<ChatHistoryProps> = ({
+  id,
   answer,
   prompt,
   onPress,

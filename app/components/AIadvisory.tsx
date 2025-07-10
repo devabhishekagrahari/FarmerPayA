@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   gradientBorder:{
-     padding:0.5,
+     padding:1,
      borderRadius:20,
      margin:4
   },

@@ -7,44 +7,45 @@ interface MessageOptionProps {
   onPress: () => void;
 }
 
-const MessageOption: React.FC<MessageOptionProps> = ({ label, onPress }) => {
-  return (    
-  <LinearGradient
+const MessageOption: React.FC<MessageOptionProps> = ({ label, onPress}) => {
+  return (
+    <LinearGradient
       colors={['#FF0000', '#FFA500']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 2 }}
-      style={styles.gradientBorder}
+      style={[styles.gradientBorder]}
     >
-    <TouchableOpacity style={styles.option} onPress={onPress}>
-      <Text style={styles.optionText}>{label}</Text>
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.option} onPress={onPress} activeOpacity={0.8}>
+        <Text style={styles.optionText} numberOfLines={2}>{label}</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   gradientBorder: {
-    padding: 0.5, // thickness of the border
+    padding: 0.8,
     borderRadius: 24,
-   
-    margin:4
-    },
+    marginHorizontal: 4,
+    width:'auto',
+    height: 40,
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
+  },
   option: {
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
     borderRadius: 24,
     borderWidth: 1,
     borderColor: '#FF0000',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 2,
-    elevation: 2,
+    height: '100%',
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
   },
   optionText: {
     color: '#333333',
     fontSize: 10,
+    textAlign: 'center',
   },
 });
 

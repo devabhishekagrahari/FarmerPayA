@@ -1,12 +1,24 @@
-import { NavigationContainer } from '@react-navigation/native';
+// App.tsx
 import React from 'react';
-import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SplashScreen from './app/screens/splashScreen';
 import AppNavigator from './app/navigation/AppNavigator';
+import SelectLanguageScreen from './app/screens/selectLanguageScreen';
+ // Your custom splash screen
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
     <NavigationContainer>
-      <AppNavigator/>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Main" component={AppNavigator} />
+        <Stack.Screen name="selectLanguage" component={SelectLanguageScreen}/>
+      </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;

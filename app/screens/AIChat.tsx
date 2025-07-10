@@ -17,6 +17,29 @@ import  {VoiceChat}  from '../components/AiAdvisoryComponents/VoiceBubble';
 import ChatInputBar from '../components/AiAdvisoryComponents/chatInputBar';
 import CustomTopBar from '../components/customTopBar';
 
+
+interface historyProps {
+  type:string,
+  answer?: string;
+  prompt?: string;
+  onPress?: () => void;
+  onLike?: () => void;
+  onDislike?: () => void;
+  onRegenerate?: () => void;
+  followUpPrompt?: string;
+  id: string;
+  duration?: string;
+  questionVoice?: string;
+  answerVoice?: string;
+  answerText?: string;
+};
+
+
+
+
+
+
+
 const options = [
   'Where is nearest seed shop? 🌱',
   'How to get Kisan Card? 📄',
@@ -30,8 +53,9 @@ const options = [
 ];
 
 // Mixed chat history: both voice and text
-const initialHistory = [
+const history:historyProps[] = [
   {
+    id:'1',
     type: 'text',
     prompt: 'How to increase crop yield?',
     answer: `To boost your crop yield with modern techniques, try these steps:\n\n• Adopt High-Yield Varieties\n• Use Drip Irrigation\n• Soil Testing\n• Integrated Pest Management`,
@@ -39,13 +63,14 @@ const initialHistory = [
   },
   {
     type: 'voice',
-    id: '1',
+    id: '2',
     duration: '0:11',
     questionVoice: 'question1.mp3',
     answerVoice: 'answer1.mp3',
     answerText: 'You can use the Kisan Suvidha app to locate nearby seed shops.',
   },
   {
+    id:'3',
     type: 'text',
     prompt: 'What is MSP for wheat?',
     answer: `The MSP for wheat in 2024-25 is ₹2,275 per quintal.`,
@@ -55,7 +80,7 @@ const initialHistory = [
 
 const AIChat = () => {
   const [inputText, setInputText] = useState('');
-  const [history, setHistory] = useState(initialHistory);
+
 
   function alert(arg0: string) {
     throw new Error('Function not implemented.');
@@ -103,14 +128,14 @@ return (
                 <VoiceChat key={index} item={item} />
               ) : (
                 <ChatHistory
-                  key={index}
-                  prompt={item.prompt ?? ''}
-                  answer={item.answer ?? ''}
-                  onPress={item.onPress ?? (() => {})}
-                  onLike={() => console.log('Liked:', item.prompt)}
-                  onDislike={() => console.log('Disliked:', item.prompt)}
-                  onRegenerate={() => console.log('Regenerate:', item.prompt)}
-                />
+                    key={index}
+                    prompt={item.prompt ?? ''}
+                    answer={item.answer ?? ''}
+                    onPress={item.onPress ?? (() => { })}
+                    onLike={() => console.log('Liked:', item.prompt)}
+                    onDislike={() => console.log('Disliked:', item.prompt)}
+                    onRegenerate={() => console.log('Regenerate:', item.prompt)} 
+                    id={item.id}                />
               )
             )}
           </ScrollView>
@@ -140,7 +165,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   container: {
-    flex: 1,
     paddingHorizontal: 16,
     paddingTop: 60,
     alignItems: 'center',
@@ -163,9 +187,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   optionsContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%',
+    flexWrap:'wrap',
     paddingBottom: 40,
   },
   inputWrapper: {

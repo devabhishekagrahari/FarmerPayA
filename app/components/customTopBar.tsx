@@ -8,7 +8,7 @@ const CustomTopBar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.leftSection}>
-        <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
+        <Image source={require('../assets/images/plant.png')} style={styles.logo} />
         <Text style={styles.title}>Farme₹Pay</Text>
       </View>
 
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: 24,
-    height: 24,
+    width: 28,
+    aspectRatio:0.72,
     resizeMode: 'contain',
     marginRight: 8,
   },
