@@ -33,7 +33,11 @@ export default function SelectLanguageScreen({navigation}:any) {
   const [selected, setSelected] = useState('Hindi');
   
   const handleSave=()=>{
+<<<<<<< HEAD
     navigation.navigate('primaryRole');
+=======
+    navigation.navigate('SignUp');
+>>>>>>> 810b0a3 (12 July 2 AM Login SignUP)
   }
   const renderItem = ({ item }: any) => {
     const isSelected = selected === item.label;
