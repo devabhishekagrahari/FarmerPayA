@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { DetailCardProps }  from './detail';
 
+const{width,height}=Dimensions.get('window')
 
 const DetailCard: React.FC<DetailCardProps> = ({ title, subtitle, buttonLabel, image, onPress }) => {
   return (
@@ -26,25 +27,26 @@ const DetailCard: React.FC<DetailCardProps> = ({ title, subtitle, buttonLabel, i
 
 const styles = StyleSheet.create({
   card: {
-    width: 238,
-    height:196,
+    width: width*0.7,
+    aspectRatio:1.5,
     backgroundColor: '#FFFDFC',
     borderRadius: 16,
     padding: 16,
+    paddingBottom:4,
     marginRight: 16,
     shadowColor: '#FFFDFC',
     elevation:4,
     flexDirection: 'column',
   },
   title: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#1F077A',
     height:'15%'
   },
   subtitle: {
     flex:1,
-    fontSize: 10,
+    fontSize: 12,
     width:'100%',
     color: '#1F077A99',
     marginVertical: 8,
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: '600',
-    fontSize:10
+    fontSize:12
   },
 });
 

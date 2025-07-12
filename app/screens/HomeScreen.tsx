@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Image } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, StatusBar } from 'react-native';
 import HeaderGreeting from '../components/HeaderGreeting';
 import ProfileStatusBar from '../components/ProfileStatusBar';
 
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    fontFamily:'Inter-Regular'
   },
 
   image: {

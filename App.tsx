@@ -13,6 +13,8 @@ import SignUpFormScreen2 from './app/screens/SignUpForm2.tsx';
 import PrimaryRoleScreen from './app/screens/PrimaryRole';
 import SecondaryRoleScreen from './app/screens/SecondaryRole.tsx';
 import PlantSelectionScreen from './app/screens/PlantSelectionScreen';
+import { StatusBar } from 'react-native';
+
 
  // Your custom splash screen
 
@@ -33,6 +35,7 @@ const App = () => {
         <Stack.Screen name="SignUpForm2" component={SignUpFormScreen2}/>
         <Stack.Screen name="PlantSelection" component={PlantSelectionScreen} />
         <Stack.Screen name="Main" component={AppNavigator} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

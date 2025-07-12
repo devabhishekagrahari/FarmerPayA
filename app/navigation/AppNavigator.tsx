@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import AIChat from '../screens/AIChat.tsx';
@@ -9,6 +9,7 @@ import NoInternetScreen from '../components/emptyState/no-internet';
 import Error_404Screen from '../components/emptyState/error-404';
 
 
+const {width,height}=Dimensions.get('window');
 
 const Tab = createBottomTabNavigator();
 
@@ -43,13 +44,15 @@ const AppNavigator = () => (
         const isScanner = route.name === 'Scanner';
 
         return (
-          <View style={isScanner ? styles.scannerIconContainer : null}>
+          <View style={[isScanner ? styles.scannerIconContainer : null ]}>
             <Image
               source={iconSource}
               style={[
                 styles.tabIcon,
                 isScanner && styles.scannerIcon,
-               ,
+                !isScanner
+                ? { tintColor: focused ? '#6929C4' : '#C0C0C0' }
+                : null
               ]}
             />
           </View>
@@ -59,7 +62,9 @@ const AppNavigator = () => (
         backgroundColor: '#fff',
         borderTopWidth: 0,
         elevation: 10,
-        height:50 ,
+        height: height*0.07, // 👈 increase this value
+        paddingBottom: 8, // 👈 optional for spacing
+        paddingTop: 8,
       },
     })}
   >
@@ -117,25 +122,26 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   scannerButtonWrapper: {
-
     justifyContent: 'center',
     alignItems: 'center',
   },
   scannerIconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  scannerIcon: {
-    width: 40,
-    height: 40,
-    borderRadius:12,
+    borderRadius:24,
     backgroundColor: '#6929C4',
     top:7,
+    padding:8,
     elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
+  },
+  scannerIcon: {
+    width: 30,
+    height: 30,
+    resizeMode:'contain'
   },
 });
 

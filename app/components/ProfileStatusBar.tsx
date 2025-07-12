@@ -42,11 +42,13 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     marginTop: 24,
+    marginBottom:24
   },
   title: { 
-    fontWeight:'600' ,
-    fontSize: 20,
-    color: '#1F077A', 
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 8,
+    color:'#1F077A',
     marginBottom: 12,
   },
   card: {

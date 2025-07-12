@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ImageSourcePropType, Dimensions } from 'react-native';
 import { Scheme } from './scheme';
-
+const {width,height}=Dimensions.get('window');
 interface Props extends Scheme {}
 
 const SchemeCard: React.FC<Props> = ({ title, subtitle, image, buttonText }) => {
@@ -19,7 +19,7 @@ const SchemeCard: React.FC<Props> = ({ title, subtitle, image, buttonText }) => 
             <Text style={styles.buttonText}>{buttonText}</Text>
           </TouchableOpacity>
         </View>
-       <View style={{width:'30%' , position:'relative',right:40,alignItems:'center'}}>
+       <View style={{width:'30%' , position:'relative',right:30,alignItems:'center'}}>
         <Image source={image} style={styles.cardImage} resizeMode="contain" />
         </View>
       </View>
@@ -32,8 +32,8 @@ export default SchemeCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: 355,
-    height:220,
+    width: width*0.9,
+    aspectRatio:1.62,
     borderRadius: 16,
     backgroundColor: '#1F3E29',
 padding:6,
@@ -41,20 +41,19 @@ padding:6,
   },
   cardContent: {
     flexDirection: 'column',
-    width:340,
-    height:200,
-    margin:10
+    width:"100%",
+    height:"100%",
+    padding:10
   },
   textSection: {
     flex: 1,
-    width:'50%',
-    paddingRight: 12,
+    width:'40%',
+    paddingRight: 14,
   },
   cardTitle: {
     fontSize: 14,
     fontWeight: 'bold',
     color: '#ffffff',
-    marginBottom: 8,
     lineHeight:20
   },
   cardSubtitle: {
@@ -75,7 +74,9 @@ padding:6,
     fontSize: 14,
   },
   cardImage: {
-    width: 193,
-    height: 132,
+    width: 180,
+    height: 130,
+    resizeMode:'contain',
+    alignSelf:'center'
   },
 });
