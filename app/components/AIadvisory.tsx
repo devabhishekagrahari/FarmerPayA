@@ -1,8 +1,8 @@
 // AIAdvisory.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ImageBackground, Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
+const{width,height}=Dimensions.get('window');
 const QUESTIONS = [
   { text: 'Where is nearest seed shop? 🌱' },
   { text: 'गेहूँ की MSP क्या है?” 🌾' },
@@ -17,7 +17,7 @@ const QUESTIONS = [
 
 const AIAdvisory = () => {
   return (
-    <ImageBackground style={{width:400, height:380}}  source={require('../assets/images/aiAdvisoryImage.png')}>
+    <ImageBackground style={{width:width+16,alignSelf:'center',aspectRatio:1.1,marginBottom:24}} resizeMode="contain" source={require('../assets/images/aiAdvisoryImage.png')}>
     <View style={styles.container}>
       <Text style={styles.title}>AI Advisory</Text>
       <View style={styles.pillContainer}>
@@ -47,15 +47,17 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
     marginTop: 16,
+    
   },
   title: {
-    fontFamily: 'Inter',       // Make sure Inter is linked properly
-  fontWeight: '600',         // or use fontFamily: 'Inter-SemiBold' if you have specific variants
-  fontSize: 22,
-  lineHeight: 22,            // 100% of 22px
-  letterSpacing: -0.88,
-    color: '#1F077A',
-    marginBottom: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 8,
+    marginHorizontal:10,
+    color:'#1F077A',
+    marginBottom: 12,
+    fontFamily: 'Inter-Regular',       // Make sure Inter is linked properly
+    lineHeight: 22,            // 100% of 22px
     marginTop:12,
 
   },

@@ -13,6 +13,7 @@ import SignUpFormScreen2 from './app/screens/SignUpForm2.tsx';
 import PrimaryRoleScreen from './app/screens/PrimaryRole';
 import PrimaryActivityScreen from './app/screens/PrimaryActivityScreen';
 import PlantSelectionScreen from './app/screens/PlantSelectionScreen';
+import { StatusBar } from 'react-native';
 
 
  // Your custom splash screen

@@ -7,6 +7,7 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,7 +21,7 @@ const Header = () => {
       start={{ x: 0.15, y: 0.5 }}
       end={{ x: 1, y: 0.5 }}
       style={styles.container}
-    >
+      >
       <ImageBackground
         source={require('../assets/images/grid.png')} // use your image path
         resizeMode="cover"

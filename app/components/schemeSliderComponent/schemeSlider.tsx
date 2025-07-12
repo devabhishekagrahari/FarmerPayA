@@ -41,7 +41,6 @@ export default SchemeSlider;
 const styles = StyleSheet.create({
   wrapper: {
     paddingHorizontal: 16,
-    marginTop: 24,
     width: '100%',
   },
   heading: {
