@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 10,
     borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#eee',
+    backgroundColor: '#FFFFFF',
   },
   selectedCard: {
     borderColor: '#54219D',

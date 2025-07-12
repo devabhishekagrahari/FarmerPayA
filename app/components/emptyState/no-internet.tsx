@@ -12,34 +12,38 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function NoInternetScreen() {
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
+  const [isRetrying, setIsRetrying] = useState(false);
 
-  const handleTryAgain = () => {
-    setLoading(true);
-    // Simulate check (replace with real internet check logic)
+  const handleRetry = () => {
+    setIsRetrying(true);
     setTimeout(() => {
-      setLoading(false);
-      // Possibly navigate or update state based on connectivity
+      setIsRetrying(false);
+      // Check internet connectivity and possibly navigate or alert
     }, 1500);
   };
 
   return (
     <View style={styles.container}>
-      {/* Back Button */}
-            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-              <Icon name="arrow-back" size={24} color="#54219D" />
-            </TouchableOpacity>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back" size={24} color="#54219D" />
+      </TouchableOpacity>
 
-      <Image
-        source={require('../../assets/images/selection/check-internet.png')} // Replace with actual path
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <View style={styles.image}>
+        <Image
+          source={require('../../assets/images/selection/check-internet.png')}
+          style={styles.image}
+          resizeMode="contain"
+        />
+      </View>
 
       <Text style={styles.subtitle}>Please check your internet connection!</Text>
 
-      <TouchableOpacity style={styles.retryButton} onPress={handleTryAgain}>
-        {loading ? (
+      <TouchableOpacity
+        style={[styles.retryButton, isRetrying && styles.retrying]}
+        onPress={handleRetry}
+        disabled={isRetrying}
+      >
+        {isRetrying ? (
           <ActivityIndicator color="#000" />
         ) : (
           <Text style={styles.retryText}>Try Again</Text>
@@ -52,23 +56,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
     padding: 24,
+    alignItems: 'center',
     justifyContent: 'center',
   },
   backButton: {
     position: 'absolute',
     top: 50,
     left: 20,
-    zIndex: 1,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#54219D',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#4B320D',
-    marginBottom: 24,
-    marginTop: -40,
-  },
+  
   image: {
     width: 300,
     height: 300,
@@ -81,12 +85,19 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     backgroundColor: '#F2F2F2',
-    paddingVertical: 10,
-    paddingHorizontal: 28,
-    borderRadius: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: '#eee',
+  },
+  retrying: {
+    backgroundColor: '#E0E0E0',
+    borderColor: '#CCCCCC',
   },
   retryText: {
     fontSize: 16,
+    fontWeight: '500',
     color: '#000',
   },
 });

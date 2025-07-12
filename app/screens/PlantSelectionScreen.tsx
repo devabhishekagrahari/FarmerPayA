@@ -55,16 +55,19 @@ const plants = [
 
 export default function PlantSelectionScreen({ navigation }: any) {
   const [selected, setSelected] = useState<string[]>([]);
+  const [warning, setWarning] = useState('');
 
   const toggleSelect = (id: string) => {
     if (selected.includes(id)) {
       setSelected(selected.filter(item => item !== id));
+      setWarning(''); 
     } else {
       if (selected.length >= 3) {
-        Alert.alert('Limit Reached', 'You can only select up to 3 plants.');
+        setWarning('You can select up to 3 plants only.');
         return;
       }
       setSelected([...selected, id]);
+      setWarning('');
     }
   };
 
@@ -100,6 +103,7 @@ export default function PlantSelectionScreen({ navigation }: any) {
       {/* Heading */}
       <Text style={styles.title}>What do you yield?</Text>
       <Text style={styles.subtitle}>Let us know about your plants (select max. 3)</Text>
+      {warning ? <Text style={styles.warningText}>{warning}</Text> : null}
 
       {/* List of options */}
       <FlatList
@@ -175,8 +179,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 10,
     borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#eee',
+    backgroundColor: '#FFFFFF',
   },
   selectedCard: {
     borderColor: '#54219D',
@@ -244,4 +247,11 @@ micInnerCircle: {
     color: '#fff',
     fontWeight: 'bold',
   },
+  warningText: {
+  color: 'red',
+  fontSize: 13,
+  marginTop: -10,
+  marginBottom: 10,
+  textAlign: 'center',
+},
 });

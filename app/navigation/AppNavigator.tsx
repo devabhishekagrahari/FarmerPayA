@@ -77,7 +77,7 @@ const AppNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen name="Weather" component={NotificationScreen} />
+    <Tab.Screen name="Weather" component={NoInternetScreen} />
     <Tab.Screen name="Profile" component={HomeScreen} />
   </Tab.Navigator>
 );
