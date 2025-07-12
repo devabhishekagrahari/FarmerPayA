@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Image,
 } from 'react-native';
 
 export default function LoginOtpVerification({ navigation }: any) {
@@ -79,7 +80,7 @@ const OtpVerification = ({
     } else {
       setError('');
       Alert.alert('Success', 'OTP Verified Successfully');
-      navigation.navigate('primaryRole');
+      navigation.navigate('SignUp');
     }
   };
 
@@ -95,7 +96,7 @@ const OtpVerification = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-        <Text style={{ fontSize: 18 }}>{'\u2190'}</Text>
+        <Image source={require('../assets/images/arrowButton.png')}/>
       </TouchableOpacity>
 
       <Text style={styles.label}>Enter the 6 digit code sent to your number</Text>

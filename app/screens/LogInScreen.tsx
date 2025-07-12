@@ -15,11 +15,12 @@ import {
 const{width,height}=Dimensions.get('window');
 const LoginScreen = ({navigation}:any) => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [errorMob, setError]= useState('');
 
   const handleGetOtp = () => {
     const isValid = /^[6-9]\d{9}$/.test(phoneNumber);
     if (!isValid) {
-      Alert.alert('Invalid Number', 'Please enter a valid 10-digit Indian mobile number.');
+      setError('Please enter a valid 10-digit Indian mobile number.')
       return;
     }
     else{
@@ -56,12 +57,18 @@ const LoginScreen = ({navigation}:any) => {
           <TextInput
             placeholder="Enter your mobile number"
             placeholderTextColor="#C0C0C0"
-            style={styles.input}
+            style={[
+                    styles.input,
+                    { borderColor: errorMob ? "#FB3748" : "#F2F2F2" }
+                  ]}
             keyboardType="phone-pad"
             maxLength={10}
-            onChangeText={setPhoneNumber}
+            onChangeText={  (text) => {
+                            setPhoneNumber(text);
+                          }}
             value={phoneNumber}
           />
+          {errorMob && <Text style={{color:'#FB3748' ,fontSize:10,marginTop:2}}>{errorMob}</Text>}
           <Text style={styles.helperText}>We will send you an OTP on this number</Text>
         </View>
 
@@ -135,7 +142,6 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 2,
-    borderColor: '#F2F2F2',
     borderRadius: 8,
     paddingHorizontal: 16,
     height: 48,

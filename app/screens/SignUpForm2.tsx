@@ -66,7 +66,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               />
             </View>
 
-            <TouchableOpacity style={styles.button} onPress={()=>{Alert.alert("SignUp Successfull... Now Login !!");  navigation.navigate('Login')}}>
+            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('primaryRole')}}>
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
 
