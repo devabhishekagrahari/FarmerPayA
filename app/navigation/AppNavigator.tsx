@@ -4,8 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import AIChat from '../screens/AIChat.tsx';
 import MyNewScreen from '../screens/aiChatInbox.tsx';
-
-
+import NotificationScreen from '../components/emptyState/no-notification.tsx';
+import NoInternetScreen from '../components/emptyState/no-internet';
+import Error_404Screen from '../components/emptyState/error-404';
 
 
 
@@ -76,7 +77,7 @@ const AppNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen name="Weather" component={HomeScreen} />
+    <Tab.Screen name="Weather" component={NotificationScreen} />
     <Tab.Screen name="Profile" component={HomeScreen} />
   </Tab.Navigator>
 );

@@ -79,7 +79,7 @@ const OtpVerification = ({
     } else {
       setError('');
       Alert.alert('Success', 'OTP Verified Successfully');
-      navigation.navigate('Main');
+      navigation.navigate('primaryRole');
     }
   };
 

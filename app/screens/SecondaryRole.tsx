@@ -11,13 +11,13 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const activities = [
-  { id: '1', title: 'Crop Farming', image: require('../assets/images/ai.png') },
-  { id: '2', title: 'Horticulture Farming', image: require('../assets/images/ai.png') },
-  { id: '3', title: 'Spice Farming', image: require('../assets/images/ai.png') },
-  { id: '4', title: 'Fruit Orchard Owner', image: require('../assets/images/ai.png') },
+  { id: '1', title: 'Crop Farming', image: require('../assets/images/selection/crop-farming.jpg') },
+  { id: '2', title: 'Horticulture Farming', image: require('../assets/images/selection/horticulture-farming.jpg') },
+  { id: '3', title: 'Spice Farming', image: require('../assets/images/selection/spices.jpg') },
+  { id: '4', title: 'Fruit Orchard Owner', image: require('../assets/images/selection/fruit-orchard.jpg') },
 ];
 
-export default function PrimaryActivityScreen({ navigation }: any) {
+export default function SecondaryRoleScreen({ navigation }: any) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const renderItem = ({ item }: any) => {
@@ -49,7 +49,7 @@ export default function PrimaryActivityScreen({ navigation }: any) {
       </View>
 
       <Text style={styles.title}>What do you do?</Text>
-      <Text style={styles.subtitle}>Let us know about your primary activity</Text>
+      <Text style={styles.subtitle}>Let us know about your secondary role</Text>
 
       <FlatList
         data={activities}

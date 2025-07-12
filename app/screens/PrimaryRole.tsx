@@ -17,12 +17,12 @@ type Role = {
 };
 
 const roles: Role[] = [
-  { id: '1', title: 'Agricultural Farmer', image: require('../assets/images/ai.png') },
-  { id: '2', title: 'Dairy Farmer', image: require('../assets/images/ai.png') },
-  { id: '3', title: 'Fisherman', image: require('../assets/images/ai.png') },
-  { id: '4', title: 'Beekeeper', image: require('../assets/images/ai.png') },
-  { id: '5', title: 'Forest Gatherer', image: require('../assets/images/ai.png') },
-  { id: '6', title: 'Floriculturist', image: require('../assets/images/ai.png') },
+  { id: '1', title: 'Agricultural Farmer', image: require('../assets/images/selection/agricultural-farmer.jpg') },
+  { id: '2', title: 'Dairy Farmer', image: require('../assets/images/selection/dairy-farmer.jpg') },
+  { id: '3', title: 'Fisherman', image: require('../assets/images/selection/fisherman.jpg') },
+  { id: '4', title: 'Beekeeper', image: require('../assets/images/selection/beekeeper.png') },
+  { id: '5', title: 'Forest Gatherer', image: require('../assets/images/selection/forest-gatherer.png') },
+  { id: '6', title: 'Floriculturist', image: require('../assets/images/selection/floriculturist.jpg') },
 ];
 
 export default function PrimaryRoleScreen({ navigation }: any) {
@@ -79,7 +79,7 @@ export default function PrimaryRoleScreen({ navigation }: any) {
 
         <TouchableOpacity
           style={styles.nextButton}
-          onPress={() => navigation.navigate('PrimaryActivity')}
+          onPress={() => navigation.navigate('secondaryRole')}
         >
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
