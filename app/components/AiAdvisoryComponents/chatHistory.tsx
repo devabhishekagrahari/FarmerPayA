@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
   iconRow: {
     flexDirection: 'row',
     marginLeft: 8,
+    marginTop:8,
     gap: 4,
   },
   icon: {

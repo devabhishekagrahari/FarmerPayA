@@ -6,7 +6,7 @@ const defaultConfig = getDefaultConfig(__dirname);
 const config = {
   transformer: {
     ...defaultConfig.transformer,
-    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+    babelTransformerPath: require.resolve('react-native-svg-transformer/react-native'),
   },
   resolver: {
     ...defaultConfig.resolver,

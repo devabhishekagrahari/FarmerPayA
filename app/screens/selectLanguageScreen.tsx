@@ -1,5 +1,5 @@
 // SelectLanguageScreen.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import VoiceInputErrorModal from '../components/VoiceInputErrorModal';
 
 
 const { width } = Dimensions.get('window');
@@ -31,6 +32,14 @@ const languages = [
 
 export default function SelectLanguageScreen({navigation}:any) {
   const [selected, setSelected] = useState('Hindi');
+  // const { permissionStatus, requestPermission } = useMicrophonePermission();
+  const [showPopup, setShowPopup] = useState(true);
+
+  // useEffect(() => {
+  //   if (permissionStatus === 'denied' || permissionStatus === 'blocked') {
+  //     setShowPopup(true);
+  //   }
+  // }, [permissionStatus]);
   
   const handleSave=()=>{
     navigation.navigate('Login');
@@ -52,6 +61,10 @@ export default function SelectLanguageScreen({navigation}:any) {
     );
   };
 
+  function requestPermission() {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Select One Language</Text>
@@ -66,7 +79,13 @@ export default function SelectLanguageScreen({navigation}:any) {
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         showsVerticalScrollIndicator={false}
       />
-
+      <VoiceInputErrorModal
+        visible={showPopup}
+        onTryAgain={() => {
+          setShowPopup(false);
+          requestPermission(); // re-trigger permission check
+        }}
+      />
       <View style={styles.footer}>
         <LinearGradient
             colors={['#FDCA4F', '#6929C4', '#97EAD2']}
@@ -75,7 +94,7 @@ export default function SelectLanguageScreen({navigation}:any) {
             locations={[0.0, 0.35, 1.0]}
             style={styles.voiceButton}
         >
-        <TouchableOpacity style={{flexDirection:'row'}}>
+        <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{}}>
           <Image source={require('../assets/images/mic2.png')}/>
           <Text style={styles.voiceText}> Speak Your Language</Text>
         </TouchableOpacity></LinearGradient>
@@ -99,10 +118,10 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '700',
     color: '#3F1976',
-    alignSelf:'center'
+    alignSelf:'flex-start'
   },
   subtitle: {
     marginTop: 8,
@@ -175,5 +194,6 @@ const styles = StyleSheet.create({
   saveText: {
     color: '#FFFFFF',
     fontSize: 12,
+    alignSelf:'center'
   },
 });
