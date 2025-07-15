@@ -11,53 +11,53 @@ import BackArrow from '../../assets/images/back-arrow.svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Error_404Screen() {
+export default function Location_errorScreen() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
 
   const handleTryAgain = () => {
     setLoading(true);
-    // Simulate check (replace with real internet check logic)
     setTimeout(() => {
       setLoading(false);
-      // Possibly navigate or update state based on connectivity
     }, 1500);
   };
 
   return (
     <View style={styles.container}>
-       {/* Back Button */}
+      {/* Back Button */}
       <View style={{ width: '100%', alignItems: 'flex-start', marginBottom: 32 }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <BackArrow color="#54219D" />
         </TouchableOpacity>
       </View>
-
       <Image
-        source={require('../../assets/images/empty-state/error404.png')} // Replace with actual path
+        source={require('../../assets/images/empty-state/location-error.png')}
         style={styles.image}
         resizeMode="contain"
       />
 
-      <Text style={styles.subtitle}>Something went wrong.</Text>
+      <Text style={styles.subtitle}>
+        Could not find your location.
+      </Text>
 
       <TouchableOpacity style={styles.retryButton} onPress={handleTryAgain}>
-        {loading ? (
-          <ActivityIndicator color="#000" />
-        ) : (
-          <Text style={styles.retryText}>Tap to retry</Text>
+         {loading ? (
+                  <ActivityIndicator color="#000" />
+                ) :  (
+          <Text style={styles.retryText}>Get Help</Text>
         )}
       </TouchableOpacity>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     padding: 24,
-    justifyContent: 'center',
+    paddingTop: 60,
   },
   backButton: {
     position: 'absolute',
@@ -72,22 +72,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#E0E0E0',
   },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#4B320D',
-    marginBottom: 24,
-    marginTop: -40,
-  },
   image: {
-    width: 300,
-    height: 300,
+    width: 329,
+    height: 429,
     marginBottom: 20,
   },
   subtitle: {
+    position: 'relative',
     fontSize: 14,
     color: '#888',
+    textAlign: 'center',
     marginBottom: 20,
+    paddingHorizontal: 10,
   },
   retryButton: {
     backgroundColor: '#F2F2F2',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import BackArrow from '../../assets/images/back-arrow.svg';
 
 export default function NotificationScreen() {
   const navigation = useNavigation();
@@ -10,15 +11,17 @@ export default function NotificationScreen() {
   return (
     <View style={styles.container}>
       {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-back" size={24} color="#54219D" />
-      </TouchableOpacity>
+      <View style={{ width: '100%', alignItems: 'flex-start', marginBottom: 32 }}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <BackArrow color="#54219D" />
+        </TouchableOpacity>
+      </View>
 
       {/* Image or Loader */}
       {!imageLoaded && <Text style={styles.loadingText}>No Notifications</Text>}
 
       <Image
-        source={require('../../assets/images/selection/no-notifications.png')}
+        source={require('../../assets/images/empty-state/no-notifications.png')}
         style={styles.image}
         resizeMode="contain"
         onLoadEnd={() => setImageLoaded(true)}
@@ -38,12 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     padding: 24,
     paddingTop: 48,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 48,
-    left: 24,
-    zIndex: 10,
   },
   image: {
     width: '100%',

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import BackArrow from '../../assets/images/back-arrow.svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -24,13 +25,15 @@ export default function NoInternetScreen() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-back" size={24} color="#54219D" />
-      </TouchableOpacity>
+      <View style={{ width: '100%', alignItems: 'flex-start', marginBottom: 32 }}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <BackArrow color="#54219D" />
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.image}>
         <Image
-          source={require('../../assets/images/selection/check-internet.png')}
+          source={require('../../assets/images/empty-state/check-internet.png')}
           style={styles.image}
           resizeMode="contain"
         />
@@ -62,8 +65,8 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 50,
-    left: 20,
+    top: 40,
+    left: 24,
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -71,8 +74,8 @@ const styles = StyleSheet.create({
     borderColor: '#54219D',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#E0E0E0',
   },
-  
   image: {
     width: 300,
     height: 300,

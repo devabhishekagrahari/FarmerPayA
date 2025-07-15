@@ -9,6 +9,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MicIcon from '../assets/images/mic.svg';
+import BackArrow from '../assets/images/back-arrow.svg';
 
 const activities = [
   { id: '1', title: 'Crop Farming', image: require('../assets/images/selection/crop-farming.jpg') },
@@ -24,12 +26,16 @@ export default function SecondaryRoleScreen({ navigation }: any) {
     const isSelected = selectedId === item.id;
     return (
       <TouchableOpacity
-        style={[styles.card, isSelected && styles.selectedCard]}
-        onPress={() => setSelectedId(item.id)}
-      >
-        <View style={styles.imageContainer}>
-            <Image source={item.image} style={styles.image} />
+              style={styles.card}
+              onPress={() => setSelectedId(item.id)}
+            >
+            <View style={[ styles.imageContainer,
+              selectedId === item.id && styles.selectedImageBorder,
+          ]}
+        >
+          <Image source={item.image} style={styles.image} />
         </View>
+      
         <Text style={styles.cardText}>{item.title}</Text>
       </TouchableOpacity>
     );
@@ -37,8 +43,8 @@ export default function SecondaryRoleScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-back" size={24} color="#54219D" />
+      <TouchableOpacity  onPress={() => navigation.goBack()} style={{ marginBottom: 32 }}>
+        <BackArrow color="#54219D" />
       </TouchableOpacity>
 
       {/* Two Progress Lines */}
@@ -64,7 +70,7 @@ export default function SecondaryRoleScreen({ navigation }: any) {
         <TouchableOpacity style={styles.micWrapper}>
             <View style={styles.micOuterCircle}>
                 <View style={styles.micInnerCircle}>
-                    <Icon name="mic" size={28} color="#FFFFFF" />
+                    <MicIcon width={28} height={28} color="#FFFFFF" />
                 </View>
             </View>
         </TouchableOpacity>
@@ -85,9 +91,12 @@ const styles = StyleSheet.create({
     width: 40, height: 40, borderRadius: 20, borderWidth: 1,
     borderColor: '#54219D', justifyContent: 'center', alignItems: 'center', marginBottom: 8,
   },
+  selectedImageBorder: {
+  borderColor: '#54219D',
+},
   progressContainer: {
   flexDirection: 'row',
-  alignSelf: 'center',
+  alignSelf: 'flex-start',
   gap: 6,
   marginBottom: 12,
 },
@@ -116,11 +125,6 @@ progressLineInactive: {
     paddingVertical: 10,
     borderRadius: 12,
     backgroundColor: '#FFFFFF',
-  },
-  selectedCard: {
-    borderColor: '#54219D',
-    borderWidth: 2,
-    backgroundColor: '#F3E8FF',
   },
   imageContainer: {
   width: 75,

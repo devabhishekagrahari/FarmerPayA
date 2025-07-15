@@ -10,6 +10,8 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MicIcon from '../assets/images/mic.svg';
+import BackArrow from '../assets/images/back-arrow.svg';
 
 const plants = [
   { id: '1', title: 'Wheat', image: require('../assets/images/selection/wheat.jpg') },
@@ -75,22 +77,28 @@ export default function PlantSelectionScreen({ navigation }: any) {
     const isSelected = selected.includes(item.id);
     return (
       <TouchableOpacity
-        style={[styles.card, isSelected && styles.selectedCard]}
-        onPress={() => toggleSelect(item.id)}
-      >
-       <View style={styles.imageContainer}>
-            <Image source={item.image} style={styles.image} />
-        </View>
-        <Text style={styles.cardText}>{item.title}</Text>
-      </TouchableOpacity>
+  style={styles.card}
+  onPress={() => toggleSelect(item.id)}
+>
+  <View
+    style={[
+      styles.imageContainer,
+      isSelected && styles.selectedImageBorder,
+    ]}
+  >
+    <Image source={item.image} style={styles.image} />
+  </View>
+  <Text style={styles.cardText}>{item.title}</Text>
+</TouchableOpacity>
+
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-back" size={24} color="#54219D" />
+      <TouchableOpacity  onPress={() => navigation.goBack()} style={{ marginBottom: 32 }}>
+        <BackArrow color="#54219D" />
       </TouchableOpacity>
 
       {/* Progress Lines (3 active) */}
@@ -121,7 +129,7 @@ export default function PlantSelectionScreen({ navigation }: any) {
         <TouchableOpacity style={styles.micWrapper}>
             <View style={styles.micOuterCircle}>
                 <View style={styles.micInnerCircle}>
-                    <Icon name="mic" size={28} color="#FFFFFF" />
+                    <MicIcon width={28} height={28} color="#FFFFFF" />
                 </View>
             </View>
         </TouchableOpacity>
@@ -147,9 +155,13 @@ const styles = StyleSheet.create({
     width: 40, height: 40, borderRadius: 20, borderWidth: 1,
     borderColor: '#54219D', justifyContent: 'center', alignItems: 'center', marginBottom: 8,
   },
+  selectedImageBorder: {
+    borderColor: '#54219D',
+  },
+
   progressContainer: {
     flexDirection: 'row',
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     gap: 6,
     marginBottom: 12,
   },
@@ -180,11 +192,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 12,
     backgroundColor: '#FFFFFF',
-  },
-  selectedCard: {
-    borderColor: '#54219D',
-    borderWidth: 2,
-    backgroundColor: '#F3E8FF',
   },
   imageContainer: {
   width: 75,

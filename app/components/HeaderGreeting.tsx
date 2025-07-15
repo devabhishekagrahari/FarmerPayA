@@ -11,10 +11,13 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
+import NotificationScreen from '../components/emptyState/no-notification';
 
 const { width, height } = Dimensions.get('window');
 
 const Header = () => {
+  const navigation = useNavigation();
   return (
     <LinearGradient
       colors={[ '#6929C4','#4506A0']}
@@ -33,7 +36,10 @@ const Header = () => {
             <Text style={styles.appName}>Farme₹Pay</Text>
           </View>
           <View style={styles.iconsRow}>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity 
+              style={styles.iconButton} 
+              onPress={() => navigation.navigate('Notification')}
+            >
               <Image source={require('../assets/images/notificationIcon.png')}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>

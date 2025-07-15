@@ -4,10 +4,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import AIChat from '../screens/AIChat.tsx';
 import MyNewScreen from '../screens/aiChatInbox.tsx';
-import NotificationScreen from '../components/emptyState/no-notification.tsx';
+import BackOnlineScreen from '../components/emptyState/back-online';
 import NoInternetScreen from '../components/emptyState/no-internet';
 import Error_404Screen from '../components/emptyState/error-404';
-
+import Low_storage from '../components/emptyState/low-storage';
+import Language_unavailableScreen from '../components/emptyState/Language-unavailable';
+import Location_errorScreen from '../components/emptyState/location-error';
+import NoTransactionScreen from '../components/emptyState/no-transaction.tsx';
 
 const {width,height}=Dimensions.get('window');
 
@@ -62,14 +65,13 @@ const AppNavigator = () => (
         backgroundColor: '#fff',
         borderTopWidth: 0,
         elevation: 10,
-        height: height*0.07, // 👈 increase this value
-        paddingBottom: 8, // 👈 optional for spacing
+        height: height*0.07, 
+        paddingBottom: 8, 
         paddingTop: 8,
       },
     })}
   >
     <Tab.Screen name="Home" component={HomeScreen} />
-
     <Tab.Screen name="Chat" component={AIChat} />
     <Tab.Screen
       name="Scanner"
@@ -82,12 +84,10 @@ const AppNavigator = () => (
         ),
       }}
     />
-    <Tab.Screen name="Weather" component={NotificationScreen} />
+    <Tab.Screen name="Weather" component={Language_unavailableScreen} />
     <Tab.Screen name="Profile" component={HomeScreen} />
   </Tab.Navigator>
 );
-
-
 
 const styles = StyleSheet.create({
   headerTitleContainer: {
