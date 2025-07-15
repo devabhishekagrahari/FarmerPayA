@@ -18,7 +18,7 @@ const ServiceCard = ({ title, icon }: { title: string; icon: any }) => (
 
 const Services=()=>{
   return (
-     <View  style={{height:height*0.38, aspectRatio:1.26}}>
+     <View  style={{width: width*0.96, aspectRatio:1.26}}>
       <Text style={styles.sectionTitle}>Services</Text>
       <View style={styles.servicesGrid}>
         <View style={{ width:'48.8%'}}>

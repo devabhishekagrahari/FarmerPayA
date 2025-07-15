@@ -14,7 +14,11 @@ import {
   Image,
   Alert,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/Feather';
+import VillageIcon from '../assets/images/VillageIcon.svg';
+import StateIcon from '../assets/images/StateIcon.svg';
+import ArrowBack from '../assets/images/ArrowBack.svg';
+import HomeIcon from '../assets/images/HomeIcon.svg';
 
 const SignUpFormScreen2 = ({ navigation }: any) => {
   return (
@@ -23,7 +27,9 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={60}
     >
-        <Pressable onPress={()=>{navigation.goBack()}} style={{marginHorizontal:24}}><Image source={require('../assets/images/arrowButton.png')}/></Pressable>
+        <Pressable onPress={()=>{navigation.goBack()}} style={{marginHorizontal:24}}>
+         <ArrowBack/>
+        </Pressable>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
@@ -32,38 +38,50 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
           <View style={styles.container}>
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter House Number</Text>
+              <View style={styles.inputBox}>
+          
+              <HomeIcon height={25} width={25} color={'#A0A0A0'}/> 
               <TextInput
                 placeholder="Enter your house, flat, apartment no."
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
               />
-            </View>
+            </View></View>
 
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Village</Text>
+              <View style={styles.inputBox}>  
+               <VillageIcon height={30} width={30} color={'#A0A0A0'}/> 
               <TextInput
                 placeholder="Enter your village/town name"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
-              />
+              /></View>
+
             </View>
 
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter City/District Name</Text>
+              <View style={styles.inputBox}>
+              <VillageIcon height={30} width={30} fill='#A0A0A0'/> 
               <TextInput
                 placeholder="Choose your city"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
               />
+              </View>
             </View>
 
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter State</Text>
+              <View style={styles.inputBox}>
+              <StateIcon height={30} width={30} />
               <TextInput
                 placeholder="Choose your state"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
               />
+              </View>
             </View>
 
             <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('primaryRole')}}>
@@ -98,19 +116,25 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
     color: 'rgba(18, 18, 18, 0.87)',
   },
-  input: {
+  inputBox:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
     height: 48,
-    backgroundColor: '#FFFFFF',
     borderWidth: 2,
     borderColor: '#f2f2f2',
     borderRadius: 8,
-    paddingHorizontal: 16,
+    backgroundColor: '#FFFFFF',
+  },
+  input: {
+    flex: 1,
     fontSize: 14,
-    color: '#121212',
+    marginLeft: 8,
+    color: '#000',
   },
   button: {
     height: 60,

@@ -17,7 +17,7 @@ const SplashScreen = ({ navigation }: any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.replace('selectLanguage'); // Change 'Home' to your actual main screen
-    }, 2000); // 2 seconds
+    }, 6000); // 2 seconds
 
     return () => clearTimeout(timer);
   }, [navigation]);

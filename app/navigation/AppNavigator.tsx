@@ -62,7 +62,7 @@ const AppNavigator = () => (
         backgroundColor: '#fff',
         borderTopWidth: 0,
         elevation: 10,
-        height: height*0.07, // 👈 increase this value
+        height: height*0.08, // 👈 increase this value
         paddingBottom: 8, // 👈 optional for spacing
         paddingTop: 8,
       },
@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   tabIcon: {
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
   },
   scannerButtonWrapper: {
@@ -126,11 +126,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scannerIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 34,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:24,
+    marginBottom: 16,
     backgroundColor: '#6929C4',
-    top:7,
+    top:14,
     padding:8,
     elevation: 2,
     shadowColor: '#000',

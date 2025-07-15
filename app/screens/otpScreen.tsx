@@ -79,8 +79,7 @@ const OtpVerification = ({
       setError('Incorrect OTP. Please try again.');
     } else {
       setError('');
-      Alert.alert('Success', 'OTP Verified Successfully');
-      navigation.navigate('SignUp');
+      navigation.navigate('SignUpForm1');
     }
   };
 
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
   resendText: {
     fontSize: 14,
     color: '#0F1B38',
-    textAlign: 'center',
+    textAlign: 'right',
     marginBottom: 16,
   },
   errorText: {
