@@ -128,7 +128,7 @@ const OtpVerification = ({
 
       {timer > 0 ? (
         <Text style={styles.resendText}>
-          If you did not receive the OTP, Resend in {timer}s
+          If you did not receive the OTP, <Text style={{color:'#D00416'}}>Resend in {timer}s</Text> 
         </Text>
       ) : (
         <TouchableOpacity onPress={handleResend}>
@@ -145,8 +145,7 @@ const OtpVerification = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    alignItems: 'center',
+    padding: 16,
     backgroundColor: '#FFFFFF',
     flex: 1,
   },
@@ -155,11 +154,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: '500',
     color: '#121212',
-    marginBottom: 16,
-    textAlign: 'center',
+    marginTop:40,
+    marginBottom: 40,
+    textAlign: 'left',
   },
   otpContainer: {
     flexDirection: 'row',
@@ -172,9 +172,10 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 8,
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '500',
     color: '#797979',
+    borderWidth:2
   },
   otpBoxActive: {
     borderWidth: 2,
@@ -189,10 +190,11 @@ const styles = StyleSheet.create({
     borderColor: '#D00416', // Red
   },
   resendText: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#0F1B38',
     textAlign: 'right',
     marginBottom: 16,
+    fontWeight:'500'
   },
   errorText: {
     fontSize: 14,
@@ -203,12 +205,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#54219D',
     height: 60,
     borderRadius: 48,
-    width: '100%',
+    width: '90%',
     justifyContent: 'center',
+    alignSelf:'center',
     alignItems: 'center',
   },
   verifyText: {
     color: '#FFFFFF',
-    fontSize: 20,
+    fontSize: 18,
   },
 });

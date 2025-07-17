@@ -2,6 +2,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import SplashScreen from './app/screens/splashScreen';
 import AppNavigator from './app/navigation/AppNavigator';
 import SelectLanguageScreen from './app/screens/selectLanguageScreen';
@@ -14,6 +15,12 @@ import PrimaryRoleScreen from './app/screens/PrimaryRole';
 import SecondaryRoleScreen from './app/screens/SecondaryRole.tsx';
 import PlantSelectionScreen from './app/screens/PlantSelectionScreen';
 import { StatusBar } from 'react-native';
+import DualAnimatedRows from './app/components/animation.tsx';
+import { InView } from 'react-native-intersection-observer';
+import AIAdvisory from './app/components/AIadvisory.tsx';
+import AIChat from './app/screens/AIChat.tsx';
+import OnboardingScreen from './app/screens/splashScreen2.tsx';
+import SplashScreen2 from './app/screens/splashScreen2.tsx';
 
 
  // Your custom splash screen
@@ -35,6 +42,8 @@ const App = () => {
         <Stack.Screen name="SignUpForm2" component={SignUpFormScreen2}/>
         <Stack.Screen name="PlantSelection" component={PlantSelectionScreen} />
         <Stack.Screen name="Main" component={AppNavigator} />
+         <Stack.Screen name="AiChat" component={AIChat} />
+         <Stack.Screen name="Splash2" component={SplashScreen2} />
 
       </Stack.Navigator>
     </NavigationContainer>

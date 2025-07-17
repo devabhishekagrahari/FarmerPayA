@@ -80,8 +80,8 @@ const LoginScreen = ({navigation}:any) => {
         {/* Terms */}
         <TouchableOpacity>
           <Text style={styles.termsText}>
-            By proceeding you are agreeing to farmerpay’s{' '} </Text>
-            <Text style={styles.link}>Terms & Conditions</Text>
+            By proceeding you are agreeing to farmerpay’s{' '} 
+            <Text style={styles.link}>Terms & Conditions</Text></Text>
          
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     alignSelf:'flex-start'
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: '700',
     color: '#3F1976',
   },
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   label: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: '500',
     marginBottom: 8,
     color: 'rgba(18, 18, 18, 0.87)',
@@ -145,12 +145,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 16,
     height: 48,
-    fontSize: 16,
+    fontSize: 12,
     backgroundColor: '#FFFFFF',
     color: '#000000',
   },
   helperText: {
-    fontSize: 12,
+    fontSize: 10,
     color: '#A2A2A2',
     alignSelf:'flex-start',
     marginTop: 8,
@@ -177,7 +177,5 @@ const styles = StyleSheet.create({
   },
   link: {
     color: '#54219D',
-    textAlign:'center',
-    textDecorationLine: 'underline',
   },
 });

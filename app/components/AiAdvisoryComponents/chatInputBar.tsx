@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  useWindowDimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import MicIcon from '../../assets/images/MicIcon.svg'
+
 
 interface ChatInputBarProps {
   value: string;
@@ -22,55 +25,61 @@ const ChatInputBar: React.FC<ChatInputBarProps> = ({
   onMicPress,
   onGalleryPress,
 }) => {
+   const {height, width} = useWindowDimensions();
+
   return (
     <View style={styles.inputWrapper}>
       <LinearGradient
         colors={['#FF0000', '#FFA500']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        style={styles.gradientBorder}
+        style={[styles.gradientBorder,{width:width*0.75}]}
       >
         <View style={styles.inputBar}>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Type a message..."
+            placeholderTextColor="#888"
+            value={value}
+            onChangeText={onChangeText}
+          />          
           <TouchableOpacity onPress={onGalleryPress}>
             <Image
               source={require('../../assets/images/gallery-add.png')}
               style={styles.iconImg}
             />
           </TouchableOpacity>
-          <TextInput
-            style={styles.input}
-            placeholder="Ask something..."
-            placeholderTextColor="#888"
-            value={value}
-            onChangeText={onChangeText}
-          />
-          <TouchableOpacity onPress={onMicPress}>
-            <ImageBackground
-              source={require('../../assets/images/micBG1.png')}
-              style={{ padding: 4 }}
-            >
-              <Image
-                source={require('../../assets/images/mic.png')}
-                style={styles.icon}
-              />
-            </ImageBackground>
-          </TouchableOpacity>
+
         </View>
       </LinearGradient>
+                <TouchableOpacity onPress={onMicPress}>
+            <View style={{marginHorizontal:8}}>
+
+              <MicIcon height={70} width={70} />
+
+            </View>
+
+          </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   inputWrapper: {
-    position: 'absolute',
+    flexDirection:'row',
     bottom: 20,
-    left: 4,
-    right: 4,
+    marginHorizontal:8,
+
+    alignItems:'center'
   },
   gradientBorder: {
-    padding: 2,
+    height:58,
+    justifyContent:'center',
+    alignItems:'center',
+    padding:2,
     borderRadius: 30,
+    
   },
   inputBar: {
     backgroundColor: '#fff',
@@ -78,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: 7,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
@@ -88,8 +97,10 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 14,
-    color: '#000',
+    color: '#72777A',
     marginHorizontal: 12,
+    alignSelf:'center',
+    paddingTop:8
   },
   icon: {
     width: 24,
@@ -97,9 +108,10 @@ const styles = StyleSheet.create({
     tintColor: '#fff',
   },
   iconImg: {
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 30,
     tintColor: '#979C9E',
+    marginHorizontal: 12,
   },
 });
 

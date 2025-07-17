@@ -16,6 +16,7 @@ import ChatHistory from '../components/AiAdvisoryComponents/chatHistory';
 import  {VoiceChat}  from '../components/AiAdvisoryComponents/VoiceBubble';
 import ChatInputBar from '../components/AiAdvisoryComponents/chatInputBar';
 import CustomTopBar from '../components/customTopBar';
+import DualAnimatedRows from '../components/animation';
 
 
 interface historyProps {
@@ -90,29 +91,7 @@ return (
 
     <View style={{ flex: 1, alignItems: 'center', height:'100%', justifyContent: 'center' ,backgroundColor:'#fff' }}>
       {history.length === 0 ? (
-        <>  <ImageBackground
-              source={require('../assets/images/bg2.png')}
-              style={styles.background}
-            >
-          <View style={styles.container}>
-            <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
-            <Text style={styles.subtitle}>What farming help do you need today?</Text>
-          </View>
-
-          <ScrollView
-            contentContainerStyle={styles.optionsContainer}
-            showsVerticalScrollIndicator={false}
-          >
-            {options.map((option, index) => (
-              <MessageOption
-                key={index}
-                label={option}
-                onPress={() => console.log('Tapped:', option)}
-              />
-            ))}
-          </ScrollView>
-          </ImageBackground>
-        </>
+        <></>
       ) : (
         <>
           <View style={{ width: '100%' }}>

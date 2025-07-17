@@ -1,7 +1,9 @@
 // AIAdvisory.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ImageBackground, Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import DualAnimatedRows from './animation';
+import { InView } from 'react-native-intersection-observer';
 const{width,height}=Dimensions.get('window');
 const QUESTIONS = [
   { text: 'Where is nearest seed shop? 🌱' },
@@ -14,13 +16,16 @@ const QUESTIONS = [
   { text: 'गेहूँ की MSP क्या है?” 🌾' },
   { text: 'Aaj ka mausam? ☀️' }, 
 ];
-
-const AIAdvisory = () => {
+interface AIAdvisoryProps {
+  inView: boolean;
+  navigation:any;
+}
+const AIAdvisory: React.FC<AIAdvisoryProps> = ({ inView ,navigation}) => {
   return (
-    <ImageBackground style={{width:width+16,alignSelf:'center',aspectRatio:1.1,marginBottom:24}} resizeMode="contain" source={require('../assets/images/aiAdvisoryImage.png')}>
+    <ImageBackground style={{width:width+16,alignSelf:'center',height:'auto' ,minHeight:width,marginBottom:24}} resizeMode="contain" source={require('../assets/images/aiAdvisoryImage.png')}>
     <View style={styles.container}>
       <Text style={styles.title}>AI Advisory</Text>
-      <View style={styles.pillContainer}>
+      {/* <View style={styles.pillContainer}>
         {QUESTIONS.map((item, index) => (
           <LinearGradient
             colors={['#FF0000', '#FFA500']}
@@ -33,7 +38,9 @@ const AIAdvisory = () => {
           </TouchableOpacity>
           </LinearGradient>
         ))}
-      </View>
+      </View> */}
+
+      <DualAnimatedRows inView={inView} navigation={navigation}/>
     </View></ImageBackground>
   );
 };
@@ -52,10 +59,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginVertical: 8,
     marginHorizontal:10,
     color:'#1F077A',
-    marginBottom: 12,
     fontFamily: 'Inter-Regular',       // Make sure Inter is linked properly
     lineHeight: 22,            // 100% of 22px
     marginTop:12,
