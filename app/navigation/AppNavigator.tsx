@@ -3,14 +3,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, StatusBar 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import AIChat from '../screens/AIChat.tsx';
-import MyNewScreen from '../screens/aiChatInbox.tsx';
-import BackOnlineScreen from '../components/emptyState/back-online';
+
+import NotificationScreen from '../components/emptyState/no-notification.tsx';
 import NoInternetScreen from '../components/emptyState/no-internet';
 import Error_404Screen from '../components/emptyState/error-404';
-import Low_storage from '../components/emptyState/low-storage';
-import Language_unavailableScreen from '../components/emptyState/Language-unavailable';
-import Location_errorScreen from '../components/emptyState/location-error';
-import NoTransactionScreen from '../components/emptyState/no-transaction.tsx';
+import DualAnimatedRows from '../components/animation.tsx';
+import AiWelcomeScreen from '../screens/AiWelcomeScreen.tsx';
+
 
 const {width,height}=Dimensions.get('window');
 
@@ -72,7 +71,8 @@ const AppNavigator = () => (
     })}
   >
     <Tab.Screen name="Home" component={HomeScreen} />
-    <Tab.Screen name="Chat" component={AIChat} />
+
+    <Tab.Screen name="Chat" component={AiWelcomeScreen} />
     <Tab.Screen
       name="Scanner"
       component={HomeScreen}
@@ -85,6 +85,7 @@ const AppNavigator = () => (
       }}
     />
     <Tab.Screen name="Weather" component={Language_unavailableScreen} />
+    <Tab.Screen name="Weather" component={HomeScreen} />
     <Tab.Screen name="Profile" component={HomeScreen} />
   </Tab.Navigator>
 );

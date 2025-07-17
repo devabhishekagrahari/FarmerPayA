@@ -93,9 +93,8 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
-    paddingTop: 16,
+    paddingTop: 40,
     flex: 1,
-    justifyContent:'space-evenly',
     backgroundColor:'#fff'
  
   },
@@ -103,25 +102,26 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   heading: {
-    fontSize: 32,
-    fontWeight: '700',
+    fontSize: 24,
+    fontWeight: '500',
     color: '#3F1976',
   },
   subheading: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#4B5768',
     marginTop: 8,
   },
   formContainer: {
     gap: 24,
-   marginBottom: 8,
+   marginBottom: 24,
+   marginTop:24
   },
   inputGroup: {
     gap: 8,
  
   },
   label: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
     color: 'rgba(18, 18, 18, 0.87)',
   },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     marginLeft: 8,
     color: '#000',
   },
@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    marginBottom:16
   },
   continueButtonText: {
     color: '#FFFFFF',
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
   footerText: {
     textAlign: 'center',
     marginBottom:32,
-    fontSize: 16,
+    fontSize: 12,
     color: '#000',
     fontWeight: '300',
   },

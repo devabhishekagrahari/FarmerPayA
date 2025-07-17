@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('window');
 const SplashScreen = ({ navigation }: any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace('selectLanguage'); // Change 'Home' to your actual main screen
+      navigation.replace('Splash2'); // Change 'Home' to your actual main screen
     }, 6000); // 2 seconds
 
     return () => clearTimeout(timer);
@@ -24,7 +24,7 @@ const SplashScreen = ({ navigation }: any) => {
 
 
   const handleGetStarted = () => {
-    navigation.navigate('selectLanguage'); // Manual navigation
+    navigation.navigate('Splash2'); // Manual navigation
   };
 
 

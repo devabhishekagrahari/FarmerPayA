@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   activeDot: {
-    width: 27,
+    width: 15,
     height: 9,
     backgroundColor: '#4506A0',
     borderRadius: 20,

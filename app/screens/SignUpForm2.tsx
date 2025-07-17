@@ -23,7 +23,7 @@ import HomeIcon from '../assets/images/HomeIcon.svg';
 const SignUpFormScreen2 = ({ navigation }: any) => {
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 ,paddingTop:64,backgroundColor:'#fff'}}
+      style={{ flex: 1 ,paddingTop:16,backgroundColor:'#fff'}}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={60}
     >
@@ -36,11 +36,12 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.container}>
+          
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter House Number</Text>
               <View style={styles.inputBox}>
           
-              <HomeIcon height={25} width={25} color={'#A0A0A0'}/> 
+              <HomeIcon height={20} width={20} color={'#A0A0A0'}/> 
               <TextInput
                 placeholder="Enter your house, flat, apartment no."
                 style={styles.input}
@@ -51,7 +52,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Village</Text>
               <View style={styles.inputBox}>  
-               <VillageIcon height={30} width={30} color={'#A0A0A0'}/> 
+               <VillageIcon height={25} width={25} color={'#A0A0A0'}/> 
               <TextInput
                 placeholder="Enter your village/town name"
                 style={styles.input}
@@ -63,7 +64,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter City/District Name</Text>
               <View style={styles.inputBox}>
-              <VillageIcon height={30} width={30} fill='#A0A0A0'/> 
+              <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
                 placeholder="Choose your city"
                 style={styles.input}
@@ -75,7 +76,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter State</Text>
               <View style={styles.inputBox}>
-              <StateIcon height={30} width={30} />
+              <StateIcon height={25} width={25} />
               <TextInput
                 placeholder="Choose your state"
                 style={styles.input}
@@ -83,7 +84,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               />
               </View>
             </View>
-
+           <View style={{gap:16}}>
             <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('primaryRole')}}>
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
@@ -93,8 +94,8 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
                 Log in
               </Text>
-            </Text>
-          </View>
+            </Text></View>
+           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -104,19 +105,21 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
+
     padding: 24,
     
   },
   container: {
     flex: 1,
-    gap: 24,
+    marginTop:40,
+    gap:24
   },
   formGroup: {
-    gap: 8,
+    
+    gap:8
   },
   label: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
     color: 'rgba(18, 18, 18, 0.87)',
   },
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     marginLeft: 8,
     color: '#000',
   },
@@ -145,19 +148,19 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#FFFFFF',
   },
   footerText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '300',
     textAlign: 'center',
     color: '#000000',
-    marginTop: 16,
+    
   },
   loginLink: {
     color: '#79BBA8',
-    fontWeight: '400',
+    fontWeight: '500',
   },
 });
 

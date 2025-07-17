@@ -57,7 +57,7 @@ padding:6,
     lineHeight:20
   },
   cardSubtitle: {
-    fontSize: 13,
+    fontSize: 12,
     color: '#F7F7F7',
     marginBottom: 12,
   },
@@ -71,7 +71,7 @@ padding:6,
   buttonText: {
     color: '#ffffff',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: 12,
   },
   cardImage: {
     width: 180,
