@@ -14,8 +14,8 @@ import PrimaryRoleScreen from './app/screens/PrimaryRole';
 import SecondaryRoleScreen from './app/screens/SecondaryRole.tsx';
 import PlantSelectionScreen from './app/screens/PlantSelectionScreen';
 import { StatusBar } from 'react-native';
-import NotificationScreen from './app/components/emptyState/no-notification'
-
+import NoNotificationScreen from './app/components/emptyState/no-notification'
+import NotificationScreen from './app/screens/NotificationScreen.tsx'
 
  // Your custom splash screen
 
@@ -37,6 +37,7 @@ const App = () => {
         <Stack.Screen name="PlantSelection" component={PlantSelectionScreen} />
         <Stack.Screen name="Main" component={AppNavigator} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

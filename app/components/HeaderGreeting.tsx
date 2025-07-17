@@ -12,7 +12,6 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-import NotificationScreen from '../components/emptyState/no-notification';
 
 const { width, height } = Dimensions.get('window');
 
