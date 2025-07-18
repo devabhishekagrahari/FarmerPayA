@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
-import AIChat from '../screens/AIChat.tsx';
+import AIChat from '../screens/AIChat/AIChat.tsx';
 
 import NotificationScreen from '../components/emptyState/no-notification.tsx';
 import NoInternetScreen from '../components/emptyState/no-internet';
 import Error_404Screen from '../components/emptyState/error-404';
 import DualAnimatedRows from '../components/animation.tsx';
-import AiWelcomeScreen from '../screens/AiWelcomeScreen.tsx';
+import AiWelcomeScreen from '../screens/AIChat/AiWelcomeScreen.tsx';
 
 
 const {width,height}=Dimensions.get('window');

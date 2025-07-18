@@ -8,9 +8,9 @@ import {
   SafeAreaView,
   Alert,
 } from 'react-native';
-import DualAnimatedRows from '../components/animation';
-import ChatInputBar from '../components/AiAdvisoryComponents/chatInputBar';
-import DualAnimatedRows1 from '../components/animation2';
+import DualAnimatedRows from '../../components/animation';
+import ChatInputBar from '../../components/AiAdvisoryComponents/chatInputBar';
+import DualAnimatedRows1 from '../../components/animation2';
 
 // ✅ adjust this import if needed
 
@@ -19,12 +19,12 @@ const AiWelcomeScreen = ({navigation}:any) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
-        source={require('../assets/images/bg2.png')}
+        source={require('../../assets/images/bg2.png')}
         style={styles.background}
         resizeMode="stretch"
       >
         <View style={styles.container}>
-          <Image source={require('../assets/images/Logo.png')} style={styles.logo} />
+          <Image source={require('../../assets/images/Logo.png')} style={styles.logo} />
           <Text style={styles.subtitle}>What farming help do you need today?</Text>
         </View>
 

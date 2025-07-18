@@ -15,7 +15,7 @@ const SignUpScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/images/signup-image.png')} // <-- put your image here
+        source={require('../../assets/images/signup-image.png')} // <-- put your image here
         style={styles.image}
         resizeMode="contain"
       />

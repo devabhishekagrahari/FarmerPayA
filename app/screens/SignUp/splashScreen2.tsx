@@ -10,8 +10,8 @@ import {
   ScrollView,
 } from 'react-native';
 
-import DualAnimatedRows3 from '../components/animation3';
-import AutoScrollingText from '../components/autoScrollingText';
+import DualAnimatedRows3 from '../../components/animation3';
+import AutoScrollingText from '../../components/autoScrollingText';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,7 +19,7 @@ const SplashScreen2 = ({navigation}:any) => {
   return (
     <View style={styles.background}> 
     <ImageBackground
-      source={require('../assets/images/aiBgSmall.png')}
+      source={require('../../assets/images/aiBgSmall.png')}
       style={{height:200,marginTop:55,width:width}}
       resizeMode="contain"
     ><DualAnimatedRows3 inView={true} navigation={navigation}/>
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
   centerTextContainer: {
     marginTop: height * 0.05,
     paddingHorizontal: 24,
-    maxHeight: 250
+    maxHeight: 280
   },
   titleText: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: '600',
     color: '#54219D',
     textAlign: 'center',
@@ -85,19 +85,22 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     position: 'absolute',
     bottom: 50,
-    width: '100%',
+    width: '90%',
     alignItems: 'center',
+    marginHorizontal:16
   },
   button: {
     backgroundColor: '#54219D',
     borderRadius: 48,
     paddingVertical: 14,
     paddingHorizontal: 32,
-    minWidth: 200,
+    width:'100%',
+    alignItems:'center'
+
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
     fontFamily: 'Inter',
   },

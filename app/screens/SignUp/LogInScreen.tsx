@@ -33,7 +33,7 @@ const LoginScreen = ({navigation}:any) => {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Top illustration */}
       <Image
-        source={require('../assets/images/farm-cow.png')} // Replace with your own image
+        source={require('../../assets/images/farm-cow.png')} // Replace with your own image
         style={styles.image}
         resizeMode="contain"
       />

@@ -14,16 +14,16 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import VillageIcon from '../assets/images/VillageIcon.svg';
-import StateIcon from '../assets/images/StateIcon.svg';
-import ArrowBack from '../assets/images/ArrowBack.svg';
-import HomeIcon from '../assets/images/HomeIcon.svg';
+
+import VillageIcon from '../../assets/images/VillageIcon.svg';
+import StateIcon from '../../assets/images/StateIcon.svg';
+import ArrowBack from '../../assets/images/ArrowBack.svg';
+import HomeIcon from '../../assets/images/HomeIcon.svg';
 
 const SignUpFormScreen2 = ({ navigation }: any) => {
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 ,paddingTop:16,backgroundColor:'#fff'}}
+      style={{ flex: 1 ,paddingTop:40,backgroundColor:'#fff'}}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={60}
     >
@@ -61,6 +61,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
 
             </View>
 
+
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter City/District Name</Text>
               <View style={styles.inputBox}>
@@ -72,6 +73,20 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               />
               </View>
             </View>
+
+
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter City/District PINCODE</Text>
+              <View style={styles.inputBox}>
+              <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
+              <TextInput
+                placeholder="Turn on gps to drop precise pin"
+                style={styles.input}
+                placeholderTextColor="#C0C0C0"
+              />
+              </View>
+            </View>
+
 
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter State</Text>
@@ -105,13 +120,12 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-
+    paddingTop:40,
     padding: 24,
-    
   },
   container: {
     flex: 1,
-    marginTop:40,
+  
     gap:24
   },
   formGroup: {

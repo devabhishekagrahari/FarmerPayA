@@ -6,20 +6,34 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
+import ArrowBack from '../../assets/images/ArrowBack.svg';
+import RNPickerSelect from 'react-native-picker-select';
 const { width, height } = Dimensions.get('window');
 
 const SignUpFormScreen1 = ({ navigation }: any) => {
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [fatherName, setFatherName] = useState('');
+                  {/* Gender Drop Down */}
+  const genderOptions = [
+  { label: 'Male', value: 'male' },
+  { label: 'Female', value: 'female' },
+  { label: 'Other', value: 'other' },
+];
+
+// Replace fatherName with gender in your state:
+const [gender, setGender] = useState('');
 
   return (
     <View style={styles.container}>
+              <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
+               <ArrowBack/>
+              </Pressable>
       <View style={styles.headerContainer}>
-        <Text style={styles.heading}>Sign Up</Text>
+        <Text style={styles.heading}>Hello! Farmer</Text>
         <Text style={styles.subheading}>Create your account to continue</Text>
       </View>
 
@@ -38,8 +52,8 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
             />
           </View>
         </View>
-
-        {/* Contact Number */}
+{/* 
+       
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Contact Number</Text>
           <View style={styles.inputBox}>
@@ -53,7 +67,32 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
               onChangeText={setContact}
             />
           </View>
-        </View>
+        </View> */}
+
+
+
+...
+
+<View style={styles.inputGroup}>
+  <Text style={styles.label}>Enter Gender</Text>
+  <View style={styles.inputBox}>
+    <Icon name="user-check" size={20} color="#C0C0C0" />
+    <RNPickerSelect
+      onValueChange={setGender}
+      value={gender}
+      placeholder={{ label: 'Select your Gender', value: null }}
+      items={genderOptions}
+      style={{
+        inputAndroid: styles.input,
+        inputIOS: styles.input,
+        placeholder: {
+          color: '#C0C0C0',
+        },
+      }}
+      Icon={() => <Icon name="chevron-down" size={20} color="#C0C0C0" />}
+    />
+  </View>
+</View>
 
         {/* Father's Name */}
         <View style={styles.inputGroup}>

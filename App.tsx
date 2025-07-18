@@ -2,25 +2,25 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import SplashScreen from './app/screens/splashScreen';
-import AppNavigator from './app/navigation/AppNavigator';
-import SelectLanguageScreen from './app/screens/selectLanguageScreen';
-import LoginOtpVerification from './app/screens/otpScreen.tsx';
-import LoginScreen from './app/screens/LogInScreen';
-import SignUpScreen from './app/screens/signUpScreen.tsx';
-import SignUpFormScreen1 from './app/screens/signUpForm1.tsx';
-import SignUpFormScreen2 from './app/screens/SignUpForm2.tsx';
+import SplashScreen from './app/screens/SignUp/splashScreen';
 import PrimaryRoleScreen from './app/screens/PrimaryRole';
-import SecondaryRoleScreen from './app/screens/SecondaryRole.tsx';
+import SecondaryRoleScreen from './app/screens/SecondaryRole';
+import SelectLanguageScreen from './app/screens/SignUp/selectLanguageScreen';
+import LoginScreen from './app/screens/SignUp/LogInScreen';
+import LoginOtpVerification from './app/screens/SignUp/otpScreen';
+import SignUpScreen from './app/screens/SignUp/signUpScreen';
+import SignUpFormScreen1 from './app/screens/SignUp/signUpForm1';
+import SignUpFormScreen2 from './app/screens/SignUp/SignUpForm2';
 import PlantSelectionScreen from './app/screens/PlantSelectionScreen';
-import { StatusBar } from 'react-native';
-import DualAnimatedRows from './app/components/animation.tsx';
-import { InView } from 'react-native-intersection-observer';
-import AIAdvisory from './app/components/AIadvisory.tsx';
-import AIChat from './app/screens/AIChat.tsx';
-import OnboardingScreen from './app/screens/splashScreen2.tsx';
-import SplashScreen2 from './app/screens/splashScreen2.tsx';
+import AppNavigator from './app/navigation/AppNavigator';
+import AIChat from './app/screens/AIChat/AIChat';
+import SplashScreen2 from './app/screens/SignUp/splashScreen2';
+import WhoAreUScreen from './app/screens/SignUp/whoAreUScreen';
+import AgentSignUp1 from './app/screens/SignUp/Agent/agentSignUp1';
+import AgentSignUp2 from './app/screens/SignUp/Agent/agentSignUp2';
+import AgentSignUp3 from './app/screens/SignUp/Agent/agentSignUp3';
+
+
 
 
  // Your custom splash screen
@@ -42,9 +42,12 @@ const App = () => {
         <Stack.Screen name="SignUpForm2" component={SignUpFormScreen2}/>
         <Stack.Screen name="PlantSelection" component={PlantSelectionScreen} />
         <Stack.Screen name="Main" component={AppNavigator} />
-         <Stack.Screen name="AiChat" component={AIChat} />
-         <Stack.Screen name="Splash2" component={SplashScreen2} />
-
+        <Stack.Screen name="AiChat" component={AIChat} />
+        <Stack.Screen name="Splash2" component={SplashScreen2} />
+        <Stack.Screen name="WhoAreU" component={WhoAreUScreen} />
+        <Stack.Screen name="AgentSignUp1" component={AgentSignUp1}/>
+        <Stack.Screen name="AgentSignUp2" component={AgentSignUp2}/>
+        <Stack.Screen name="AgentSignUp3" component={AgentSignUp3}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
