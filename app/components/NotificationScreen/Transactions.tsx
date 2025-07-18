@@ -8,56 +8,58 @@ import {
   Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import BackArrow from '../../assets/images/back-arrow.svg';
 import Icon from 'react-native-vector-icons/Feather';
-import check from '../..assets/images/notification/check-circle.svg';
+import CheckIcon from '../../assets/images/notifications/check-circle.svg';
+import BenefitIcon from '../../assets/images/notifications/benefit.svg';
+import FailedIcon from '../../assets/images/notifications/failed.svg';
+import RupeeIcon from '../../assets/images/notifications/rupee.svg';
 
 const transactions = [
   {
     id: '1',
-    icon: 'check-circle',
-    iconColor: '#2196F3',
-    bgColor: '#E3F2FD',
+    icon: CheckIcon,
+    
     message: '₹5,000 credited to your account for loan disbursal. View details in your transaction history.',
     time: '11:00 AM',
     dateGroup: 'TODAY',
   },
   {
     id: '2',
-    icon: 'gift',
-    iconColor: '#8E24AA',
-    bgColor: '#F3E5F5',
+    icon: BenefitIcon,
+    
     message: 'You received a government scheme benefit of ₹2,500. View in your transaction summary.',
     time: '9:30 AM',
     dateGroup: 'TODAY',
   },
   {
     id: '3',
-    icon: 'x-circle',
-    iconColor: '#D32F2F',
-    bgColor: '#FFEBEE',
+    icon: FailedIcon,
+    
     message: 'Transaction failed due to insufficient balance. Please check your account and try again.',
     time: '6:45 PM',
     dateGroup: 'YESTERDAY',
   },
   {
     id: '4',
-    icon: 'dollar-sign',
-    iconColor: '#00796B',
-    bgColor: '#E0F2F1',
+    icon: RupeeIcon,
+    
     message: 'All recent transactions are now updated. Tap to review your financial activity.',
     time: '5:00 PM',
     dateGroup: 'YESTERDAY',
   },
 ];
 
+
 export default function Transactions() {
   const navigation = useNavigation();
 
-  const renderItem = ({ item }: any) => (
+  const renderItem = ({ item }: any) => {
+  const IconComponent = item.icon;
+
+  return (
     <View style={styles.card}>
-      <View style={[styles.iconWrapper, { backgroundColor: item.bgColor }]}> 
-        <Icon name={item.icon} size={20} color={item.iconColor} />
+      <View style={[styles.iconWrapper, { backgroundColor: item.bgColor }]}>
+        <IconComponent width={32} height={32} />
       </View>
       <View style={styles.messageContainer}>
         <Text style={styles.messageText}>{item.message}</Text>
@@ -68,6 +70,7 @@ export default function Transactions() {
       </View>
     </View>
   );
+};
 
   const groupedData = transactions.reduce((acc: any, item) => {
     if (!acc[item.dateGroup]) acc[item.dateGroup] = [];

@@ -38,27 +38,44 @@ export default function NotificationScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#FFF' },
-  backButton: { marginBottom: 16 },
-  header: { fontSize: 20, fontWeight: 'bold', color: '#3F1976', marginBottom: 16 },
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#FFF',
+  },
+  backButton: {
+    marginBottom: 16,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#3F1976',
+    marginBottom: 16,
+  },
   tabs: {
     flexDirection: 'row',
-    backgroundColor: '#F3F3F3',
-    borderRadius: 10,
+    backgroundColor: '#F3EFFF',
+    borderRadius: 15,
+    padding: 4,
     marginBottom: 16,
   },
   tab: {
     flex: 1,
     paddingVertical: 10,
+    borderRadius: 11,
     alignItems: 'center',
-    borderRadius: 10,
   },
   activeTab: {
-    backgroundColor: '#EDE5FF',
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 1,
+    elevation: 1,
   },
   tabText: {
     fontSize: 14,
-    color: '#999',
+    color: '#999999',
   },
   activeText: {
     color: '#54219D',

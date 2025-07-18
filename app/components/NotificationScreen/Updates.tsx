@@ -1,19 +1,21 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import ClockIcon from '../../assets/images/clock.svg'; // use your clock icon SVG
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import ClockIcon from '../../assets/images/clock.svg';
+import Promo1 from '../../assets/images/promo1.svg';
+import Promo2 from '../../assets/images/promo2.svg';
 
 const updatesData = [
   {
     id: '1',
     date: 'TODAY',
-    image: require('../../assets/images/promo1.svg'), // Replace with your actual image path
+    ImageComponent: Promo1,
     title: 'Complete your profile and unlock loans up to ₹10,000—no paperwork, instant approval',
     time: '11:00 AM',
   },
   {
     id: '2',
     date: 'YESTERDAY',
-    image: require('../../assets/images/promo2.svg'), // Replace with your actual image path
+    ImageComponent: Promo2,
     title: 'Update your details to receive personalized advice and higher credit offers!',
     time: '11:00 AM',
   },
@@ -25,23 +27,29 @@ export default function Updates() {
     YESTERDAY: updatesData.filter(item => item.date === 'YESTERDAY'),
   };
 
-  const renderItem = ({ item }: any) => (
-    <View style={styles.card}>
-      <View style={styles.cardContent}>
-        <Image source={item.image} style={styles.cardImage} />
-        <View style={styles.textContainer}>
-          <Text style={styles.cardTitle}>{item.title}</Text>
-          <View style={styles.timeRow}>
-            <ClockIcon width={12} height={12} />
-            <Text style={styles.timeText}>{item.time}</Text>
+  const renderItem = ({ item }: any) => {
+    const { ImageComponent } = item;
+
+    return (
+      <View style={styles.card}>
+        <View style={styles.cardContent}>
+          <View style={styles.imageContainer}>
+            <ImageComponent width="100%" height="100%" />
+          </View>
+          <View style={styles.contentRight}>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <View style={styles.timeRow}>
+              <ClockIcon width={12} height={12} />
+              <Text style={styles.timeText}>{item.time}</Text>
+            </View>
+            <TouchableOpacity style={styles.ctaButton}>
+              <Text style={styles.ctaText}>Hurry Up! Apply Now</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
-      <TouchableOpacity style={styles.ctaButton}>
-        <Text style={styles.ctaText}>Hurry Up! Apply Now</Text>
-      </TouchableOpacity>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -78,16 +86,19 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     flexDirection: 'row',
+    alignItems: 'stretch',
   },
-  cardImage: {
-    width: 64,
-    height: 64,
+  imageContainer: {
+    width: 100,
+    height: 100,
     borderRadius: 8,
-    marginRight: 12,
+    overflow: 'hidden',
+    marginRight: 16,
   },
-  textContainer: {
+  contentRight: {
     flex: 1,
     justifyContent: 'space-between',
+    paddingVertical: 2,
   },
   cardTitle: {
     fontSize: 13,
@@ -103,15 +114,16 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 12,
     color: '#999',
+    marginLeft: 6,
   },
   ctaButton: {
-    alignSelf: 'flex-end',
-    marginTop: 12,
+    alignSelf: 'flex-start',
     borderColor: '#54219D',
     borderWidth: 1,
     borderRadius: 20,
     paddingVertical: 6,
     paddingHorizontal: 16,
+    marginTop: 8,
   },
   ctaText: {
     fontSize: 12,
