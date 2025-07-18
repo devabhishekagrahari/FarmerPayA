@@ -1,45 +1,54 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import ClockIcon from '../../assets/images/clock.svg';
-import Promo1 from '../../assets/images/promo1.svg';
-import Promo2 from '../../assets/images/promo2.svg';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 const updatesData = [
   {
     id: '1',
     date: 'TODAY',
-    ImageComponent: Promo1,
-    title: 'Complete your profile and unlock loans up to ₹10,000—no paperwork, instant approval',
+    image: require('../../assets/images/notifications/promo1.png'),
+    title:
+      'Complete your profile and unlock loans up to ₹10,000—no paperwork, instant approval',
     time: '11:00 AM',
   },
   {
     id: '2',
     date: 'YESTERDAY',
-    ImageComponent: Promo2,
-    title: 'Update your details to receive personalized advice and higher credit offers!',
+    image: require('../../assets/images/notifications/promo2..png'),
+    title:
+      'Update your details to receive personalized advice and higher credit offers!',
     time: '11:00 AM',
   },
 ];
 
 export default function Updates() {
   const groupedData = {
-    TODAY: updatesData.filter(item => item.date === 'TODAY'),
-    YESTERDAY: updatesData.filter(item => item.date === 'YESTERDAY'),
+    TODAY: updatesData.filter((item) => item.date === 'TODAY'),
+    YESTERDAY: updatesData.filter((item) => item.date === 'YESTERDAY'),
   };
 
   const renderItem = ({ item }: any) => {
-    const { ImageComponent } = item;
-
     return (
       <View style={styles.card}>
         <View style={styles.cardContent}>
           <View style={styles.imageContainer}>
-            <ImageComponent width="100%" height="100%" />
+            <Image
+              source={item.image}
+              style={StyleSheet.absoluteFillObject}
+              resizeMode="cover"
+            />
           </View>
           <View style={styles.contentRight}>
             <Text style={styles.cardTitle}>{item.title}</Text>
             <View style={styles.timeRow}>
-              <ClockIcon width={12} height={12} />
+              <Icon name="clock" size={12} color="#999" />
               <Text style={styles.timeText}>{item.time}</Text>
             </View>
             <TouchableOpacity style={styles.ctaButton}>
@@ -59,7 +68,7 @@ export default function Updates() {
           <FlatList
             data={items}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
             scrollEnabled={false}
           />
         </View>
@@ -82,7 +91,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginHorizontal: 16,
     marginBottom: 16,
-    padding: 12,
+    padding: 8,
+    gap: 2,
+
   },
   cardContent: {
     flexDirection: 'row',
@@ -90,13 +101,14 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: 100,
-    height: 100,
+    flex: 1,
     borderRadius: 8,
     overflow: 'hidden',
     marginRight: 16,
+    position: 'relative',
   },
   contentRight: {
-    flex: 1,
+    flex: 3,
     justifyContent: 'space-between',
     paddingVertical: 2,
   },
@@ -109,7 +121,6 @@ const styles = StyleSheet.create({
   timeRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
   },
   timeText: {
     fontSize: 12,

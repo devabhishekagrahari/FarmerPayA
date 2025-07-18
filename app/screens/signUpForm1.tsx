@@ -6,20 +6,40 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
+import ArrowBack from '../assets/images/ArrowBack.svg';
+import RNPickerSelect from 'react-native-picker-select';
 const { width, height } = Dimensions.get('window');
 
 const SignUpFormScreen1 = ({ navigation }: any) => {
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [fatherName, setFatherName] = useState('');
+                  {/* Gender Drop Down */}
+  const genderOptions = [
+  { label: 'Male', value: 'male' },
+  { label: 'Female', value: 'female' },
+  { label: 'Other', value: 'other' },
+];
+const ageOptions = [
+  { label: '18-29', value: '18-29' },
+  { label: '29-55', value: '29-55' },
+  { label: '55+', value: '55+' },
+];
+
+// Replace fatherName with gender in your state:
+const [gender, setGender] = useState('');
+const [age, setAge] = useState('')
 
   return (
     <View style={styles.container}>
+              <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
+               <ArrowBack/>
+              </Pressable>
       <View style={styles.headerContainer}>
-        <Text style={styles.heading}>Sign Up</Text>
+        <Text style={styles.heading}>Hello! Farmer</Text>
         <Text style={styles.subheading}>Create your account to continue</Text>
       </View>
 
@@ -38,8 +58,8 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
             />
           </View>
         </View>
-
-        {/* Contact Number */}
+{/* 
+       
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Contact Number</Text>
           <View style={styles.inputBox}>
@@ -53,9 +73,69 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
               onChangeText={setContact}
             />
           </View>
-        </View>
+        </View> */}
 
-        {/* Father's Name */}
+
+
+...
+
+<View style={styles.inputGroup}>
+  <Text style={styles.label}>Select Gender</Text>
+  <View style={styles.pickerContainer}>
+    <RNPickerSelect
+      onValueChange={setGender}
+      value={gender}
+      placeholder={{ label: 'Select your Gender', value: null }}
+      items={genderOptions}
+      useNativeAndroidPickerStyle={false}
+      style={{
+        inputAndroid: styles.pickerInput,
+        inputIOS: styles.pickerInput,
+        placeholder: {
+          color: '#C0C0C0',
+        },
+      }}
+      Icon={() => (
+        <Icon
+          name="chevron-down"
+          size={20}
+          color="#C0C0C0"
+          style={styles.pickerIcon}
+        />
+      )}
+    />
+  </View>
+</View>
+<View style={styles.inputGroup}>
+  <Text style={styles.label}>Select Age</Text>
+  <View style={styles.pickerContainer}>
+    <RNPickerSelect
+      onValueChange={setAge}
+      value={age}
+      placeholder={{ label: 'Select your Age group', value: null }}
+      items={ageOptions}
+      useNativeAndroidPickerStyle={false}
+      style={{
+        inputAndroid: styles.pickerInput,
+        inputIOS: styles.pickerInput,
+        placeholder: {
+          color: '#C0C0C0',
+        },
+      }}
+      Icon={() => (
+        <Icon
+          name="chevron-down"
+          size={20}
+          color="#C0C0C0"
+          style={styles.pickerIcon}
+        />
+      )}
+    />
+  </View>
+</View>
+
+        {/* 
+        
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Father’s Name</Text>
           <View style={styles.inputBox}>
@@ -69,7 +149,9 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
             />
           </View>
         </View>
+        */}
      </View>
+     
 
       {/* Continue Button */}
       <TouchableOpacity style={styles.continueButton} onPress={()=>{navigation.navigate('SignUpForm2')}}>
@@ -88,7 +170,9 @@ const SignUpFormScreen1 = ({ navigation }: any) => {
       </Text>
     </View>
   );
+
 };
+export default SignUpFormScreen1;
 
 const styles = StyleSheet.create({
   container: {
@@ -165,6 +249,24 @@ const styles = StyleSheet.create({
     color: '#28a745',
     fontWeight: '500',
   },
-});
+  pickerContainer: {
+  borderWidth: 2,
+  borderColor: '#f2f2f2',
+  borderRadius: 8,
+  backgroundColor: '#fff',
+  height: 48,
+  justifyContent: 'center',
+  paddingHorizontal: 16,
+  position: 'relative',
+},
+pickerInput: {
+  fontSize: 12,
+  color: '#000',
+},
+pickerIcon: {
+  position: 'absolute',
+  right: 16,
+  top: 14,
+},
 
-export default SignUpFormScreen1;
+});
