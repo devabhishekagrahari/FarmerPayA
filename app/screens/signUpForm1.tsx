@@ -9,7 +9,7 @@ import {
   Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import ArrowBack from '../assets/images/ArrowBack.svg';
+import ArrowBack from '../../assets/images/ArrowBack.svg';
 import RNPickerSelect from 'react-native-picker-select';
 const { width, height } = Dimensions.get('window');
 

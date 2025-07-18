@@ -2,8 +2,8 @@ import React from 'react';
 import { createDrawerNavigator} from '@react-navigation/drawer';
 
 import DrawerContent from './drawerComponent.tsx';
-import MyNewScreen from '../screens/aiChatInbox';
-
+//import MyNewScreen from '../screens/aiChatInbox';
+import MyNewScreen from '../screens/AiWelcomeScreen'
 
 
 const Drawer = createDrawerNavigator();
@@ -24,6 +24,3 @@ const DrawerNavigator = () => {
 };
 
 export default DrawerNavigator;
-
-
-
