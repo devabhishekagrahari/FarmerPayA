@@ -10,13 +10,13 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import MessageOption from '../components/AiAdvisoryComponents/messageOptions';
+import MessageOption from '../../components/AiAdvisoryComponents/messageOptions';
 import LinearGradient from 'react-native-linear-gradient';
-import ChatHistory from '../components/AiAdvisoryComponents/chatHistory';
-import  {VoiceChat}  from '../components/AiAdvisoryComponents/VoiceBubble';
-import ChatInputBar from '../components/AiAdvisoryComponents/chatInputBar';
-import CustomTopBar from '../components/customTopBar';
-import DualAnimatedRows from '../components/animation';
+import ChatHistory from '../../components/AiAdvisoryComponents/chatHistory';
+import  {VoiceChat}  from '../../components/AiAdvisoryComponents/VoiceBubble';
+import ChatInputBar from '../../components/AiAdvisoryComponents/chatInputBar';
+import CustomTopBar from '../../components/customTopBar';
+import DualAnimatedRows from '../../components/animation';
 
 
 interface historyProps {

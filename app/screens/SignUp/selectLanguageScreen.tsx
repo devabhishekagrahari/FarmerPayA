@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import VoiceInputErrorModal from '../components/VoiceInputErrorModal';
+import VoiceInputErrorModal from '../../components/VoiceInputErrorModal.tsx';
 
 
 const { width } = Dimensions.get('window');
@@ -95,7 +95,7 @@ export default function SelectLanguageScreen({navigation}:any) {
             style={styles.voiceButton}
         >
         <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{}}>
-          <Image source={require('../assets/images/mic2.png')}/>
+          <Image source={require('../../assets/images/mic2.png')}/>
           <Text style={styles.voiceText}> Speak Your Language</Text>
         </TouchableOpacity></LinearGradient>
 

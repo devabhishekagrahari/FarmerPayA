@@ -79,7 +79,7 @@ const OtpVerification = ({
       setError('Incorrect OTP. Please try again.');
     } else {
       setError('');
-      navigation.navigate('SignUpForm1');
+      navigation.navigate('WhoAreU');
     }
   };
 
@@ -95,7 +95,7 @@ const OtpVerification = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-        <Image source={require('../assets/images/arrowButton.png')}/>
+        <Image source={require('../../assets/images/arrowButton.png')}/>
       </TouchableOpacity>
 
       <Text style={styles.label}>Enter the 6 digit code sent to your number</Text>

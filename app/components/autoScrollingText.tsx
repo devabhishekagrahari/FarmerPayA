@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   Animated,
   View,
@@ -11,73 +11,75 @@ import {
 const { height: screenHeight } = Dimensions.get('window');
 
 const AutoScrollingText = () => {
-  const scrollAnim = useRef(new Animated.Value(0)).current;
-  const [textHeight, setTextHeight] = useState(0);
-  const CONTAINER_HEIGHT = screenHeight * 0.3;
+  const messages = [
+    { text: 'Empowering Farmers, One Tap at a Time.', color: '#3D65CA' },
+    { text: 'Your Harvest, Your Story, Your Price.', color: '#54219D' },
+    { text: 'Grow Smarter, Earn More.', color: '#FFA500' },
+  ];
+
+  const itemHeight = 150;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const indexRef = useRef(0);
+
+  const animateStep = () => {
+    indexRef.current++;
+
+    Animated.timing(translateY, {
+      toValue: -itemHeight * indexRef.current,
+      duration: 600,
+      easing: Easing.out(Easing.quad),
+      useNativeDriver: true,
+    }).start(() => {
+      setTimeout(() => {
+        if (indexRef.current === messages.length - 1) {
+          // reset to start after short delay
+          Animated.timing(translateY, {
+            toValue: 0,
+            duration: 800,
+            easing: Easing.inOut(Easing.quad),
+            useNativeDriver: true,
+          }).start(() => {
+            indexRef.current = 0;
+            setTimeout(animateStep, 1000); // pause before looping
+          });
+        } else {
+          animateStep(); // continue to next item
+        }
+      }, 3000); // display duration for each item
+    });
+  };
 
   useEffect(() => {
-    if (textHeight === 0) return;
-
-    scrollAnim.setValue(0);
-    Animated.loop(
-      Animated.timing(scrollAnim, {
-        toValue: 1,
-        duration: 15000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      })
-    ).start();
-  }, [textHeight]);
-
-  const translateY = scrollAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -textHeight],
+    animateStep();
   });
 
-  const content = (
-    <>
-      <Text style={styles.titleText}>
-        Empowering Farmers, One Tap at a Time.{"\n"}
-        Your Harvest, Your Story, Your Price.{"\n"}
-        Grow Smarter, Earn More.{"\n"}
-      </Text>
-    </>
-  );
-
   return (
-    <View style={styles.centerTextContainer}>
-      <Animated.View
-        style={{
-          transform: [{ translateY }],
-        }}
-      >
-        <View
-          onLayout={(event) => {
-            setTextHeight(event.nativeEvent.layout.height);
-          }}
-        >
-          {content}
-        </View>
-        {/* Duplicate for seamless looping */}
-        {content}
+    <View style={styles.container}>
+      <Animated.View style={{ transform: [{ translateY }] }}>
+        {messages.map((msg, i) => (
+          <View key={i} style={[styles.item, { height: itemHeight }]}>
+            <Text style={[styles.titleText, { color: msg.color }]}>{msg.text}</Text>
+          </View>
+        ))}
       </Animated.View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  centerTextContainer: {
-    marginTop: screenHeight * 0.1,
-    height: screenHeight * 0.3,
+  container: {
+    height: 145, // visible height = one item
     overflow: 'hidden',
     paddingHorizontal: 24,
+    marginTop: screenHeight * 0.1,
+  },
+  item: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   titleText: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: '600',
-    color: '#54219D',
-    textAlign: 'center',
-    lineHeight: 32,
   },
 });
 

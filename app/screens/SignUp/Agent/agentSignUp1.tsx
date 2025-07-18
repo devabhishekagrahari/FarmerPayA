@@ -9,29 +9,14 @@ import {
   Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import ArrowBack from '../../assets/images/ArrowBack.svg';
-import RNPickerSelect from 'react-native-picker-select';
+import ArrowBack from '../../../assets/images/ArrowBack.svg';
+import BankIcon from '../../../assets/images/BankIcon.svg';
 const { width, height } = Dimensions.get('window');
 
-const SignUpFormScreen1 = ({ navigation }: any) => {
+const AgentSignUp1 = ({ navigation }: any) => {
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [fatherName, setFatherName] = useState('');
-                  {/* Gender Drop Down */}
-  const genderOptions = [
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' },
-  { label: 'Other', value: 'other' },
-];
-const ageOptions = [
-  { label: '18-29', value: '18-29' },
-  { label: '29-55', value: '29-55' },
-  { label: '55+', value: '55+' },
-];
-
-// Replace fatherName with gender in your state:
-const [gender, setGender] = useState('');
-const [age, setAge] = useState('')
 
   return (
     <View style={styles.container}>
@@ -39,7 +24,7 @@ const [age, setAge] = useState('')
                <ArrowBack/>
               </Pressable>
       <View style={styles.headerContainer}>
-        <Text style={styles.heading}>Hello! Farmer</Text>
+        <Text style={styles.heading}>Hello! Agent</Text>
         <Text style={styles.subheading}>Create your account to continue</Text>
       </View>
 
@@ -58,8 +43,8 @@ const [age, setAge] = useState('')
             />
           </View>
         </View>
-{/* 
-       
+
+        {/* Contact Number */}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Contact Number</Text>
           <View style={styles.inputBox}>
@@ -73,88 +58,41 @@ const [age, setAge] = useState('')
               onChangeText={setContact}
             />
           </View>
-        </View> */}
+        </View>
 
-
-
-...
-
-<View style={styles.inputGroup}>
-  <Text style={styles.label}>Select Gender</Text>
-  <View style={styles.pickerContainer}>
-    <RNPickerSelect
-      onValueChange={setGender}
-      value={gender}
-      placeholder={{ label: 'Select your Gender', value: null }}
-      items={genderOptions}
-      useNativeAndroidPickerStyle={false}
-      style={{
-        inputAndroid: styles.pickerInput,
-        inputIOS: styles.pickerInput,
-        placeholder: {
-          color: '#C0C0C0',
-        },
-      }}
-      Icon={() => (
-        <Icon
-          name="chevron-down"
-          size={20}
-          color="#C0C0C0"
-          style={styles.pickerIcon}
-        />
-      )}
-    />
-  </View>
-</View>
-<View style={styles.inputGroup}>
-  <Text style={styles.label}>Select Age</Text>
-  <View style={styles.pickerContainer}>
-    <RNPickerSelect
-      onValueChange={setAge}
-      value={age}
-      placeholder={{ label: 'Select your Age group', value: null }}
-      items={ageOptions}
-      useNativeAndroidPickerStyle={false}
-      style={{
-        inputAndroid: styles.pickerInput,
-        inputIOS: styles.pickerInput,
-        placeholder: {
-          color: '#C0C0C0',
-        },
-      }}
-      Icon={() => (
-        <Icon
-          name="chevron-down"
-          size={20}
-          color="#C0C0C0"
-          style={styles.pickerIcon}
-        />
-      )}
-    />
-  </View>
-</View>
-
-        {/* 
-        
+                {/* Gender Drop Down */}
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Father’s Name</Text>
+          <Text style={styles.label}>Enter Partner Bank</Text>
           <View style={styles.inputBox}>
-            <Icon name="user-check" size={20} color="#C0C0C0" />
+            <BankIcon height={20} width={20}/>
             <TextInput
               style={styles.input}
-              placeholder="Enter your father's name"
+              placeholder="Enter Your Bank Name"
               placeholderTextColor="#C0C0C0"
               value={fatherName}
               onChangeText={setFatherName}
             />
           </View>
         </View>
-        */}
+
+        {/* Father's Name */}
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Enter Branch Code</Text>
+          <View style={styles.inputBox}>
+            <BankIcon height={20} width={20}/>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your Branch Code"
+              placeholderTextColor="#C0C0C0"
+              value={fatherName}
+              onChangeText={setFatherName}
+            />
+          </View>
+        </View>
      </View>
-     
 
       {/* Continue Button */}
-      <TouchableOpacity style={styles.continueButton} onPress={()=>{navigation.navigate('SignUpForm2')}}>
+      <TouchableOpacity style={styles.continueButton} onPress={()=>{navigation.navigate('AgentSignUp2')}}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
 
@@ -170,9 +108,7 @@ const [age, setAge] = useState('')
       </Text>
     </View>
   );
-
 };
-export default SignUpFormScreen1;
 
 const styles = StyleSheet.create({
   container: {
@@ -249,24 +185,6 @@ const styles = StyleSheet.create({
     color: '#28a745',
     fontWeight: '500',
   },
-  pickerContainer: {
-  borderWidth: 2,
-  borderColor: '#f2f2f2',
-  borderRadius: 8,
-  backgroundColor: '#fff',
-  height: 48,
-  justifyContent: 'center',
-  paddingHorizontal: 16,
-  position: 'relative',
-},
-pickerInput: {
-  fontSize: 12,
-  color: '#000',
-},
-pickerIcon: {
-  position: 'absolute',
-  right: 16,
-  top: 14,
-},
-
 });
+
+export default AgentSignUp1;

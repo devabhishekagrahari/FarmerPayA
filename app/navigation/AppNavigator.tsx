@@ -2,9 +2,14 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../screens/HomeScreen';
-import AiWelcomeScreen from '../screens/AiWelcomeScreen.tsx';
+import HomeScreen from '../screens/HomeScreen';;
 import Language_unavailableScreen from '../components/emptyState/Language-unavailable';
+import AIChat from '../screens/AIChat/AIChat.tsx';
+import NotificationScreen from '../components/emptyState/no-notification.tsx';
+import NoInternetScreen from '../components/emptyState/no-internet';
+import Error_404Screen from '../components/emptyState/error-404';
+import DualAnimatedRows from '../components/animation.tsx';
+import AiWelcomeScreen from '../screens/AIChat/AiWelcomeScreen.tsx';
 
 // Icons (SVGs)
 import HomeActive from '../assets/images/nav/active-home.svg';
