@@ -52,7 +52,10 @@ const AppNavigator = () => (
             IconComponent = HomeInactive;
         }
 
-        const isScanner = route.name === 'Scanner';
+  const isScanner = route.name === 'Scanner';
+  const iconStyle = isScanner
+    ? styles.scannerIconContainer
+    : [styles.iconWrapper, !focused && styles.notFocused];
         return (
           <View style={isScanner ? styles.scannerIconContainer : styles.iconWrapper}>
             <IconComponent width={isScanner ? 56 : 56} height={isScanner ? 56 : 56}/>
@@ -103,6 +106,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  notFocused: {
+  marginTop: 8, // 👈 tweak this value to control spacing
+},
   svgIcon: {
     width: 24,
     height: 24,
