@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   header: {
     width: '80%',
     marginBottom: 16,
-    flexDirection:'row',
+    flexDirection:'column',
     flexWrap:'wrap',
     alignSelf:'flex-start'
   },

@@ -33,7 +33,7 @@ const languages = [
 export default function SelectLanguageScreen({navigation}:any) {
   const [selected, setSelected] = useState('Hindi');
   // const { permissionStatus, requestPermission } = useMicrophonePermission();
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   // useEffect(() => {
   //   if (permissionStatus === 'denied' || permissionStatus === 'blocked') {
@@ -62,7 +62,7 @@ export default function SelectLanguageScreen({navigation}:any) {
   };
 
   function requestPermission() {
-    throw new Error('Function not implemented.');
+    console.log('Function is required!');
   }
 
   return (
@@ -94,14 +94,16 @@ export default function SelectLanguageScreen({navigation}:any) {
             locations={[0.0, 0.35, 1.0]}
             style={styles.voiceButton}
         >
-        <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{}}>
-          <Image source={require('../../assets/images/mic2.png')}/>
-          <Text style={styles.voiceText}> Speak Your Language</Text>
-        </TouchableOpacity></LinearGradient>
+          <TouchableOpacity style={{flexDirection:'row', alignSelf:'flex-start'}} onPress={()=>{}}>
+            <Image source={require('../../assets/images/mic2.png')}/>
+            <Text style={styles.voiceText}> Speak Your Language</Text>
+          </TouchableOpacity>
+        </LinearGradient>
 
         <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
           <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   );
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: '#4B5768',
-    alignSelf:'center'
+    alignSelf:'flex-start'
   },
   grid: {
     marginTop:16,
@@ -164,12 +166,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   footer: {
-    position: 'absolute',
+  
     bottom: 32,
     width: '100%',
     flexDirection: 'row',
-    gap:16,
-    paddingHorizontal: 24,
+    justifyContent: 'space-evenly',
+    gap:'10%'
   },
   voiceButton: {
 
@@ -190,6 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 48,
     paddingVertical: 12,
     paddingHorizontal: 32,
+    alignSelf:'flex-end'
   },
   saveText: {
     color: '#FFFFFF',
