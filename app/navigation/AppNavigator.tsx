@@ -58,6 +58,7 @@ const AppNavigator = () => (
     : [styles.iconWrapper, !focused && styles.notFocused];
         return (
           <View style={isScanner ? styles.scannerIconContainer : styles.iconWrapper}>
+            {focused&&<View style={{height:2, width:15, backgroundColor:'#6929C4' }}/>}
             <IconComponent width={isScanner ? 56 : 56} height={isScanner ? 56 : 56}/>
           </View>
         );
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop:16
   },
   notFocused: {
   marginTop: 8, // 👈 tweak this value to control spacing
