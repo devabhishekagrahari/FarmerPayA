@@ -9,7 +9,7 @@ const ServiceCard = ({ title, icon }: { title: string; icon: any }) => (
     <View style={{width:'54%',  paddingTop: 16, paddingLeft:16}}>
       <Text style={styles.label}>{title}</Text>
       </View>
-      <View style={{width:'45%' ,padding: 4,alignItems:'flex-end'}}>
+      <View style={{width:'45%' ,padding: 6,justifyContent:'center'}}>
          <Image source={icon} style={styles.icon} />
       </View>
   </TouchableOpacity>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     margin: 3,
   },
   icon: { 
-    width: '100%',
+    width: '90%',
     aspectRatio:1,
     marginBottom: 8, 
     resizeMode:'contain' 
