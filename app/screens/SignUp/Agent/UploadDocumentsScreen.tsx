@@ -102,11 +102,13 @@ uploadContent: {
   marginLeft: 0, // fallback spacing if no `gap`
 },
   saveButton: {
+    height: 60,
     marginTop: 'auto',
-    backgroundColor: '#6929C4',
-    borderRadius: 30,
+    backgroundColor: '#54219D',
+    borderRadius: 48,
     paddingVertical: 16,
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',  
     width: '100%',
     marginBottom: 20,
   },
