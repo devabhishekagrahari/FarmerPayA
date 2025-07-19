@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import VoiceInputErrorModal from '../../components/VoiceInputErrorModal.tsx';
+//import VoiceInputErrorModal from '../../components/VoiceInputErrorModal.tsx';
 
 
 const { width } = Dimensions.get('window');
@@ -79,13 +79,14 @@ export default function SelectLanguageScreen({navigation}:any) {
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         showsVerticalScrollIndicator={false}
       />
+      {/*
       <VoiceInputErrorModal
         visible={showPopup}
         onTryAgain={() => {
           setShowPopup(false);
           requestPermission(); // re-trigger permission check
         }}
-      />
+      />*/}
       <View style={styles.footer}>
         <LinearGradient
             colors={['#FDCA4F', '#6929C4', '#97EAD2']}

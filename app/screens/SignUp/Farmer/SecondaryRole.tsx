@@ -9,36 +9,33 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MicIcon from '../../../assets/images/mic.svg';
+import BackArrow from '../../../assets/images/back-arrow.svg';
 
-type Role = {
-  id: string;
-  title: string;
-  image: any;
-};
-
-const roles: Role[] = [
-  { id: '1', title: 'Agricultural Farmer', image: require('../assets/images/selection/agricultural-farmer.jpg') },
-  { id: '2', title: 'Dairy Farmer', image: require('../assets/images/selection/dairy-farmer.jpg') },
-  { id: '3', title: 'Fisherman', image: require('../assets/images/selection/fisherman.jpg') },
-  { id: '4', title: 'Beekeeper', image: require('../assets/images/selection/beekeeper.png') },
-  { id: '5', title: 'Forest Gatherer', image: require('../assets/images/selection/forest-gatherer.png') },
-  { id: '6', title: 'Floriculturist', image: require('../assets/images/selection/floriculturist.jpg') },
+const activities = [
+  { id: '1', title: 'Crop Farming', image: require('../../../assets/images/selection/crop-farming.jpg') },
+  { id: '2', title: 'Horticulture Farming', image: require('../../../assets/images/selection/horticulture-farming.jpg') },
+  { id: '3', title: 'Spice Farming', image: require('../../../assets/images/selection/spices.jpg') },
+  { id: '4', title: 'Fruit Orchard Owner', image: require('../../../assets/images/selection/fruit-orchard.jpg') },
 ];
 
-export default function PrimaryRoleScreen({ navigation }: any) {
+export default function SecondaryRoleScreen({ navigation }: any) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const renderItem = ({ item }: { item: Role }) => {
+  const renderItem = ({ item }: any) => {
     const isSelected = selectedId === item.id;
     return (
       <TouchableOpacity
-        style={[styles.card, isSelected && styles.selectedCard]}
-        onPress={() => setSelectedId(item.id)}
-      >
-        <View style={styles.imageContainer}>
-            <Image source={item.image} style={styles.image} />
+              style={styles.card}
+              onPress={() => setSelectedId(item.id)}
+            >
+            <View style={[ styles.imageContainer,
+              selectedId === item.id && styles.selectedImageBorder,
+          ]}
+        >
+          <Image source={item.image} style={styles.image} />
         </View>
-
+      
         <Text style={styles.cardText}>{item.title}</Text>
       </TouchableOpacity>
     );
@@ -46,21 +43,22 @@ export default function PrimaryRoleScreen({ navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
-        <Icon name="arrow-back" size={24} color="#54219D" />
+      <TouchableOpacity  onPress={() => navigation.goBack()} style={{ marginBottom: 32 }}>
+        <BackArrow color="#54219D" />
       </TouchableOpacity>
 
-      {/* Progress Line */}
+      {/* Two Progress Lines */}
       <View style={styles.progressContainer}>
+        <View style={styles.progressLineActive} />
         <View style={styles.progressLineActive} />
         <View style={styles.progressLineInactive} />
       </View>
 
-      <Text style={styles.title}>Who are you?</Text>
-      <Text style={styles.subtitle}>Let us know about your primary role</Text>
+      <Text style={styles.title}>What do you do?</Text>
+      <Text style={styles.subtitle}>Let us know about your secondary role</Text>
 
       <FlatList
-        data={roles}
+        data={activities}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
@@ -72,15 +70,14 @@ export default function PrimaryRoleScreen({ navigation }: any) {
         <TouchableOpacity style={styles.micWrapper}>
             <View style={styles.micOuterCircle}>
                 <View style={styles.micInnerCircle}>
-                    <Icon name="mic" size={28} color="#FFFFFF" />
+                    <MicIcon width={28} height={28} color="#FFFFFF" />
                 </View>
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.nextButton}
-          onPress={() => navigation.navigate('secondaryRole')}
-        >
+        <TouchableOpacity 
+            style={styles.nextButton}
+            onPress={() => navigation.navigate('PlantSelection')}>
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -94,24 +91,30 @@ const styles = StyleSheet.create({
     width: 40, height: 40, borderRadius: 20, borderWidth: 1,
     borderColor: '#54219D', justifyContent: 'center', alignItems: 'center', marginBottom: 8,
   },
+  selectedImageBorder: {
+  borderColor: '#54219D',
+},
   progressContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    gap: 6,
-    marginBottom: 12,
-  },
-  progressLineActive: {
-    width: 30,
-    height: 4,
-    backgroundColor: '#54219D',
-    borderRadius: 2,
-  },
-  progressLineInactive: {
-    width: 30,
-    height: 4,
-    backgroundColor: '#E0E0E0',
-    borderRadius: 2,
-  },
+  flexDirection: 'row',
+  alignSelf: 'flex-start',
+  gap: 6,
+  marginBottom: 12,
+},
+
+progressLineActive: {
+  width: 30,
+  height: 4,
+  backgroundColor: '#54219D',
+  borderRadius: 2,
+},
+
+progressLineInactive: {
+  width: 30,
+  height: 4,
+  backgroundColor: '#D9D9D9',
+  borderRadius: 2,
+},
+
   title: { fontSize: 24, fontWeight: '700', color: '#3F1976', marginBottom: 4 },
   subtitle: { fontSize: 14, color: '#666', marginBottom: 20 },
   grid: { paddingBottom: 20 },
@@ -122,11 +125,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 12,
     backgroundColor: '#FFFFFF',
-  },
-  selectedCard: {
-    borderColor: '#54219D',
-    borderWidth: 2,
-    backgroundColor: '#F3E8FF',
   },
   imageContainer: {
   width: 75,
@@ -149,7 +147,7 @@ image: {
   bottomContainer: {
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
   },
- micWrapper: {
+  micWrapper: {
   justifyContent: 'center',
   alignItems: 'center',
 },
@@ -171,7 +169,6 @@ micInnerCircle: {
   justifyContent: 'center',
   alignItems: 'center',
 },
-
 
   nextButton: {
     flex: 1, marginLeft: 16, backgroundColor: '#54219D',

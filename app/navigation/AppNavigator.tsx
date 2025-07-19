@@ -1,18 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import AIChat from '../screens/AIChat/AIChat.tsx';
 
+import HomeScreen from '../screens/HomeScreen';;
+import Language_unavailableScreen from '../components/emptyState/Language-unavailable';
+import AIChat from '../screens/AIChat/AIChat.tsx';
 import NotificationScreen from '../components/emptyState/no-notification.tsx';
 import NoInternetScreen from '../components/emptyState/no-internet';
 import Error_404Screen from '../components/emptyState/error-404';
 import DualAnimatedRows from '../components/animation.tsx';
 import AiWelcomeScreen from '../screens/AIChat/AiWelcomeScreen.tsx';
 
+// Icons (SVGs)
+import HomeActive from '../assets/images/nav/active-home.svg';
+import HomeInactive from '../assets/images/nav/home.svg';
+import AiActive from '../assets/images/nav/active-ai.svg';
+import AiInactive from '../assets/images/nav/ai.svg';
+import ScanIcon from '../assets/images/nav/scan.svg';
+import UpiIcon from '../assets/images/nav/upi.svg';
+import UpiActiveIcon from '../assets/images/nav/active-upi.svg';
+import ProfileActive from '../assets/images/nav/active-profile.svg';
+import ProfileInactive from '../assets/images/nav/profile.svg';
 
-const {width,height}=Dimensions.get('window');
-
+const { width, height } = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
@@ -21,132 +31,104 @@ const AppNavigator = () => (
       tabBarShowLabel: false,
       headerShown: false,
       tabBarIcon: ({ focused }) => {
-        let iconSource;
-
+        let IconComponent;
         switch (route.name) {
           case 'Home':
-            iconSource = require('../assets/images/home.png');
+            IconComponent = focused ? HomeActive : HomeInactive;
             break;
           case 'Chat':
-            iconSource = require('../assets/images/chat.png');
+            IconComponent = focused ? AiActive : AiInactive;
             break;
           case 'Scanner':
-            iconSource = require('../assets/images/scanner.png');
+            IconComponent = ScanIcon;
             break;
           case 'Weather':
-            iconSource = require('../assets/images/cloud.png');
+            IconComponent = focused ? UpiActiveIcon : UpiIcon;
             break;
           case 'Profile':
-            iconSource = require('../assets/images/profile.png');
+            IconComponent = focused ? ProfileActive : ProfileInactive;
             break;
           default:
-            iconSource = require('../assets/images/home.png');
+            IconComponent = HomeInactive;
         }
 
         const isScanner = route.name === 'Scanner';
-
         return (
-          <View style={[isScanner ? styles.scannerIconContainer : null ]}>
-            <Image
-              source={iconSource}
-              style={[
-                styles.tabIcon,
-                isScanner && styles.scannerIcon,
-                !isScanner
-                ? { tintColor: focused ? '#6929C4' : '#C0C0C0' }
-                : null
-              ]}
-            />
+          <View style={isScanner ? styles.scannerIconContainer : styles.iconWrapper}>
+            <IconComponent width={isScanner ? 56 : 56} height={isScanner ? 56 : 56}/>
           </View>
         );
       },
+
       tabBarStyle: {
         backgroundColor: '#fff',
         borderTopWidth: 0,
-        elevation: 10,
-        height: height*0.08, // 👈 increase this value
-        paddingBottom: 8, // 👈 optional for spacing
-        paddingTop: 8,
+        elevation: 5,
+        height: 70,
+        paddingBottom: 0,
+        paddingTop: 6,
+      },
+      tabBarItemStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
       },
     })}
   >
     <Tab.Screen name="Home" component={HomeScreen} />
-
     <Tab.Screen name="Chat" component={AiWelcomeScreen} />
     <Tab.Screen
       name="Scanner"
       component={HomeScreen}
       options={{
         tabBarButton: (props) => (
-          <TouchableOpacity onPress={ ()=>{console.log('iconPressed')}}style={styles.scannerButtonWrapper}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => console.log('Scanner pressed')}
+            style={styles.scannerButtonWrapper}
+          >
             {props.children}
           </TouchableOpacity>
         ),
       }}
     />
-    <Tab.Screen name="Weather" component={HomeScreen} />
+    <Tab.Screen name="Weather" component={Language_unavailableScreen} />
     <Tab.Screen name="Profile" component={HomeScreen} />
   </Tab.Navigator>
 );
 
-
-
 const styles = StyleSheet.create({
-  headerTitleContainer: {
-    flexDirection: 'row',
+  iconWrapper: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  icon: {
-    width: 28,
-    height: 28,
-    resizeMode: 'contain',
-    marginRight: 8,
-  },
-  appName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  headerRightContainer: {
-    flexDirection: 'row',
-    marginRight: 16,
-    alignItems: 'center',
-  },
-  iconButton: {
+  svgIcon: {
     width: 24,
     height: 24,
-    resizeMode: 'contain',
-    marginLeft: 16,
-  },
-  tabIcon: {
-    width: 30,
-    height: 30,
-    resizeMode: 'contain',
+    alignSelf: 'center',
   },
   scannerButtonWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   scannerIconContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: 34,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: '#6929C4',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16,
-    backgroundColor: '#6929C4',
-    top:14,
-    padding:8,
-    elevation: 2,
+    position: 'absolute',
+    bottom: 18,
+    alignSelf: 'center',
+    padding: 10,
+    elevation: 5,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
-  },
-  scannerIcon: {
-    width: 30,
-    height: 30,
-    resizeMode:'contain'
+    zIndex: 10,
   },
 });
 
