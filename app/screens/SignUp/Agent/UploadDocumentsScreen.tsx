@@ -91,7 +91,7 @@ uploadContent: {
 },
   saveButton: {
     marginTop: 'auto',
-    backgroundColor: '#6C27CE',
+    backgroundColor: '#6929C4',
     borderRadius: 30,
     paddingVertical: 16,
     alignItems: 'center',

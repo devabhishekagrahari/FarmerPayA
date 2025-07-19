@@ -12,6 +12,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+import Call from "../../assets/images/Call.svg";
 const{width,height}=Dimensions.get('window');
 const LoginScreen = ({navigation}:any) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -54,13 +55,15 @@ const LoginScreen = ({navigation}:any) => {
         {/* Phone Input */}
         <View style={styles.inputBlock}>
           <Text style={styles.label}>Enter Contact Number</Text>
+          <View             style={[
+                    styles.input,
+                    { borderColor: errorMob ? "#FB3748" : "#F2F2F2" }
+                  ]}>
+          <Call/>
           <TextInput
             placeholder="Enter your mobile number"
             placeholderTextColor="#C0C0C0"
-            style={[
-                    styles.input,
-                    { borderColor: errorMob ? "#FB3748" : "#F2F2F2" }
-                  ]}
+
             keyboardType="phone-pad"
             maxLength={10}
             onChangeText={  (text) => {
@@ -68,6 +71,7 @@ const LoginScreen = ({navigation}:any) => {
                           }}
             value={phoneNumber}
           />
+          </View>
           {errorMob && <Text style={{color:'#FB3748' ,fontSize:10,marginTop:2}}>{errorMob}</Text>}
           <Text style={styles.helperText}>We will send you an OTP on this number</Text>
         </View>
@@ -143,7 +147,10 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 2,
     borderRadius: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
+    flexDirection:'row',
+    gap:6,
+    alignItems:'center',
     height: 48,
     fontSize: 12,
     backgroundColor: '#FFFFFF',
