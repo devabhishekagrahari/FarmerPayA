@@ -141,21 +141,23 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   card: {
-    flexDirection: 'row',
-    backgroundColor: '#F8F8F8',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10,
-    alignItems: 'flex-start',
-  },
-  iconWrapper: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
+  flexDirection: 'row',
+  backgroundColor: '#F8F8F8',
+  borderRadius: 8,
+  padding: 12,
+  marginBottom: 10,
+  alignItems: 'center', // <-- fix: align vertically centered
+},
+
+ iconWrapper: {
+  width: 40,
+  height: 40,
+  borderRadius: 20,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginRight: 12,
+},
+
   messageContainer: {
     flex: 1,
   },

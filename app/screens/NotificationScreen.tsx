@@ -9,11 +9,13 @@ export default function NotificationScreen({ navigation }: any) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerRow}>
       {/* Header */}
       <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-        <BackArrow color="#54219D" />
+        <BackArrow width={30} height={30}color="#54219D"  />
       </TouchableOpacity>
-      <Text style={styles.header}>Notifications</Text>
+      <Text style={styles.headerText}>Notifications</Text>
+      </View>
 
       {/* Tabs */}
       <View style={styles.tabs}>
@@ -38,20 +40,44 @@ export default function NotificationScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 12, // if gap isn't supported in your RN version, use marginLeft in Text
+  marginBottom: 24,
+  marginTop: 4,
+},
+
+headerText: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  color: '#3F1976',
+  // fallback spacing if gap doesn’t work
+  marginLeft: 12,
+},
+
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: '#FFF',
   },
-  backButton: {
-    marginBottom: 16,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#3F1976',
-    marginBottom: 16,
-  },
+  headerRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: 24,
+},
+
+backButton: {
+  marginRight: 12,
+  padding: 4,
+},
+
+header: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  color: '#3F1976',
+},
+
   tabs: {
     flexDirection: 'row',
     backgroundColor: '#F3EFFF',

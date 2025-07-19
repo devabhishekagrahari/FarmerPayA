@@ -75,21 +75,12 @@ export default function PlantSelectionScreen({ navigation }: any) {
   const renderItem = ({ item }: any) => {
     const isSelected = selected.includes(item.id);
     return (
-      <TouchableOpacity
-        style={styles.card}
-        onPress={() => toggleSelect(item.id)}
-      >
-      <View
-        style={[
-          styles.imageContainer,
-          isSelected && styles.selectedImageBorder,
-        ]}
-      >
-        <Image source={item.image} style={styles.image} />
-      </View>
+      <TouchableOpacity style={styles.card} onPress={() => toggleSelect(item.id)}>
+        <View style={[styles.imageContainer,isSelected && styles.selectedImageBorder,]}>
+          <Image source={item.image} style={styles.image} />
+        </View>
         <Text style={styles.cardText}>{item.title}</Text>
       </TouchableOpacity>
-
     );
   };
 
@@ -141,7 +132,7 @@ export default function PlantSelectionScreen({ navigation }: any) {
             navigation.navigate('Main'); // Replace with actual next screen
           }}
         >
-          <Text style={styles.nextText}>Next</Text>
+          <Text style={styles.nextText} >Next</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -150,10 +141,7 @@ export default function PlantSelectionScreen({ navigation }: any) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: '#FFFFFF' },
-  backButton: {
-    width: 40, height: 40, borderRadius: 20, borderWidth: 1,
-    borderColor: '#54219D', justifyContent: 'center', alignItems: 'center', marginBottom: 8,
-  },
+  
   selectedImageBorder: {
     borderColor: '#54219D',
   },

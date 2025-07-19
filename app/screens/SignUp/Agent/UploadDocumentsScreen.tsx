@@ -8,9 +8,9 @@ const { width } = Dimensions.get('window');
 const UploadDocumentsScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      {/* Back Arrow */}
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-        <BackArrow width={24} height={24} />
+      {/* Back Button */}
+      <TouchableOpacity  onPress={() => navigation.goBack()} style={{ marginBottom: 40 }}>
+        <BackArrow color="#54219D" />
       </TouchableOpacity>
 
       {/* Title */}
@@ -27,8 +27,8 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
       </TouchableOpacity>
 
       {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton}>
-        <Text style={styles.saveText}>Save</Text>
+      <TouchableOpacity style={styles.saveButton} onPress={() => navigation.navigate('Main')}>
+        <Text style={styles.saveText} >Save</Text>
       </TouchableOpacity>
     </View>
   );
@@ -38,14 +38,26 @@ export default UploadDocumentsScreen;
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 24,
+    paddingTop: 40,
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 24,
+    backgroundColor:'#fff'
+ 
   },
-  backButton: {
-    marginTop: 12,
-    marginBottom: 24,
-  },
+
+ backButton: {
+  position: 'absolute',
+  top: 48,
+  left: 24,
+  width: 40,
+  height: 40,
+  borderRadius: 20,
+  borderWidth: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 10,
+},
+
   title: {
     fontSize: 20,
     fontWeight: 'bold',
