@@ -9,8 +9,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MicIcon from '../assets/images/mic.svg';
-import BackArrow from '../assets/images/back-arrow.svg';
+import MicIcon from '../../../assets/images/mic.svg';
+import BackArrow from '../../../assets/images/back-arrow.svg';
 
 type Role = {
   id: string;
@@ -19,12 +19,12 @@ type Role = {
 };
 
 const roles: Role[] = [
-  { id: '1', title: 'Agricultural Farmer', image: require('../assets/images/selection/agricultural-farmer.jpg') },
-  { id: '2', title: 'Dairy Farmer', image: require('../assets/images/selection/dairy-farmer.jpg') },
-  { id: '3', title: 'Fisherman', image: require('../assets/images/selection/fisherman.jpg') },
-  { id: '4', title: 'Beekeeper', image: require('../assets/images/selection/beekeeper.png') },
-  { id: '5', title: 'Forest Gatherer', image: require('../assets/images/selection/forest-gatherer.png') },
-  { id: '6', title: 'Floriculturist', image: require('../assets/images/selection/floriculturist.jpg') },
+  { id: '1', title: 'Agricultural Farmer', image: require('../../../assets/images/selection/agricultural-farmer.jpg') },
+  { id: '2', title: 'Dairy Farmer', image: require('../../../assets/images/selection/dairy-farmer.jpg') },
+  { id: '3', title: 'Fisherman', image: require('../../../assets/images/selection/fisherman.jpg') },
+  { id: '4', title: 'Beekeeper', image: require('../../../assets/images/selection/beekeeper.png') },
+  { id: '5', title: 'Forest Gatherer', image: require('../../../assets/images/selection/forest-gatherer.png') },
+  { id: '6', title: 'Floriculturist', image: require('../../../assets/images/selection/floriculturist.jpg') },
 ];
 
 export default function PrimaryRoleScreen({ navigation }: any) {

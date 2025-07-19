@@ -10,50 +10,49 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MicIcon from '../assets/images/mic.svg';
-import BackArrow from '../assets/images/back-arrow.svg';
+import MicIcon from '../../../assets/images/mic.svg';
+import BackArrow from '../../../assets/images/back-arrow.svg';
 
 const plants = [
-  { id: '1', title: 'Wheat', image: require('../assets/images/selection/wheat.jpg') },
-  { id: '2', title: 'Rice', image: require('../assets/images/selection/rice.jpg') },
-  { id: '3', title: 'Maize', image: require('../assets/images/selection/corn.png') },
-  { id: '4', title: 'Pulses', image: require('../assets/images/selection/pusles.jpg') },
-  { id: '5', title: 'Sugarcane', image: require('../assets/images/selection/sugarcane.jpg') },
-  { id: '6', title: 'Barley', image: require('../assets/images/selection/barley.jpg') },
-  { id: '7', title: 'Mango', image: require('../assets/images/selection/mango.png') },
-  { id: '8', title: 'Banana', image: require('../assets/images/selection/banana.png') },
-  { id: '9', title: 'Tomato', image: require('../assets/images/selection/tomato.png') },
-  { id: '10', title: 'Potato', image: require('../assets/images/selection/potato.png') },
-  { id: '11', title: 'Pomegranate', image: require('../assets/images/selection/pomogrante.png') },
-  { id: '12', title: 'Watermelon', image: require('../assets/images/selection/watermelon.png') },
-  { id: '13', title: 'Grapes', image: require('../assets/images/selection/grapes.png') },
-  { id: '14', title: 'Papaya', image: require('../assets/images/selection/papaya.png') },
-  { id: '15', title: 'Spinach', image: require('../assets/images/selection/spinach.png') },
-  { id: '16', title: 'Fenugreek Leaves', image: require('../assets/images/selection/fenugreek-leaves.png') },
-  { id: '17', title: 'Radish', image: require('../assets/images/selection/raddish.png') },
-  { id: '18', title: 'Carrot', image: require('../assets/images/selection/carrot.png') },
-  { id: '19', title: 'Mustard Greens', image: require('../assets/images/selection/mustard-greens.png') },
-  { id: '20', title: 'Coriander', image: require('../assets/images/selection/corriander.png') },
-  { id: '21', title: 'Mint', image: require('../assets/images/selection/mint.png') },
-  { id: '22', title: 'Curry Leaves', image: require('../assets/images/selection/curryleaves.png') },
-  { id: '23', title: 'Guava', image: require('../assets/images/selection/guava.png') },
-  { id: '24', title: 'Apple', image: require('../assets/images/selection/apple.png') },
-  { id: '25', title: 'Lemon', image: require('../assets/images/selection/lemon.png') },
-  { id: '26', title: 'Sweet Lime', image: require('../assets/images/selection/sweet-lime.png') },
-  { id: '27', title: 'Kinnow', image: require('../assets/images/selection/kinnow.png') },
-  { id: '28', title: 'Grapefruit', image: require('../assets/images/selection/grapefruit.png') },
-  { id: '29', title: 'Pineapple', image: require('../assets/images/selection/pineapple.png') },
-  { id: '30', title: 'Orange', image: require('../assets/images/selection/orange.png') },
-  { id: '31', title: 'Turmeric', image: require('../assets/images/selection/turmeric.png') },
-  { id: '32', title: 'Red Chilli', image: require('../assets/images/selection/redchilli.png') },
-  { id: '33', title: 'Cardamom', image: require('../assets/images/selection/cardamom.png') },
-  { id: '34', title: 'Cumin Seeds', image: require('../assets/images/selection/cumin-seeds.png') },
-  { id: '35', title: 'Cinnamon', image: require('../assets/images/selection/cinnamon.png') },
-  { id: '36', title: 'Mustard Seeds', image: require('../assets/images/selection/mustard-seeds.png') },
-  { id: '37', title: 'Cloves', image: require('../assets/images/selection/cloves.png') },
-  { id: '38', title: 'Black Peppercorns', image: require('../assets/images/selection/blackpepper.png') },
+  { id: '1', title: 'Wheat', image: require('../../../assets/images/selection/wheat.jpg') },
+  { id: '2', title: 'Rice', image: require('../../../assets/images/selection/rice.jpg') },
+  { id: '3', title: 'Maize', image: require('../../../assets/images/selection/corn.png') },
+  { id: '4', title: 'Pulses', image: require('../../../assets/images/selection/pusles.jpg') },
+  { id: '5', title: 'Sugarcane', image: require('../../../assets/images/selection/sugarcane.jpg') },
+  { id: '6', title: 'Barley', image: require('../../../assets/images/selection/barley.jpg') },
+  { id: '7', title: 'Mango', image: require('../../../assets/images/selection/mango.png') },
+  { id: '8', title: 'Banana', image: require('../../../assets/images/selection/banana.png') },
+  { id: '9', title: 'Tomato', image: require('../../../assets/images/selection/tomato.png') },
+  { id: '10', title: 'Potato', image: require('../../../assets/images/selection/potato.png') },
+  { id: '11', title: 'Pomegranate', image: require('../../../assets/images/selection/pomogrante.png') },
+  { id: '12', title: 'Watermelon', image: require('../../../assets/images/selection/watermelon.png') },
+  { id: '13', title: 'Grapes', image: require('../../../assets/images/selection/grapes.png') },
+  { id: '14', title: 'Papaya', image: require('../../../assets/images/selection/papaya.png') },
+  { id: '15', title: 'Spinach', image: require('../../../assets/images/selection/spinach.png') },
+  { id: '16', title: 'Fenugreek Leaves', image: require('../../../assets/images/selection/fenugreek-leaves.png') },
+  { id: '17', title: 'Radish', image: require('../../../assets/images/selection/raddish.png') },
+  { id: '18', title: 'Carrot', image: require('../../../assets/images/selection/carrot.png') },
+  { id: '19', title: 'Mustard Greens', image: require('../../../assets/images/selection/mustard-greens.png') },
+  { id: '20', title: 'Coriander', image: require('../../../assets/images/selection/corriander.png') },
+  { id: '21', title: 'Mint', image: require('../../../assets/images/selection/mint.png') },
+  { id: '22', title: 'Curry Leaves', image: require('../../../assets/images/selection/curryleaves.png') },
+  { id: '23', title: 'Guava', image: require('../../../assets/images/selection/guava.png') },
+  { id: '24', title: 'Apple', image: require('../../../assets/images/selection/apple.png') },
+  { id: '25', title: 'Lemon', image: require('../../../assets/images/selection/lemon.png') },
+  { id: '26', title: 'Sweet Lime', image: require('../../../assets/images/selection/sweet-lime.png') },
+  { id: '27', title: 'Kinnow', image: require('../../../assets/images/selection/kinnow.png') },
+  { id: '28', title: 'Grapefruit', image: require('../../../assets/images/selection/grapefruit.png') },
+  { id: '29', title: 'Pineapple', image: require('../../../assets/images/selection/pineapple.png') },
+  { id: '30', title: 'Orange', image: require('../../../assets/images/selection/orange.png') },
+  { id: '31', title: 'Turmeric', image: require('../../../assets/images/selection/turmeric.png') },
+  { id: '32', title: 'Red Chilli', image: require('../../../assets/images/selection/redchilli.png') },
+  { id: '33', title: 'Cardamom', image: require('../../../assets/images/selection/cardamom.png') },
+  { id: '34', title: 'Cumin Seeds', image: require('../../../assets/images/selection/cumin-seeds.png') },
+  { id: '35', title: 'Cinnamon', image: require('../../../assets/images/selection/cinnamon.png') },
+  { id: '36', title: 'Mustard Seeds', image: require('../../../assets/images/selection/mustard-seeds.png') },
+  { id: '37', title: 'Cloves', image: require('../../../assets/images/selection/cloves.png') },
+  { id: '38', title: 'Black Peppercorns', image: require('../../../assets/images/selection/blackpepper.png') },
 ];
-
 
 export default function PlantSelectionScreen({ navigation }: any) {
   const [selected, setSelected] = useState<string[]>([]);
@@ -77,19 +76,19 @@ export default function PlantSelectionScreen({ navigation }: any) {
     const isSelected = selected.includes(item.id);
     return (
       <TouchableOpacity
-  style={styles.card}
-  onPress={() => toggleSelect(item.id)}
->
-  <View
-    style={[
-      styles.imageContainer,
-      isSelected && styles.selectedImageBorder,
-    ]}
-  >
-    <Image source={item.image} style={styles.image} />
-  </View>
-  <Text style={styles.cardText}>{item.title}</Text>
-</TouchableOpacity>
+        style={styles.card}
+        onPress={() => toggleSelect(item.id)}
+      >
+      <View
+        style={[
+          styles.imageContainer,
+          isSelected && styles.selectedImageBorder,
+        ]}
+      >
+        <Image source={item.image} style={styles.image} />
+      </View>
+        <Text style={styles.cardText}>{item.title}</Text>
+      </TouchableOpacity>
 
     );
   };
@@ -194,21 +193,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   imageContainer: {
-  width: 75,
-  height: 75,
-  borderRadius: 75 / 2,
-  borderWidth: 2,
-  borderColor: '#A2A2A2', // grey-500
-  justifyContent: 'center',
-  alignItems: 'center',
-  overflow: 'hidden',
-},
-image: {
-  width: 65,
-  height: 65,
-  borderRadius: 65 / 2,
-},
-
+    width: 75,
+    height: 75,
+    borderRadius: 75 / 2,
+    borderWidth: 2,
+    borderColor: '#A2A2A2', // grey-500
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  image: {
+    width: 65,
+    height: 65,
+    borderRadius: 65 / 2,
+  },
 
   cardText: {
     fontSize: 13,

@@ -145,7 +145,7 @@ useEffect(() => {
             <View style={{ gap: 16 }}>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('primaryRole')}
+                onPress={() => navigation.navigate('UploadDocumentsScreen')}
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
@@ -163,6 +163,7 @@ useEffect(() => {
     </KeyboardAvoidingView>
   );
 };
+export default AgentSignUp3;
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -253,5 +254,3 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
 });
-
-export default AgentSignUp3;

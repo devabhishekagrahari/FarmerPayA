@@ -14,7 +14,6 @@ import {
   Image,
   Alert,
 } from 'react-native';
-
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';

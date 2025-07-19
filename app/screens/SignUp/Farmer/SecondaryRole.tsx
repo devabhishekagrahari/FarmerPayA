@@ -9,14 +9,14 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MicIcon from '../assets/images/mic.svg';
-import BackArrow from '../assets/images/back-arrow.svg';
+import MicIcon from '../../../assets/images/mic.svg';
+import BackArrow from '../../../assets/images/back-arrow.svg';
 
 const activities = [
-  { id: '1', title: 'Crop Farming', image: require('../assets/images/selection/crop-farming.jpg') },
-  { id: '2', title: 'Horticulture Farming', image: require('../assets/images/selection/horticulture-farming.jpg') },
-  { id: '3', title: 'Spice Farming', image: require('../assets/images/selection/spices.jpg') },
-  { id: '4', title: 'Fruit Orchard Owner', image: require('../assets/images/selection/fruit-orchard.jpg') },
+  { id: '1', title: 'Crop Farming', image: require('../../../assets/images/selection/crop-farming.jpg') },
+  { id: '2', title: 'Horticulture Farming', image: require('../../../assets/images/selection/horticulture-farming.jpg') },
+  { id: '3', title: 'Spice Farming', image: require('../../../assets/images/selection/spices.jpg') },
+  { id: '4', title: 'Fruit Orchard Owner', image: require('../../../assets/images/selection/fruit-orchard.jpg') },
 ];
 
 export default function SecondaryRoleScreen({ navigation }: any) {

@@ -3,15 +3,15 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './app/screens/SignUp/splashScreen';
-import PrimaryRoleScreen from './app/screens/PrimaryRole';
-import SecondaryRoleScreen from './app/screens/SecondaryRole';
+import PrimaryRoleScreen from './app/screens/SignUp/Farmer/PrimaryRole.tsx';
+import SecondaryRoleScreen from './app/screens/SignUp/Farmer/SecondaryRole.tsx';
 import SelectLanguageScreen from './app/screens/SignUp/selectLanguageScreen';
 import LoginScreen from './app/screens/SignUp/LogInScreen';
 import LoginOtpVerification from './app/screens/SignUp/otpScreen';
 import SignUpScreen from './app/screens/SignUp/signUpScreen';
 import SignUpFormScreen1 from './app/screens/SignUp/signUpForm1';
 import SignUpFormScreen2 from './app/screens/SignUp/SignUpForm2';
-import PlantSelectionScreen from './app/screens/PlantSelectionScreen';
+import PlantSelectionScreen from './app/screens/SignUp/Farmer/PlantSelectionScreen.tsx';
 import { StatusBar } from 'react-native';
 import NoNotificationScreen from './app/components/emptyState/no-notification'
 import NotificationScreen from './app/screens/NotificationScreen.tsx'
@@ -24,11 +24,7 @@ import WhoAreUScreen from './app/screens/SignUp/whoAreUScreen';
 import AgentSignUp1 from './app/screens/SignUp/Agent/agentSignUp1';
 import AgentSignUp2 from './app/screens/SignUp/Agent/agentSignUp2';
 import AgentSignUp3 from './app/screens/SignUp/Agent/agentSignUp3';
-
-
-
-
- // Your custom splash screen
+import UploadDocumentsScreen from './app/screens/SignUp/Agent/UploadDocumentsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,15 +44,13 @@ const App = () => {
         <Stack.Screen name="PlantSelection" component={PlantSelectionScreen} />
         <Stack.Screen name="Main" component={AppNavigator} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
-         <Stack.Screen name="AiChat" component={AIChat} />
-         <Stack.Screen name="Splash2" component={SplashScreen2} />
-
         <Stack.Screen name="AiChat" component={AIChat} />
         <Stack.Screen name="Splash2" component={SplashScreen2} />
         <Stack.Screen name="WhoAreU" component={WhoAreUScreen} />
         <Stack.Screen name="AgentSignUp1" component={AgentSignUp1}/>
         <Stack.Screen name="AgentSignUp2" component={AgentSignUp2}/>
         <Stack.Screen name="AgentSignUp3" component={AgentSignUp3}/>
+        <Stack.Screen name="UploadDocumentsScreen" component={UploadDocumentsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
