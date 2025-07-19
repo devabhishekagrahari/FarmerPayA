@@ -10,6 +10,7 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import VoiceInputErrorModal from '../../components/VoiceInputErrorModal';
 //import VoiceInputErrorModal from '../../components/VoiceInputErrorModal.tsx';
 
 
@@ -79,14 +80,14 @@ export default function SelectLanguageScreen({navigation}:any) {
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         showsVerticalScrollIndicator={false}
       />
-      {/*
+    
       <VoiceInputErrorModal
         visible={showPopup}
         onTryAgain={() => {
           setShowPopup(false);
           requestPermission(); // re-trigger permission check
         }}
-      />*/}
+      />
       <View style={styles.footer}>
         <LinearGradient
             colors={['#FDCA4F', '#6929C4', '#97EAD2']}
@@ -95,7 +96,7 @@ export default function SelectLanguageScreen({navigation}:any) {
             locations={[0.0, 0.35, 1.0]}
             style={styles.voiceButton}
         >
-          <TouchableOpacity style={{flexDirection:'row', alignSelf:'flex-start'}} onPress={()=>{}}>
+          <TouchableOpacity style={{flexDirection:'row', alignSelf:'flex-start'}} onPress={()=>{setShowPopup(true);}}>
             <Image source={require('../../assets/images/mic2.png')}/>
             <Text style={styles.voiceText}> Speak Your Language</Text>
           </TouchableOpacity>
