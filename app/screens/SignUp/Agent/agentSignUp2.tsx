@@ -98,7 +98,14 @@ const AgentSignUp2 = ({ navigation }: any) => {
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
                 value={formData.pincode}
-                onChangeText={text => setFormData({ ...formData, pincode: text })}
+                onChangeText={text => {
+                  const cleaned = text.replace(/[^0-9]/g, '');
+                  if (cleaned.length <= 6) {
+                  setFormData({ ...formData, pincode: text });
+                  }
+                }}
+                keyboardType="number-pad"
+                maxLength={6}
               />
               </View>
             </View>
