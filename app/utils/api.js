@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://10.182.208.140:3000';
+export const BASE_URL = 'Secret';
