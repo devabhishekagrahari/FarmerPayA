@@ -11,6 +11,9 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
 import RNPickerSelect from 'react-native-picker-select';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/api';
+
 const { width, height } = Dimensions.get('window');
 
 const SignUpFormScreen1 = ({ navigation }: any) => {

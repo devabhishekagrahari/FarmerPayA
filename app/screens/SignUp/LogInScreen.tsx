@@ -29,26 +29,26 @@ const LoginScreen = ({navigation}:any) => {
       return;
     }
     setError('');
-try {
-  const payload = {
-  mobile: `${phoneNumber}`, // Ensure it matches the server-side expectation
-};
-  console.log("Payload being sent:", payload);
+    try {
+      const payload = {
+        mobile: `${phoneNumber}`, // Ensure it matches the server-side expectation
+      };
+      console.log("Payload being sent:", payload);
 
-  const response = await axios.post('http://10.182.208.140:3000/auth/send-otp', payload);
-  console.log("OTP Sent:", response.data);
-  navigation.navigate('OtpScreen', { mobile: phoneNumber });
+      const response = await axios.post('http://10.182.208.140:3000/auth/send-otp', payload);
+      console.log("OTP Sent:", response.data);
+      navigation.navigate('OtpScreen', { mobile: phoneNumber });
 
-  // proceed with navigation or OTP screen
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      console.log("Server error response:", err.response?.data);
-      Alert.alert("Error", err.response?.data?.message || "Something went wrong.");
-    } else {
-      console.log("Unknown error:", (err as Error).message);
-      Alert.alert("Network Error", "Please check your internet.");
+      // proceed with navigation or OTP screen
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        console.log("Server error response:", err.response?.data);
+        Alert.alert("Error", err.response?.data?.message || "Something went wrong.");
+      } else {
+        console.log("Unknown error:", (err as Error).message);
+        Alert.alert("Network Error", "Please check your internet.");
+      }
     }
-  }
   };
 
   return (
@@ -71,8 +71,6 @@ try {
           <View style={styles.horizontalLine} />
         </View>
         
-
-
         {/* Phone Input */}
         <View style={styles.inputBlock}>
           <Text style={styles.label}>Enter Contact Number</Text>
