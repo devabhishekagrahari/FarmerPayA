@@ -14,9 +14,10 @@ import {
 } from 'react-native';
 
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
-import StateIcon from '../../../assets/images/StateIcon.svg';
+import BankIcon from '../../../assets/images/BankIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
-import HomeIcon from '../../../assets/images/HomeIcon.svg';
+import UserIcon from '../../../assets/images/agentSignUp/UserIcon.svg';
+import Upload from '../../../assets/images/Button.svg'; 
 import { useRoute } from '@react-navigation/native';
 
 interface FormData {
@@ -27,7 +28,7 @@ interface FormData {
   pincode?: string;
 }
 
-const AgentSignUp3 = ({ navigation }: any) => {
+const AgentSignUp4 = ({ navigation }: any) => {
     const [ formData , setFormData ] = useState({
           houseNo: '',
           villageName: '',
@@ -35,22 +36,6 @@ const AgentSignUp3 = ({ navigation }: any) => {
           state: '',
           pincode: '',
     })
-
-const route = useRoute<any>();
-
-useEffect(() => {
-  if (route?.params?.checked && route?.params?.formData) {
-    setFormData(route.params.formData);
-  }
-  if(!route?.params?.checked){
-    setFormData({          houseNo: '',
-          villageName: '',
-          city: '',
-          state: '',
-          pincode: '',});
-  }
-}, []);
-
   
   return (
     <KeyboardAvoidingView
@@ -62,35 +47,37 @@ useEffect(() => {
         <ArrowBack />
       </Pressable>
 
-      <Text style={styles.label0}>CORRESPONDANCE ADDRESS</Text>
+      <Text style={styles.label0}>Bank Details<Text style={{color:'#FF0000'}}> *</Text></Text>
 
             {/* Checkbox */}
 
 
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
           <View style={styles.container}>
 
             {/* Inputs */}
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter House Number</Text>
+              <Text style={styles.label}>Account-holder Name</Text>
               <View style={styles.inputBox}>
-                <HomeIcon height={20} width={20} color={'#A0A0A0'} />
+                <UserIcon height={20} width={20} color={'#A0A0A0'} />
                 <TextInput
-                  placeholder="Enter your house, flat, apartment no."
+                  placeholder="Enter your Account Holder Name"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
                   value={formData.houseNo}
+                  onChangeText={(Text)=>{setFormData({...formData,houseNo:Text})}}
+                 
                 />
               </View>
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter Village</Text>
+              <Text style={styles.label}>Bank Account Number</Text>
               <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} color={'#A0A0A0'} />
+                 <BankIcon height={25} width={25}  />
                 <TextInput
-                  placeholder="Enter your village/town name"
+                  placeholder="Enter your Bank Account Number"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
                   value={formData.villageName}
@@ -99,11 +86,11 @@ useEffect(() => {
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District Name</Text>
+              <Text style={styles.label}>Confirm Bank Account Number</Text>
               <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} fill="#A0A0A0" />
+                 <BankIcon height={25} width={25}  />
                 <TextInput
-                  placeholder="Choose your city"
+                  placeholder="Enter Your Bank Account Number"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
                   value={formData.city}
@@ -112,11 +99,11 @@ useEffect(() => {
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter Pincode</Text>
+              <Text style={styles.label}>IFSC Code</Text>
               <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} fill="#A0A0A0" />
+                <BankIcon height={25} width={25}  />
                 <TextInput
-                  placeholder="Turn on gps to drop precise pin"
+                  placeholder="Enter 11-character alphanumeric code"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
                   value={formData.pincode}
@@ -125,11 +112,11 @@ useEffect(() => {
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter State</Text>
+              <Text style={styles.label}>Enter Partner Bank Name</Text>
               <View style={styles.inputBox}>
-                <StateIcon height={25} width={25} />
+                <BankIcon height={25} width={25} />
                 <TextInput
-                  placeholder="Choose your state"
+                  placeholder="Enter your partner bank name"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
                   value={formData.state} 
@@ -137,10 +124,34 @@ useEffect(() => {
               </View>
             </View>
 
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter Partner Bank's Branch Code</Text>
+              <View style={styles.inputBox}>
+                <BankIcon height={25} width={25} />
+                <TextInput
+                  placeholder="Enter your Partner Bank's Branch Code"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.state} 
+                />
+              </View>
+            </View>
+ 
+            <View style={styles.formGroup}>
+                <Text style={styles.label}>Upload your Cancel Check</Text>
+                      {/* Upload Box */}
+                      <TouchableOpacity style={styles.uploadBox}>
+                        <View style={styles.uploadContent}>
+                          <Upload width={100} height={50} />
+                          <Text style={styles.orDropText}>or Drop Files</Text>
+                        </View>
+                      </TouchableOpacity>
+            </View>
+
             <View style={{ gap: 16 }}>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('UploadDocumentsScreen')}
+                onPress={() => navigation.navigate('BankApproval')}
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
@@ -154,11 +165,11 @@ useEffect(() => {
             </View>
           </View>
         </ScrollView>
-      </TouchableWithoutFeedback>
+
     </KeyboardAvoidingView>
   );
 };
-export default AgentSignUp3;
+export default AgentSignUp4;
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -187,7 +198,7 @@ const styles = StyleSheet.create({
   inputBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingLeft: 16,
     height: 48,
     borderWidth: 2,
     borderColor: '#f2f2f2',
@@ -222,6 +233,28 @@ const styles = StyleSheet.create({
     color: '#79BBA8',
     fontWeight: '500',
   },
-
+uploadBox: {
+  marginTop: 32,
+  borderWidth: 1,
+  borderColor: '#DDD',
+  borderStyle: 'dashed',
+  borderRadius: 8,
+  padding: 20,
+  //backgroundColor: '#F9F9F9',
+  alignItems: 'flex-start',
+},
+uploadContent: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: 12, // if your React Native version supports it
+  // Or use marginLeft below if gap not supported:
+  // paddingHorizontal: 10,
+},
+  orDropText: {
+  fontSize: 16,
+  color: '#888',
+  marginLeft: 0, // fallback spacing if no `gap`
+},
 
 });

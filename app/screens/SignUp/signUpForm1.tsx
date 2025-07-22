@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
+import HomeIcon from '../../assets/images/HomeIcon.svg';
 import RNPickerSelect from 'react-native-picker-select';
 const { width, height } = Dimensions.get('window');
 
 const SignUpFormScreen1 = ({ navigation }: any) => {
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
-  const [fatherName, setFatherName] = useState('');
                   {/* Gender Drop Down */}
   const genderOptions = [
   { label: 'Male', value: 'male' },
@@ -58,22 +58,9 @@ const [age, setAge] = useState('')
             />
           </View>
         </View>
-{/* 
+
        
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Contact Number</Text>
-          <View style={styles.inputBox}>
-            <Icon name="phone" size={20} color="#C0C0C0" />
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your mobile number"
-              placeholderTextColor="#C0C0C0"
-              keyboardType="phone-pad"
-              value={contact}
-              onChangeText={setContact}
-            />
-          </View>
-        </View> */}
+
 
 
 
@@ -133,6 +120,20 @@ const [age, setAge] = useState('')
     />
   </View>
 </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Enter House Number</Text>
+          <View style={styles.inputBox}>
+           <HomeIcon/>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your house, flat, apartment no."
+              placeholderTextColor="#C0C0C0"
+              keyboardType="phone-pad"
+              value={contact}
+              onChangeText={setContact}
+            />
+          </View>
+        </View> 
 
         {/* 
         
@@ -212,7 +213,7 @@ const styles = StyleSheet.create({
   inputBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingLeft: 16,
     height: 48,
     borderWidth: 2,
     borderColor: '#f2f2f2',
@@ -265,7 +266,7 @@ pickerInput: {
 },
 pickerIcon: {
   position: 'absolute',
-  right: 16,
+  right:16,
   top: 14,
 },
 

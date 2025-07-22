@@ -18,7 +18,7 @@ import {
 import VillageIcon from '../../assets/images/VillageIcon.svg';
 import StateIcon from '../../assets/images/StateIcon.svg';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
-import HomeIcon from '../../assets/images/HomeIcon.svg';
+import GpsIcon from '../../assets/images/GpsIcon.svg';
 
 const SignUpFormScreen2 = ({ navigation }: any) => {
   return (
@@ -37,17 +37,6 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
         >
           <View style={styles.container}>
           
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter House Number</Text>
-              <View style={styles.inputBox}>
-          
-              <HomeIcon height={20} width={20} color={'#A0A0A0'}/> 
-              <TextInput
-                placeholder="Enter your house, flat, apartment no."
-                style={styles.input}
-                placeholderTextColor="#C0C0C0"
-              />
-            </View></View>
 
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Village</Text>
@@ -76,9 +65,9 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
 
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District PINCODE</Text>
+              <Text style={styles.label}>Enter PINCODE</Text>
               <View style={styles.inputBox}>
-              <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
+              <GpsIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
                 placeholder="Turn on gps to drop precise pin"
                 style={styles.input}

@@ -53,9 +53,7 @@ const AppNavigator = () => (
         }
 
   const isScanner = route.name === 'Scanner';
-  const iconStyle = isScanner
-    ? styles.scannerIconContainer
-    : [styles.iconWrapper, !focused && styles.notFocused];
+
         return (
           <View style={isScanner ? styles.scannerIconContainer : styles.iconWrapper}>
             {focused&&<View style={{height:2, width:15, backgroundColor:'#6929C4' }}/>}

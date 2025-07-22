@@ -15,6 +15,7 @@ import {
   Alert,
 } from 'react-native';
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
+import GpsIcon from '../../../assets/images/GpsIcon.svg';
 import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import HomeIcon from '../../../assets/images/HomeIcon.svg';
@@ -27,6 +28,7 @@ const AgentSignUp2 = ({ navigation }: any) => {
       state: '',
       pincode: '',
     })
+    const [checked, setChecked] = useState(false);
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 ,paddingTop:40,backgroundColor:'#fff'}}
@@ -90,9 +92,9 @@ const AgentSignUp2 = ({ navigation }: any) => {
 
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District PINCODE</Text>
+              <Text style={styles.label}>Enter Pincode</Text>
               <View style={styles.inputBox}>
-              <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
+              <GpsIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
                 placeholder="Turn on gps to drop precise pin"
                 style={styles.input}
@@ -124,8 +126,13 @@ const AgentSignUp2 = ({ navigation }: any) => {
               />
               </View>
             </View>
+            
+         <Pressable style={styles.checkboxRow} onPress={() => setChecked(!checked)}>
+                         {checked?<View style={styles.checked}/>:<View style={styles.checkbox}/>}
+                         <Text style={{fontSize: 12,fontWeight: '500',color: '#797979',}}>Use this as Correspondence Address</Text>
+          </Pressable>
            <View style={{gap:16}}>
-            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AgentSignUp3',{formData})}}>
+            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AgentSignUp3',{formData,checked})}}>
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
 
@@ -136,6 +143,8 @@ const AgentSignUp2 = ({ navigation }: any) => {
               </Text>
             </Text></View>
            </View>
+
+
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -210,6 +219,31 @@ const styles = StyleSheet.create({
     color: '#79BBA8',
     fontWeight: '500',
   },
+    checkboxRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop:6,
+    gap: 8,
+  },
+  checkbox: {
+    width: 15,
+    height: 15,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: '#54219D',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checked: {
+    width: 15,
+    height: 15,
+    borderRadius: 4,
+    borderWidth: 5,
+    borderColor: '#54219D',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
 });
 
 export default AgentSignUp2;
