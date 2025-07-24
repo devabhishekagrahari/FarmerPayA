@@ -11,47 +11,92 @@ import {
   Platform,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from 'react-native';
-
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import HomeIcon from '../../../assets/images/HomeIcon.svg';
 import { useRoute } from '@react-navigation/native';
+import axios from 'axios';
+import { BASE_URL } from '../../../utils/api';
+import { KeyboardTypeOptions } from 'react-native';
 
-interface FormData {
-  houseNo?: string;
-  villageName?: string;
-  city?: string;
-  state?: string;
-  pincode?: string;
-}
+
 
 const AgentSignUp3 = ({ navigation }: any) => {
-    const [ formData , setFormData ] = useState({
-          houseNo: '',
-          villageName: '',
-          city: '',
-          state: '',
-          pincode: '',
-    })
+  const route = useRoute<any>();
+  const {
+    user_id,
+    mobile,
+    house_no,
+    village_or_town,
+    city_or_district,
+    pincode,
+    state,
+  } = route.params;
+
   const [checked, setChecked] = useState(false);
-const route = useRoute<any>();
 
-useEffect(() => {
-  if (checked && route?.params?.formData) {
-    setFormData(route.params.formData);
-  }
-  if(!checked){
-    setFormData({          houseNo: '',
-          villageName: '',
-          city: '',
-          state: '',
-          pincode: '',});
-  }
-}, [checked]);
+  const [formData, setFormData] = useState({
+    houseNo: '',
+    villageName: '',
+    city: '',
+    state: '',
+    pincode: '',
+  });
 
-  
+  useEffect(() => {
+    if (checked) {
+      setFormData({
+        houseNo: house_no,
+        villageName: village_or_town,
+        city: city_or_district,
+        state: state,
+        pincode: pincode,
+      });
+    } else {
+      setFormData({
+        houseNo: '',
+        villageName: '',
+        city: '',
+        state: '',
+        pincode: '',
+      });
+    }
+  }, [checked]);
+
+  const handleSubmit = async () => {
+    const { houseNo, villageName, city, state, pincode } = formData;
+
+    if (!houseNo || !villageName || !city || !state || !pincode) {
+      Alert.alert('Error', 'Please fill all the fields.');
+      return;
+    }
+
+    try {
+      const payload = {
+        user_id,
+        house_no: houseNo,
+        village_or_town: villageName,
+        city_or_district: city,
+        pincode,
+        state,
+      };
+
+      console.log('Sending /corraddress:', payload);
+
+      const response = await axios.post(`${BASE_URL}/agent/corraddress`, payload);
+
+      console.log('Correspondence address submitted:', response.data);
+
+      navigation.navigate('UploadDocumentsScreen', { user_id, mobile });
+    } catch (error: any) {
+      console.error('Failed to submit corr address:', error);
+      Alert.alert('Error', error?.response?.data?.message || 'Something went wrong.');
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, paddingTop: 40, backgroundColor: '#fff' }}
@@ -62,91 +107,45 @@ useEffect(() => {
         <ArrowBack />
       </Pressable>
 
-      <Text style={styles.label0}>CORRESPONDANCE ADDRESS</Text>
+      <Text style={styles.label0}>CORRESPONDENCE ADDRESS</Text>
 
-            {/* Checkbox */}
-            <Pressable style={styles.checkboxRow} onPress={() => setChecked(!checked)}>
-              <View style={[styles.checkbox, checked && styles.checked]}>
-                {checked && <View style={styles.innerTick} />}
-              </View>
-              <Text style={{    fontSize: 12,fontWeight: '500',color: '#797979',}}>SAME AS PERMANENT ADDRESS</Text>
-            </Pressable>
+      <Pressable style={styles.checkboxRow} onPress={() => setChecked(!checked)}>
+        <View style={[styles.checkbox, checked && styles.checked]}>
+          {checked && <View style={styles.innerTick} />}
+        </View>
+        <Text style={styles.checkboxText}>SAME AS PERMANENT ADDRESS</Text>
+      </Pressable>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
           <View style={styles.container}>
-
-            {/* Inputs */}
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter House Number</Text>
-              <View style={styles.inputBox}>
-                <HomeIcon height={20} width={20} color={'#A0A0A0'} />
-                <TextInput
-                  placeholder="Enter your house, flat, apartment no."
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.houseNo}
-                />
+            {/* Input Fields */}
+            {[
+              { label: 'Enter House Number', key: 'houseNo', icon: <HomeIcon height={20} width={20} /> },
+              { label: 'Enter Village', key: 'villageName', icon: <VillageIcon height={25} width={25} /> },
+              { label: 'Enter City/District Name', key: 'city', icon: <VillageIcon height={25} width={25} /> },
+              { label: 'Enter City/District PINCODE', key: 'pincode', icon: <VillageIcon height={25} width={25} />, keyboardType: 'number-pad' },
+              { label: 'Enter State', key: 'state', icon: <StateIcon height={25} width={25} /> },
+            ].map(({ label, key, icon, keyboardType }) => (
+              <View style={styles.formGroup} key={key}>
+                <Text style={styles.label}>{label}</Text>
+                <View style={styles.inputBox}>
+                  {icon}
+                  <TextInput
+                    placeholder={label}
+                    placeholderTextColor="#C0C0C0"
+                    style={styles.input}
+                    value={formData[key as keyof typeof formData]}
+                    onChangeText={(text) => setFormData({ ...formData, [key]: text })}
+                    keyboardType={keyboardType as KeyboardTypeOptions || 'default'}
+                    maxLength={key === 'pincode' ? 6 : undefined}
+                  />
+                </View>
               </View>
-            </View>
-
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter Village</Text>
-              <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} color={'#A0A0A0'} />
-                <TextInput
-                  placeholder="Enter your village/town name"
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.villageName}
-                />
-              </View>
-            </View>
-
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District Name</Text>
-              <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} fill="#A0A0A0" />
-                <TextInput
-                  placeholder="Choose your city"
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.city}
-                />
-              </View>
-            </View>
-
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District PINCODE</Text>
-              <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} fill="#A0A0A0" />
-                <TextInput
-                  placeholder="Turn on gps to drop precise pin"
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.pincode}
-                />
-              </View>
-            </View>
-
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter State</Text>
-              <View style={styles.inputBox}>
-                <StateIcon height={25} width={25} />
-                <TextInput
-                  placeholder="Choose your state"
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.state} 
-                />
-              </View>
-            </View>
+            ))}
 
             <View style={{ gap: 16 }}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('UploadDocumentsScreen')}
-              >
+              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
 
@@ -163,6 +162,7 @@ useEffect(() => {
     </KeyboardAvoidingView>
   );
 };
+
 export default AgentSignUp3;
 
 const styles = StyleSheet.create({
@@ -227,12 +227,11 @@ const styles = StyleSheet.create({
     color: '#79BBA8',
     fontWeight: '500',
   },
-
   checkboxRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:6,
-    marginHorizontal:32,
+    marginTop: 6,
+    marginHorizontal: 32,
     gap: 8,
   },
   checkbox: {
@@ -252,5 +251,10 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: '#fff',
     borderRadius: 2,
+  },
+  checkboxText: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#797979',
   },
 });

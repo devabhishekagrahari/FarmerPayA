@@ -33,6 +33,7 @@ const OtpVerification = ({
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(30);
   const [error, setError] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
   const inputsRef = useRef<Array<TextInput | null>>([]);
@@ -83,6 +84,7 @@ const handleVerify = async () => {
 
   if (enteredOtp.length < 6) {
     setError('Please enter all 6 digits.');
+    setInfoMessage('');
     return;
   }
 
@@ -95,6 +97,9 @@ const handleVerify = async () => {
     const { isRegistered, message, user_id } = response.data;
 
     setError(''); // Clear any previous errors
+    setInfoMessage('');
+    console.log('mobile:', mobile);
+console.log('enteredOtp:', enteredOtp);
 
     if (isRegistered) {
       // Registered user, proceed accordingly
@@ -115,7 +120,7 @@ const handleVerify = async () => {
       console.error('Unknown error:', err);
       setError('Something went wrong.');
     }
-    Alert.alert('Server Error', 'Failed to verify OTP');
+     setInfoMessage('');
   }
 };
 
@@ -125,7 +130,7 @@ const handleVerify = async () => {
     setTimer(30);
     setError('');
     setActiveIndex(0);
-    inputsRef.current[0]?.focus();
+    inputsRef.current[0]?.focus();    
 
     try {
       const res = await axios.post(`${BASE_URL}/auth/send-otp`, { mobile });

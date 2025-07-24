@@ -11,18 +11,58 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import BankIcon from '../../../assets/images/BankIcon.svg';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import axios from 'axios';
+import { BASE_URL } from '../../../utils/api';
+
 const { width, height } = Dimensions.get('window');
 
-const AgentSignUp1 = ({ navigation }: any) => {
+const AgentSignUp1 = ({ navigation , route}: any) => {
+
+  const { user_id, mobile } = route.params;
+
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
-  const [fatherName, setFatherName] = useState('');
+  const [partnerBank, setPartnerBank] = useState('');
+  const [branchCode, setBranchCode] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleRegisterAgent = async()=>{
+    if (!fullName || !contact || !partnerBank || !branchCode) {
+      setErrorMessage('Please fill all fields');
+      return;
+    }
+    try{
+      const response = await axios.post(`${BASE_URL}/agent/`,{
+        user_id:user_id,
+        full_name:fullName,
+        mobile:mobile,
+        partner_bank:partnerBank,
+        branch_code:branchCode
+      });
+      console.log('Agent Registered: ', response.data);
+      navigation.navigate('AgentSignUp2', { user_id, mobile });
+
+    }catch(error:any){
+      console.log('Data was:',{
+        user_id:user_id,
+        full_name:fullName,
+        mobile:mobile,
+        partner_bank:partnerBank,
+        branch_code:branchCode
+      });
+
+      console.error('Error in Registeration :', error);
+      setErrorMessage(error?.response?.data?.message || 'Failed to register. Please try again.');
+    }
+  };
 
   return (
     <View style={styles.container}>
-              <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
-               <ArrowBack/>
-              </Pressable>
+      <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
+        <ArrowBack/>
+      </Pressable>
+
       <View style={styles.headerContainer}>
         <Text style={styles.heading}>Hello! Agent</Text>
         <Text style={styles.subheading}>Create your account to continue</Text>
@@ -60,7 +100,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
           </View>
         </View>
 
-                {/* Gender Drop Down */}
+                {/* Bank Name */}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Partner Bank</Text>
           <View style={styles.inputBox}>
@@ -69,13 +109,13 @@ const AgentSignUp1 = ({ navigation }: any) => {
               style={styles.input}
               placeholder="Enter Your Bank Name"
               placeholderTextColor="#C0C0C0"
-              value={fatherName}
-              onChangeText={setFatherName}
+              value={partnerBank}
+              onChangeText={setPartnerBank}
             />
           </View>
         </View>
 
-        {/* Father's Name */}
+        {/* Branch Code */}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Branch Code</Text>
           <View style={styles.inputBox}>
@@ -84,15 +124,18 @@ const AgentSignUp1 = ({ navigation }: any) => {
               style={styles.input}
               placeholder="Enter your Branch Code"
               placeholderTextColor="#C0C0C0"
-              value={fatherName}
-              onChangeText={setFatherName}
+              value={branchCode}
+              onChangeText={setBranchCode}
             />
           </View>
         </View>
+        {errorMessage ? (
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        ) : null}
      </View>
 
       {/* Continue Button */}
-      <TouchableOpacity style={styles.continueButton} onPress={()=>{navigation.navigate('AgentSignUp2')}}>
+      <TouchableOpacity style={styles.continueButton} onPress={handleRegisterAgent}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
 
@@ -185,6 +228,12 @@ const styles = StyleSheet.create({
     color: '#28a745',
     fontWeight: '500',
   },
+  errorText: {
+  color: 'red',
+  fontSize: 12,
+  marginTop: 4,
+},
+
 });
 
 export default AgentSignUp1;

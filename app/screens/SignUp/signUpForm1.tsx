@@ -13,28 +13,56 @@ import ArrowBack from '../../assets/images/ArrowBack.svg';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/api';
+import { Alert } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-
 const SignUpFormScreen1 = ({ navigation }: any) => {
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [fatherName, setFatherName] = useState('');
                   {/* Gender Drop Down */}
   const genderOptions = [
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' },
-  { label: 'Other', value: 'other' },
-];
-const ageOptions = [
-  { label: '18-29', value: '18-29' },
-  { label: '29-55', value: '29-55' },
-  { label: '55+', value: '55+' },
-];
+    { label: 'Male', value: 'male' },
+    { label: 'Female', value: 'female' },
+    { label: 'Other', value: 'other' },
+  ];
+  const ageOptions = [
+    { label: '18-29', value: '18-29' },
+    { label: '29-55', value: '29-55' },
+    { label: '55+', value: '55+' },
+  ];
 
-// Replace fatherName with gender in your state:
-const [gender, setGender] = useState('');
-const [age, setAge] = useState('')
+  // Replace fatherName with gender in your state:
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+
+const handleRegisterFarmer = async () => {
+  try {
+    // Optional: Validate fields before sending
+    if (!fullName || !gender || !age || !contact) {
+      Alert.alert('Please fill all fields.');
+      return;
+    }
+
+    const response = await axios.post(`${BASE_URL}/farmer/register`, {
+      full_name: fullName,
+      gender,
+      age,
+      mobile_number: contact, // must match backend naming
+      email: '' // if you have email input, use it here
+    });
+
+    if (response.status === 201) {
+      Alert.alert('Farmer registered successfully');
+      navigation.navigate('SignUpForm2');
+    }
+  } catch (error) {
+    const err = error as any;
+    console.error('Registration Error:', err?.response?.data || err?.message);
+    Alert.alert(err?.response?.data?.message || 'Something went wrong');
+  }
+};
+
 
   return (
     <View style={styles.container}>
@@ -47,6 +75,7 @@ const [age, setAge] = useState('')
       </View>
 
       <View style={styles.formContainer}>
+
         {/* Full Name */}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Full Name</Text>
@@ -61,7 +90,7 @@ const [age, setAge] = useState('')
             />
           </View>
         </View>
-{/* 
+ 
        
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Contact Number</Text>
@@ -76,11 +105,9 @@ const [age, setAge] = useState('')
               onChangeText={setContact}
             />
           </View>
-        </View> */}
+        </View> 
 
 
-
-...
 
 <View style={styles.inputGroup}>
   <Text style={styles.label}>Select Gender</Text>
@@ -157,7 +184,7 @@ const [age, setAge] = useState('')
      
 
       {/* Continue Button */}
-      <TouchableOpacity style={styles.continueButton} onPress={()=>{navigation.navigate('SignUpForm2')}}>
+      <TouchableOpacity style={styles.continueButton} onPress={handleRegisterFarmer}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
 

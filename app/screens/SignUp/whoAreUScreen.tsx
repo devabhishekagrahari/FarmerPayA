@@ -1,5 +1,5 @@
 // ChoosePersonaScreen.tsx
-import React from 'react';
+import React, { useState }  from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,36 @@ import {
   SafeAreaView,
   Dimensions,
 } from 'react-native';
-
-
 import BankFarmer from '../../assets/images/BankFarmer.svg'
+import axios from 'axios';
+import { BASE_URL } from '../../utils/api';
 
+const WhoAreUScreen = ({navigation,route }:any) => {
+  const { user_id, mobile } = route.params;
+  const [errorMessage, setErrorMessage] = useState('');
 
-const WhoAreUScreen = ({navigation}:any) => {
+  const handleRoleSelect = async(roleName:string)=>{
+    try{
+      const response = await axios.post(`${BASE_URL}/role/`,{
+        name : roleName,
+        user_id,
+      });
+      console.log('Role assigned:', response.data);
+      if(roleName === 'agent'){
+        navigation.navigate('AgentSignUp1', { user_id, mobile });
+      }else{
+        navigation.navigate('SignUpForm1', { user_id, mobile });
+      }
+    }catch (error){
+      console.log('Sending role assignment payload:', {
+        name: roleName,
+        user_id,
+        });
 
-
+      console.error('Error assigningn role : ', error);
+      setErrorMessage('Failed to assign role. Please try again.');
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       {/* SVG Icons */}
@@ -30,15 +52,24 @@ const WhoAreUScreen = ({navigation}:any) => {
       </View>
 
       {/* Buttons */}
-      <TouchableOpacity style={styles.primaryButton} onPress={()=>{navigation.navigate('AgentSignUp1')}}>
+      <TouchableOpacity 
+        style={styles.primaryButton} 
+        onPress={()=> handleRoleSelect('agent')}
+      >
         <Text style={styles.primaryText}>I’m a Bank / CSC Agent</Text>
       </TouchableOpacity>
 
       <Text style={styles.orText}>OR</Text>
 
-      <TouchableOpacity style={styles.secondaryButton} onPress={()=>{navigation.navigate('SignUpForm1')}}>
+      <TouchableOpacity 
+        style={styles.secondaryButton} 
+        onPress={()=> handleRoleSelect('farmer')}
+      >
         <Text style={styles.secondaryText}>I’m a Farmer</Text>
       </TouchableOpacity>
+      {errorMessage !== '' && (
+  <Text style={styles.errorText}>{errorMessage}</Text>
+)}
     </SafeAreaView>
   );
 };
@@ -108,4 +139,12 @@ const styles = StyleSheet.create({
     color: '#54219D',
     fontWeight: '500',
   },
+  errorText: {
+  color: 'red',
+  textAlign: 'right',
+  marginTop: 10,
+  marginRight: 10,
+  fontSize: 14,
+},
+
 });

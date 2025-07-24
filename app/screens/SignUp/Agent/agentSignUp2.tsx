@@ -18,15 +18,78 @@ import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import HomeIcon from '../../../assets/images/HomeIcon.svg';
+import axios from 'axios';
+import { BASE_URL } from '../../../utils/api';
 
-const AgentSignUp2 = ({ navigation }: any) => {
-    const [ formData , setFormData ] = useState({
-      houseNo: '',
-      villageName: '',
-      city: '',
-      state: '',
-      pincode: '',
-    })
+const AgentSignUp2 = ({ navigation, route }: any) => {
+  const { user_id, mobile } = route.params;
+
+  const [ formData , setFormData ] = useState({
+    houseNo: '',
+    villageName: '',
+    city: '',
+    state: '',
+    pincode: '',
+  })
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (name: string, value: string) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleRegisterAgent = async()=>{
+    const { houseNo, villageName, city, pincode, state } = formData;
+
+    if (!houseNo || !villageName || !city || !pincode|| !state) {
+      setErrorMessage('Please fill all fields');
+      return;
+    }
+    try{
+      console.log('📦 Sending data to backend:', {
+        user_id: user_id,
+        house_no: houseNo,
+        village_or_town: villageName,
+        city_or_district: city,
+        pincode,
+        state,
+      });
+
+      const response = await axios.post(`${BASE_URL}/agent/address`,{
+        user_id:user_id,
+         house_no: houseNo,
+        village_or_town: villageName,
+        city_or_district: city,
+        pincode,
+        state,
+      });
+
+      console.log('Agent Address Registered: ', response.data);
+      navigation.navigate('AgentSignUp3', { 
+        user_id,
+        mobile,
+        house_no: houseNo,
+        village_or_town: villageName,
+        city_or_district: city,
+        pincode,
+        state,
+      });
+
+    }catch(error:any){
+      console.log('Data was:',{
+        user_id: user_id,
+        house_no: houseNo,
+        village_or_town: villageName,
+        city_or_district: city,
+        pincode,
+        state,
+      });
+
+      console.error('Error in Address Registeration :', error);
+      setErrorMessage(error?.response?.data?.message || 'Failed to register. Please try again.');
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 ,paddingTop:40,backgroundColor:'#fff'}}
@@ -125,7 +188,7 @@ const AgentSignUp2 = ({ navigation }: any) => {
               </View>
             </View>
            <View style={{gap:16}}>
-            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AgentSignUp3',{formData})}}>
+            <TouchableOpacity style={styles.button} onPress={handleRegisterAgent}>
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
 

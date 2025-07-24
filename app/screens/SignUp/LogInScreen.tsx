@@ -35,7 +35,7 @@ const LoginScreen = ({navigation}:any) => {
       };
       console.log("Payload being sent:", payload);
 
-      const response = await axios.post('http://10.182.208.140:3000/auth/send-otp', payload);
+      const response = await axios.post(`${BASE_URL}/auth/send-otp`, payload);
       console.log("OTP Sent:", response.data);
       navigation.navigate('OtpScreen', { mobile: phoneNumber });
 

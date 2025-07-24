@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState } from 'react';
 import {
   View,
   Text,
@@ -19,8 +19,41 @@ import VillageIcon from '../../assets/images/VillageIcon.svg';
 import StateIcon from '../../assets/images/StateIcon.svg';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
 import HomeIcon from '../../assets/images/HomeIcon.svg';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/api';
 
 const SignUpFormScreen2 = ({ navigation }: any) => {
+  const [houseNo, setHouseNo] = useState('');
+  const [village, setVillage] = useState('');
+  const [cityId, setCityId] = useState(1); // Replace with actual city ID or selection
+  const [stateId, setStateId] = useState(1); // Replace accordingly
+  const [areaId, setAreaId] = useState(1); // Replace accordingly
+  const [mollha, setMollha] = useState('');
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
+  const [mobileNumber, setMobileNumber] = useState(''); 
+  const handleSubmitAddress = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/farmer/address`, {
+        mobile_number: mobileNumber,
+        address_type: 'local', // or 'permanent'
+        country_id: 1, // Replace if needed
+        state_id: stateId,
+        city_id: cityId,
+        area_id: areaId,
+        house_no: houseNo,
+        village: village,
+        mollha: mollha,
+        Latitude: lat,
+        Longitude: lng,
+      });
+
+      Alert.alert('Success', response.data.message);
+      navigation.navigate('primaryRole');
+    } catch (error: any) {
+      console.error('Address Error:', error);
+      Alert.alert('Error', error.response?.data?.message || 'Something went wrong');
+    }}
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 ,paddingTop:40,backgroundColor:'#fff'}}
@@ -100,7 +133,7 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               </View>
             </View>
            <View style={{gap:16}}>
-            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('primaryRole')}}>
+            <TouchableOpacity style={styles.button} onPress={handleSubmitAddress}>
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
 
