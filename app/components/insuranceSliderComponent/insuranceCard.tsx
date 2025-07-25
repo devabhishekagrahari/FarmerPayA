@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image , Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image , Dimensions, TouchableOpacity } from 'react-native';
 import { Insurance } from './insurance';
 import LinearGradient from 'react-native-linear-gradient';
 const{width, height}=Dimensions.get('window');
 const InsuranceCard: React.FC<Insurance> = ({ title, emojiImage, bgColor1 ,bgColor2 , titleColor}) => {
   return (
     <View style={[styles.card]}>
+      <TouchableOpacity>
       <LinearGradient
         colors={[bgColor1, bgColor2]}
         start={{ x: 0, y: 0 }}
@@ -13,7 +14,7 @@ const InsuranceCard: React.FC<Insurance> = ({ title, emojiImage, bgColor1 ,bgCol
         style={styles.card}
       > 
       <Text style={[styles.title, {color:titleColor || '#FFFFFF'}]}>{title}</Text>
-      <Image source={emojiImage} style={styles.emoji}/></LinearGradient>
+      <Image source={emojiImage} style={styles.emoji}/></LinearGradient></TouchableOpacity>
     </View>
   );
 };

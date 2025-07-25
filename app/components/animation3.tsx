@@ -23,19 +23,19 @@ interface AnimatedRowProps {
 }
 
 const AnimatedRow: React.FC<AnimatedRowProps> = ({ direction, items, onDone }) => {
-  const translateX = useRef(new Animated.Value(direction === 'left' ? -width : width)).current;
+  const translateX = useRef(new Animated.Value(width / 2)).current; // Start from center
   const scale = useRef(new Animated.Value(1)).current;
-
 
   useEffect(() => {
     const animate = () => {
-      translateX.setValue(direction === 'left' ? width : -width);
+      // From center → to left or right end
+      translateX.setValue(direction === 'left' ?0:-width );
       Animated.timing(translateX, {
-        toValue: direction === 'left' ? -width : width,
-        duration: 8000,
+        toValue: direction === 'left' ? -width : 0, // overshoot a bit for smooth effect
+        duration: 4000,
         easing: Easing.linear,
         useNativeDriver: true,
-      }).start(() => animate());
+      }).start(() => animate()); // Loop it
     };
 
     animate();
@@ -90,6 +90,24 @@ const DualAnimatedRows3: React.FC<DualAnimatedRowsProps> = ({ inView ,navigation
 
   const QUESTIONS1 = [
     'Where is nearest seed shop? 🌱',
+    'गेहूँ की MSP क्या है?” 🌾',
+    'Aaj ka mausam? ☀️',
+    'ಮೇಯುವ ಸರ್ಕಾರ ಯೋಜನೆಗೆ ಅರ್ಹನು? 📚',
+    'Which government scheme am I eligible for? 📄',
+    'How to get Kisan Card? 📄',
+    'बोरवेल गहराई? 💧',
+    'गेहूँ की MSP क्या है?” 🌾',
+    'Aaj ka mausam? ☀️',
+        'Where is nearest seed shop? 🌱',
+    'गेहूँ की MSP क्या है?” 🌾',
+    'Aaj ka mausam? ☀️',
+    'ಮೇಯುವ ಸರ್ಕಾರ ಯೋಜನೆಗೆ ಅರ್ಹನು? 📚',
+    'Which government scheme am I eligible for? 📄',
+    'How to get Kisan Card? 📄',
+    'बोरवेल गहराई? 💧',
+    'गेहूँ की MSP क्या है?” 🌾',
+    'Aaj ka mausam? ☀️',
+        'Where is nearest seed shop? 🌱',
     'गेहूँ की MSP क्या है?” 🌾',
     'Aaj ka mausam? ☀️',
     'ಮೇಯುವ ಸರ್ಕಾರ ಯೋಜನೆಗೆ ಅರ್ಹನು? 📚',

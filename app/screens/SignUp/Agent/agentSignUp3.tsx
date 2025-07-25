@@ -25,7 +25,7 @@ import { KeyboardTypeOptions } from 'react-native';
 
 
 const AgentSignUp3 = ({ navigation }: any) => {
-  const route = useRoute<any>();
+    const route = useRoute<any>();
   const {
     user_id,
     mobile,
@@ -35,16 +35,15 @@ const AgentSignUp3 = ({ navigation }: any) => {
     pincode,
     state,
   } = route.params;
-
+    const [ formData , setFormData ] = useState({
+          houseNo: '',
+          villageName: '',
+          city: '',
+          state: '',
+          pincode: '',
+    })
   const [checked, setChecked] = useState(false);
-
-  const [formData, setFormData] = useState({
-    houseNo: '',
-    villageName: '',
-    city: '',
-    state: '',
-    pincode: '',
-  });
+//const route = useRoute<any>();
 
   useEffect(() => {
     if (checked) {
@@ -109,12 +108,8 @@ const AgentSignUp3 = ({ navigation }: any) => {
 
       <Text style={styles.label0}>CORRESPONDENCE ADDRESS</Text>
 
-      <Pressable style={styles.checkboxRow} onPress={() => setChecked(!checked)}>
-        <View style={[styles.checkbox, checked && styles.checked]}>
-          {checked && <View style={styles.innerTick} />}
-        </View>
-        <Text style={styles.checkboxText}>SAME AS PERMANENT ADDRESS</Text>
-      </Pressable>
+            {/* Checkbox */}
+
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
@@ -142,7 +137,33 @@ const AgentSignUp3 = ({ navigation }: any) => {
                   />
                 </View>
               </View>
-            ))}
+              ))}
+
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter City/District PINCODE</Text>
+              <View style={styles.inputBox}>
+                <VillageIcon height={25} width={25} fill="#A0A0A0" />
+                <TextInput
+                  placeholder="Turn on gps to drop precise pin"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.pincode}
+                />
+              </View>
+            </View>
+
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter State</Text>
+              <View style={styles.inputBox}>
+                <StateIcon height={25} width={25} />
+                <TextInput
+                  placeholder="Choose your state"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.state} 
+                />
+              </View>
+            </View>
 
             <View style={{ gap: 16 }}>
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
@@ -227,11 +248,12 @@ const styles = StyleSheet.create({
     color: '#79BBA8',
     fontWeight: '500',
   },
+
   checkboxRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 6,
-    marginHorizontal: 32,
+    marginTop:6,
+    marginHorizontal:32,
     gap: 8,
   },
   checkbox: {

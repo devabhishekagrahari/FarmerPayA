@@ -27,7 +27,7 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
       </TouchableOpacity>
 
       {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton} onPress={() => navigation.navigate('Main')}>
+      <TouchableOpacity style={styles.saveButton} onPress={() => navigation.navigate('AgentSignUp4')}>
         <Text style={styles.saveText} >Save</Text>
       </TouchableOpacity>
     </View>

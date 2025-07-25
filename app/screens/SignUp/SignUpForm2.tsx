@@ -18,6 +18,7 @@ import VillageIcon from '../../assets/images/VillageIcon.svg';
 import StateIcon from '../../assets/images/StateIcon.svg';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
 import HomeIcon from '../../assets/images/HomeIcon.svg';
+import GpsIcon from '../../assets/images/GpsIcon.svg';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/api';
 
@@ -136,9 +137,9 @@ const SignUpFormScreen2 = ({ navigation, route }: any) => {
 
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District PINCODE</Text>
+              <Text style={styles.label}>Enter PINCODE</Text>
               <View style={styles.inputBox}>
-              <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
+              <GpsIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
                 value={pincode}
                 onChangeText={setPincode}
