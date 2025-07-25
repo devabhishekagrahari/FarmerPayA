@@ -11,6 +11,8 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import MicIcon from '../../../assets/images/mic.svg';
 import BackArrow from '../../../assets/images/back-arrow.svg';
+import axios from 'axios';
+import { BASE_URL } from '../../../utils/api';
 
 type Role = {
   id: string;
@@ -27,9 +29,11 @@ const roles: Role[] = [
   { id: '6', title: 'Floriculturist', image: require('../../../assets/images/selection/floriculturist.jpg') },
 ];
 
-export default function PrimaryRoleScreen({ navigation }: any) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+export default function PrimaryRoleScreen({ navigation,route }: any) {
+  const { user_id } = route.params;
 
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [errorSelect, setError]= useState('');
   const renderItem = ({ item }: { item: Role }) => {
     const isSelected = selectedId === item.id;
     return (
@@ -48,6 +52,38 @@ export default function PrimaryRoleScreen({ navigation }: any) {
 </TouchableOpacity>
 
     );
+  };
+
+  const handlePrimaryRole = async() =>{
+    const selectedRole = roles.find((role) => role.id === selectedId);
+    if (!selectedRole){
+      console.error('Please select an activity');
+      return;
+    }
+    setError('');
+    const formattedRole = selectedRole.title;
+
+    try{
+      const response = await axios.post(
+      `${BASE_URL}/farmer/${user_id}/primary-role`,
+      {
+        user_id,
+        primary_role: formattedRole,
+      }
+    );
+    console.log('Primary role saved successfully:', response.data);
+    navigation.navigate('secondaryRole', {user_id});
+
+    }catch (error: any) {
+      console.error('Error saving primary role (frontend catch):', {
+        message: error?.response?.data?.message,
+        full: error?.response,
+      });
+
+      setError(
+        error?.response?.data?.message || 'Failed to save primary role. Try again.'
+      );
+    }
   };
 
   return (
@@ -85,7 +121,7 @@ export default function PrimaryRoleScreen({ navigation }: any) {
 
         <TouchableOpacity
           style={styles.nextButton}
-          onPress={() => navigation.navigate('secondaryRole')}
+          onPress={handlePrimaryRole}
         >
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>

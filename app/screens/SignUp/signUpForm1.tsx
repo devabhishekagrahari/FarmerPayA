@@ -16,7 +16,10 @@ import { BASE_URL } from '../../utils/api';
 import { Alert } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const SignUpFormScreen1 = ({ navigation }: any) => {
+const SignUpFormScreen1 = ({ navigation, route }: any) => {
+
+  const { user_id, mobile } = route.params;
+
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [fatherName, setFatherName] = useState('');
@@ -45,6 +48,7 @@ const handleRegisterFarmer = async () => {
     }
 
     const response = await axios.post(`${BASE_URL}/farmer/register`, {
+      user_id,  
       full_name: fullName,
       gender,
       age,
@@ -54,7 +58,9 @@ const handleRegisterFarmer = async () => {
 
     if (response.status === 201) {
       Alert.alert('Farmer registered successfully');
-      navigation.navigate('SignUpForm2');
+      navigation.navigate('SignUpForm2',{
+        user_id }
+      );
     }
   } catch (error) {
     const err = error as any;

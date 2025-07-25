@@ -11,6 +11,8 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import MicIcon from '../../../assets/images/mic.svg';
 import BackArrow from '../../../assets/images/back-arrow.svg';
+import axios from 'axios';
+import { BASE_URL } from '../../../utils/api';
 
 const activities = [
   { id: '1', title: 'Crop Farming', image: require('../../../assets/images/selection/crop-farming.jpg') },
@@ -19,9 +21,11 @@ const activities = [
   { id: '4', title: 'Fruit Orchard Owner', image: require('../../../assets/images/selection/fruit-orchard.jpg') },
 ];
 
-export default function SecondaryRoleScreen({ navigation }: any) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+export default function SecondaryRoleScreen({ navigation,route }: any) {
+  const { user_id } = route.params;
 
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [errorSelect, setError]= useState('');
   const renderItem = ({ item }: any) => {
     const isSelected = selectedId === item.id;
     return (
@@ -40,6 +44,38 @@ export default function SecondaryRoleScreen({ navigation }: any) {
       </TouchableOpacity>
     );
   };
+  const handleSecondaryRole = async() =>{
+    const selectedRole = activities.find((role) => role.id === selectedId);
+    if (!selectedRole){
+      console.error('Please select an activity');
+      return;
+    }
+    setError('');
+    const formattedRole = selectedRole.title;
+
+    try{
+      const response = await axios.post(
+      `${BASE_URL}/farmer/${user_id}/secondary-role`,
+      {
+        user_id,
+        secondary_role: formattedRole,
+      }
+    );
+    console.log('Secondary role saved successfully:', response.data);
+    navigation.navigate('PlantSelection', {user_id});
+
+    }catch (error: any) {
+      console.error('Error saving secondary role (frontend catch):', {
+        message: error?.response?.data?.message,
+        full: error?.response,
+      });
+
+      setError(
+        error?.response?.data?.message || 'Failed to save secondary role. Try again.'
+      );
+    }
+  };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -77,7 +113,7 @@ export default function SecondaryRoleScreen({ navigation }: any) {
 
         <TouchableOpacity 
             style={styles.nextButton}
-            onPress={() => navigation.navigate('PlantSelection')}>
+            onPress={handleSecondaryRole}>
           <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
       </View>

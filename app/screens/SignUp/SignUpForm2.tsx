@@ -14,7 +14,6 @@ import {
   Image,
   Alert,
 } from 'react-native';
-
 import VillageIcon from '../../assets/images/VillageIcon.svg';
 import StateIcon from '../../assets/images/StateIcon.svg';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
@@ -22,38 +21,60 @@ import HomeIcon from '../../assets/images/HomeIcon.svg';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/api';
 
-const SignUpFormScreen2 = ({ navigation }: any) => {
+const SignUpFormScreen2 = ({ navigation, route }: any) => {
+
+  const { user_id } = route.params;
+  console.log("Signup2 received ", user_id);
+
   const [houseNo, setHouseNo] = useState('');
   const [village, setVillage] = useState('');
-  const [cityId, setCityId] = useState(1); // Replace with actual city ID or selection
-  const [stateId, setStateId] = useState(1); // Replace accordingly
-  const [areaId, setAreaId] = useState(1); // Replace accordingly
-  const [mollha, setMollha] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
-  const [mobileNumber, setMobileNumber] = useState(''); 
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [pincode, setPincode] = useState('');
+
+  const [errorSelect, setError]= useState('');
+
   const handleSubmitAddress = async () => {
+    if (!houseNo || !village || !city || !state) {
+      setError('Validation Error: All fields are required.');
+      return;
+    }
+    
     try {
-      const response = await axios.post(`${BASE_URL}/farmer/address`, {
-        mobile_number: mobileNumber,
-        address_type: 'local', // or 'permanent'
-        country_id: 1, // Replace if needed
-        state_id: stateId,
-        city_id: cityId,
-        area_id: areaId,
+      const response = await axios.post(`${BASE_URL}/farmer/add-address`, {
+        user_id,
+        address_type: 'local',
+        country_id: 1,
+        state_id: state,    // string temporarily
+        city_id: city,      // string temporarily
+        area_id: 1,
         house_no: houseNo,
-        village: village,
-        mollha: mollha,
-        Latitude: lat,
-        Longitude: lng,
+        village,
+        mollha: '',
+        pincode,
+        Latitude: '',
+        Longitude: '',
       });
+      console.log('Posting to:', `${BASE_URL}/farmer/add-address`);
+
 
       Alert.alert('Success', response.data.message);
-      navigation.navigate('primaryRole');
+      navigation.navigate('primaryRole',{user_id});
     } catch (error: any) {
-      console.error('Address Error:', error);
+      console.error('Address Error: ', error);
+
+      if (error.response) {
+        console.error('Response status:', error.response.status);
+        console.error('Response data:', error.response.data);
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Request setup error:', error.message);
+      }
       Alert.alert('Error', error.response?.data?.message || 'Something went wrong');
-    }}
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 ,paddingTop:40,backgroundColor:'#fff'}}
@@ -76,6 +97,8 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
           
               <HomeIcon height={20} width={20} color={'#A0A0A0'}/> 
               <TextInput
+                value={houseNo}
+                onChangeText={setHouseNo}
                 placeholder="Enter your house, flat, apartment no."
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
@@ -87,6 +110,8 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               <View style={styles.inputBox}>  
                <VillageIcon height={25} width={25} color={'#A0A0A0'}/> 
               <TextInput
+                value={village}
+                onChangeText={setVillage}
                 placeholder="Enter your village/town name"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
@@ -100,6 +125,8 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               <View style={styles.inputBox}>
               <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
+                value={city}
+                onChangeText={setCity}
                 placeholder="Choose your city"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
@@ -113,6 +140,8 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               <View style={styles.inputBox}>
               <VillageIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
+                value={pincode}
+                onChangeText={setPincode}
                 placeholder="Turn on gps to drop precise pin"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
@@ -126,6 +155,8 @@ const SignUpFormScreen2 = ({ navigation }: any) => {
               <View style={styles.inputBox}>
               <StateIcon height={25} width={25} />
               <TextInput
+                value={state}
+                onChangeText={setState}
                 placeholder="Choose your state"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
