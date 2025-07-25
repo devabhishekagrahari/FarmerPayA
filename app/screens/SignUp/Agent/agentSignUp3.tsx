@@ -22,19 +22,19 @@ import axios from 'axios';
 import { BASE_URL } from '../../../utils/api';
 import { KeyboardTypeOptions } from 'react-native';
 
-
-
 const AgentSignUp3 = ({ navigation }: any) => {
     const route = useRoute<any>();
-  const {
-    user_id,
-    mobile,
-    house_no,
-    village_or_town,
-    city_or_district,
-    pincode,
-    state,
-  } = route.params;
+    const {
+      user_id,
+      mobile,
+      house_no,
+      village_or_town,
+      city_or_district,
+      pincode,
+      state,
+      same_as_permanent 
+    } = route.params;
+
     const [ formData , setFormData ] = useState({
           houseNo: '',
           villageName: '',
@@ -42,28 +42,21 @@ const AgentSignUp3 = ({ navigation }: any) => {
           state: '',
           pincode: '',
     })
-  const [checked, setChecked] = useState(false);
-//const route = useRoute<any>();
+    const [checked, setChecked] = useState(false);
+    //const route = useRoute<any>();
 
-  useEffect(() => {
-    if (checked) {
-      setFormData({
-        houseNo: house_no,
-        villageName: village_or_town,
-        city: city_or_district,
-        state: state,
-        pincode: pincode,
-      });
-    } else {
-      setFormData({
-        houseNo: '',
-        villageName: '',
-        city: '',
-        state: '',
-        pincode: '',
-      });
-    }
-  }, [checked]);
+    useEffect(() => {
+      if (same_as_permanent) {
+        setChecked(true);
+        setFormData({
+          houseNo: house_no,
+          villageName: village_or_town,
+          city: city_or_district,
+          state: state,
+          pincode: pincode,
+        });
+      } 
+    }, []);
 
   const handleSubmit = async () => {
     const { houseNo, villageName, city, state, pincode } = formData;

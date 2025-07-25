@@ -26,22 +26,10 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
 
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
-  const [fatherName, setFatherName] = useState('');
-  const [partnerBank, setPartnerBank] = useState('');
-  const [branchCode, setBranchCode] = useState('');
+  const [aadharCard, setAadharCard] = useState('');
+  const [panCard, setPanCard] = useState('');
+  const [designation, setDesignation] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-const genderOptions = [
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-    { label: 'Other', value: 'other' },
-  ];
-  const ageOptions = [
-    { label: '18-29', value: '18-29' },
-    { label: '29-55', value: '29-55' },
-    { label: '55+', value: '55+' },
-  ];
-  
-  // Replace fatherName with gender in your state:
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
   const [checked, setChecked] = useState({
@@ -51,29 +39,56 @@ const genderOptions = [
     vittaSakhi: false,
     Adathiya:false
   });
+  const genderOptions = [
+    { label: 'Male', value: 'male' },
+    { label: 'Female', value: 'female' },
+    { label: 'Other', value: 'other' },
+  ];
+  const ageOptions = [
+    { label: '18-29', value: '18-29' },
+    { label: '29-55', value: '29-55' },
+    { label: '55+', value: '55+' },
+  ];
+  const designationOptions = [
+  { label: 'Bank Sakhi', value: 'Bank Sakhi' },
+  { label: 'Self Help Group', value: 'SHG' },
+  { label: 'CSC', value: 'CSC' },
+  { label: 'Vitta Sakhi', value: 'Vitta Sakhi' },
+  { label: 'Adathiya', value: 'Adathiya' },
+];
+
+  
   const handleRegisterAgent = async()=>{
-    if (!fullName || !contact || !partnerBank || !branchCode) {
+    if (!fullName || !gender || !age || !designation || !aadharCard || !panCard) {
       setErrorMessage('Please fill all fields');
       return;
     }
     try{
-      const response = await axios.post(`${BASE_URL}/agent/`,{
-        user_id:user_id,
-        full_name:fullName,
-        mobile:mobile,
-        partner_bank:partnerBank,
-        branch_code:branchCode
-      });
+      const response = await axios.post(`${BASE_URL}/agent/`, {
+        user_id,
+        full_name: fullName,
+        gender,
+        age,
+        designation,
+        aadhar_card: aadharCard,
+        pan_card: panCard,
+        mobile,
+        email: "" // optional if you don’t collect it now
+    });
       console.log('Agent Registered: ', response.data);
       navigation.navigate('AgentSignUp2', { user_id, mobile });
 
     }catch(error:any){
       console.log('Data was:',{
-        user_id:user_id,
-        full_name:fullName,
-        mobile:mobile,
-        partner_bank:partnerBank,
-        branch_code:branchCode
+        user_id,
+        full_name: fullName,
+        gender,
+        age,
+        designation,
+        aadhar_card: aadharCard,
+        pan_card: panCard,
+        mobile,
+        email: ""
       });
 
       console.error('Error in Registeration :', error);
@@ -109,6 +124,7 @@ const genderOptions = [
             />
           </View>
         </View>
+
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Age <Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
@@ -137,10 +153,8 @@ const genderOptions = [
           </View>
         </View>
 
-            
-      
-                        {/* Gender Drop Down */}
-                        <View style={styles.inputGroup}>
+        {/* Gender Drop Down */}
+        <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Gender <Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.pickerContainer}>
           <RNPickerSelect
@@ -167,45 +181,30 @@ const genderOptions = [
     />
           </View>
         </View>
+
         {/* Designation Options */}
-        <View style={{gap:8, flexDirection:'row',justifyContent:'space-between'}}>
-          <View style={{flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start'}}>
-        <TouchableOpacity onPress={()=>{setChecked({...checked,bankSakhi:!checked.bankSakhi});}} style={styles.checkItem}> 
-          {checked.bankSakhi?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Bank Sakhi</Text>
-        </TouchableOpacity> 
-
-                <TouchableOpacity onPress={()=>{setChecked({...checked,shg:!checked.shg});}} style={styles.checkItem}> 
-          {checked.shg?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Self Help Group</Text>
-        </TouchableOpacity> 
-
-                <TouchableOpacity onPress={()=>{setChecked({...checked,csc:!checked.csc});}} style={styles.checkItem}> 
-          {checked.csc?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> CSC</Text>
-        </TouchableOpacity> 
-
-        </View>
-        <View style={{flexDirection:'column', alignItems:'flex-start'}}>
-                <TouchableOpacity onPress={()=>{setChecked({...checked,vittaSakhi:!checked.vittaSakhi});}} style={styles.checkItem}> 
-          {checked.vittaSakhi?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Vitta Sakhi</Text>
-        </TouchableOpacity> 
-
-                <TouchableOpacity onPress={()=>{setChecked({...checked,Adathiya:!checked.Adathiya});}} style={styles.checkItem}> 
-          {checked.Adathiya?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Adathiya</Text>
-        </TouchableOpacity> 
-
-       </View>
-     
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Select Designation <Text style={{color:'#FF0000'}}>*</Text></Text>
+            <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              onValueChange={setDesignation}
+              value={designation}
+              placeholder={{ label: 'Select Designation', value: null }}
+              items={designationOptions}
+              useNativeAndroidPickerStyle={false}
+              style={{
+                inputAndroid: styles.pickerInput,
+                inputIOS: styles.pickerInput,
+                placeholder: { color: '#C0C0C0' },
+              }}
+              Icon={() => (
+              <Icon name="chevron-down" size={20} color="#C0C0C0" style={styles.pickerIcon} />
+              )}
+            />
+          </View>
         </View>
 
+        {/* Adhaar Card */}
         <View style={styles.inputGroup}>
          <Text style={styles.label}>Enter Adhaar Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
@@ -214,69 +213,38 @@ const genderOptions = [
               style={styles.input}
               placeholder="Enter 12 digits of your Adhaar Card"
               placeholderTextColor="#C0C0C0"
-              value={fatherName}
-              onChangeText={setFatherName}
+              value={aadharCard}
+              onChangeText={setAadharCard}
+              maxLength={12}
+              keyboardType="numeric"
             />
           </View>
         </View>
 
-        {/* Father's Name */}
+        {/* PAN Card Number */}
         <View style={styles.inputGroup}>
-        <Text style={styles.label}>Enter PAN Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
+          <Text style={styles.label}>Enter PAN Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
-            <CardIcon height={20} width={20}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter 10-character alphanumeric code "
-              placeholderTextColor="#C0C0C0"
-              value={fatherName}
-              onChangeText={setFatherName}
-            />
-          </View>
-        </View>
-     </View>
-
-        {/* Bank Name */}
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Partner Bank</Text>
-          <View style={styles.inputBox}>
-            <BankIcon height={20} width={20}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter Your Bank Name"
-              placeholderTextColor="#C0C0C0"
-              value={partnerBank}
-              onChangeText={setPartnerBank}
-            />
+          <CardIcon height={20} width={20}/>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter 10-character PAN number"
+            placeholderTextColor="#C0C0C0"
+            value={panCard}
+            onChangeText={setPanCard}
+            maxLength={10}
+            autoCapitalize="characters"
+          />
           </View>
         </View>
 
-        {/* Branch Code */}
-        <View style={styles.inputGroup}>
-        <Text style={styles.label}>Enter PAN Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
-          <View style={styles.inputBox}>
-            <CardIcon height={20} width={20}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter 10-character alphanumeric code "
-              placeholderTextColor="#C0C0C0"
-              value={branchCode}
-              onChangeText={setBranchCode}
-            />
-          </View>
-        </View>
-        {errorMessage ? (
-          <Text style={styles.errorText}>{errorMessage}</Text>
-        ) : null}
-     </View>
+        {/* Continue Button */}
+        <TouchableOpacity style={styles.continueButton} onPress={handleRegisterAgent}>
+          <Text style={styles.continueButtonText}>Continue</Text>
+        </TouchableOpacity>
 
-      {/* Continue Button */}
-      <TouchableOpacity style={styles.continueButton} onPress={handleRegisterAgent}>
-        <Text style={styles.continueButtonText}>Continue</Text>
-      </TouchableOpacity>
-
-      {/* Log In Footer */}
-      <Text style={styles.footerText}>
+        {/* Log In Footer */}
+        <Text style={styles.footerText}>
         Already have an account?{' '}
         <Text
           style={styles.loginLink}
@@ -284,7 +252,8 @@ const genderOptions = [
         >
           Log in
         </Text>
-      </Text>
+        </Text>
+      </View>
     </View>
     </ScrollView>
   );
@@ -404,13 +373,12 @@ checkItem:{
   justifyContent:'center',
   paddingTop:8,
   gap:8,
-}
-  errorText: {
+},
+errorText: {
   color: 'red',
   fontSize: 12,
   marginTop: 4,
 },
-}
-);
+});
 
 export default AgentSignUp1;

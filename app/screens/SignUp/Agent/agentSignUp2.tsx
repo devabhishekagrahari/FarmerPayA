@@ -74,6 +74,7 @@ const AgentSignUp2 = ({ navigation, route }: any) => {
         city_or_district: city,
         pincode,
         state,
+        same_as_permanent: checked,
       });
 
     }catch(error:any){

@@ -16,7 +16,7 @@ import {
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import BankIcon from '../../../assets/images/BankIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
-import UserIcon from '../../../assets/images/agentSignUp/UserIcon.svg';
+//import UserIcon from '../../../assets/images/agentSignUp/UserIcon.svg';
 import Upload from '../../../assets/images/Button.svg'; 
 import { useRoute } from '@react-navigation/native';
 
@@ -60,7 +60,7 @@ const AgentSignUp4 = ({ navigation }: any) => {
             <View style={styles.formGroup}>
               <Text style={styles.label}>Account-holder Name</Text>
               <View style={styles.inputBox}>
-                <UserIcon height={20} width={20} color={'#A0A0A0'} />
+                {/*<UserIcon height={20} width={20} color={'#A0A0A0'} />*/}
                 <TextInput
                   placeholder="Enter your Account Holder Name"
                   style={styles.input}
