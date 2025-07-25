@@ -1,6 +1,8 @@
 import React from "react";
 import { Dimensions, Text, TouchableOpacity, View } from "react-native";
 import BankApprovalIcon from "../../../assets/images/agentSignUp/BankApproval.svg"
+import { Image } from "react-native";
+
 const{width , height} = Dimensions.get('window');
 const BankApproval=({navigation}:any)=>{
     return (

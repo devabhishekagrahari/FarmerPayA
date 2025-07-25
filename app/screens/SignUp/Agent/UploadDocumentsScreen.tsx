@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { pick, types } from '@react-native-documents/picker';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
-import ThreeDot from '../../../assets/images/agentSignUp/ThreeDot.svg';
+import DeleteIcon from '../../../assets/images/agentSignUp/DeleteIcon.svg';
 import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
 import Upload from '../../../assets/images/Button.svg';
 import * as Progress from 'react-native-progress';
@@ -141,7 +141,6 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
          {!file1 &&(<View>
         <TouchableOpacity style={styles.uploadBox} onPress={pickAndSimulateUpload1}>
           <Upload width={130} height={100} />
-          <Text style={styles.orDropText}>or Drop Files</Text>
         </TouchableOpacity></View>) }
 
         {isUploading1 && (
@@ -172,10 +171,10 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
                 <RefreshIcon height={20}/>      
                 </TouchableOpacity>     
                 <TouchableOpacity onPress={() => setFile1(null)} style={styles.crossIcon}>
-                  <Text style={{ fontSize: 12, color:'red' }}>X</Text>
+                  <DeleteIcon/>
                 </TouchableOpacity>
                
-                <ThreeDot height={15}/>
+
                 </View>
               </View>
               <Text style={styles.sizeText}>Size - {(file1.size / (1024 * 1024)).toFixed(2)}MB</Text>
@@ -198,7 +197,7 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
         {!file2 &&(<View>
         <TouchableOpacity style={styles.uploadBox} onPress={pickAndSimulateUpload2}>
           <Upload width={130} height={100} />
-          <Text style={styles.orDropText}>or Drop Files</Text>
+
         </TouchableOpacity></View>)}
 
         {isUploading2 && (
@@ -227,10 +226,10 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
                 <TouchableOpacity onPress={pickAndSimulateUpload2}>
                 <RefreshIcon height={20}/> </TouchableOpacity>         
                 <TouchableOpacity onPress={() => setFile2(null)} style={styles.crossIcon}>
-                  <Text style={{ fontSize: 12, color:'red' }}>X</Text>
+                 <DeleteIcon/>
                 </TouchableOpacity>
                 
-                <ThreeDot height={15}/>
+             
                 </View>
               </View>
               <Text style={styles.sizeText}>Size - {(file2.size / (1024 * 1024)).toFixed(2)}MB</Text>
@@ -259,7 +258,6 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
 
 export default UploadDocumentsScreen;
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -273,12 +271,9 @@ const styles = StyleSheet.create({
   backButton: {
     width: 40,
     height: 40,
-
-
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-
   },
   title: {
     fontSize: 20,
@@ -328,7 +323,7 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
     borderColor: '#E4E4E4',
     borderRadius: 4,
-    padding: 16,
+    padding: 8,
     marginBottom: 16,
     backgroundColor: '#FFFFFF',
   },
