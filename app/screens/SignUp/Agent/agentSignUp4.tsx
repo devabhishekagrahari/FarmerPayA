@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   label0: {
-    marginHorizontal: 32,
+    marginHorizontal: 24,
     color: '#797979',
     paddingTop: 40,
     fontSize: 14,
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 10,
     marginLeft: 8,
     color: '#000',
   },
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 uploadBox: {
-  marginTop: 32,
+  marginTop: 16,
   borderWidth: 1,
   borderColor: '#DDD',
   borderStyle: 'dashed',
@@ -252,7 +252,7 @@ uploadContent: {
   // paddingHorizontal: 10,
 },
   orDropText: {
-  fontSize: 16,
+  fontSize: 12,
   color: '#888',
   marginLeft: 0, // fallback spacing if no `gap`
 },

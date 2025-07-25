@@ -1,34 +1,257 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import BackArrow from '../../../assets/images/back-arrow.svg';
-import Upload from '../../../assets/images/Button.svg'; 
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Dimensions,
+  Animated,
+} from 'react-native';
+import { pick, types } from '@react-native-documents/picker';
+import ArrowBack from '../../../assets/images/ArrowBack.svg';
+import ThreeDot from '../../../assets/images/agentSignUp/ThreeDot.svg';
+import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
+import Upload from '../../../assets/images/Button.svg';
+import * as Progress from 'react-native-progress';
 
-const { width } = Dimensions.get('window');
+const { width,height } = Dimensions.get('window');
 
 const UploadDocumentsScreen = ({ navigation }: any) => {
+  const [file1, setFile1] = useState<any>(null);
+  const [file2, setFile2] = useState<any>(null);
+
+  const [progress1, setProgress1] = useState(0);
+  const [uploadSpeed1, setUploadSpeed1] = useState('');
+  const [isUploading1, setIsUploading1] = useState(false);
+
+  const [progress2, setProgress2] = useState(0);
+  const [uploadSpeed2, setUploadSpeed2] = useState('');
+  const [isUploading2, setIsUploading2] = useState(false);
+
+  const simulateUpload = (
+    fileSize: number,
+    setProgressFn: (val: number) => void,
+    setSpeedFn: (val: string) => void,
+    setUploadingFn: (val: boolean) => void
+  ) => {
+    setUploadingFn(true);
+    setProgressFn(0);
+    setSpeedFn('');
+    const start = Date.now();
+    let uploaded = 0;
+    const chunk = 50 * 1024;
+
+    const timer = setInterval(() => {
+      if (uploaded >= fileSize) {
+        clearInterval(timer);
+        setProgressFn(1);
+        setSpeedFn('Upload complete!');
+        setUploadingFn(false);
+        return;
+      }
+      uploaded += chunk;
+      const pct = uploaded / fileSize;
+      setProgressFn(pct > 1 ? 1 : pct);
+
+      const elapsed = (Date.now() - start) / 1000;
+      const speed = ((uploaded / 1024) / elapsed).toFixed(2);
+      setSpeedFn(`${speed} KB/s`);
+    }, 500);
+  };
+
+  const pickAndSimulateUpload1 = async () => {
+    try {
+      const [res] = await pick({ type: [types.allFiles] });
+      setFile1(res);
+      simulateUpload(res.size ?? 100 * 1024, setProgress1, setUploadSpeed1, setIsUploading1);
+    } catch (err: any) {
+      if (err.name !== 'Cancel') {
+        console.warn('Picker error:', err);
+      }
+    }
+  };
+
+  const pickAndSimulateUpload2 = async () => {
+    try {
+      const [res] = await pick({ type: [types.allFiles] });
+      setFile2(res);
+      simulateUpload(res.size ?? 100 * 1024, setProgress2, setUploadSpeed2, setIsUploading2);
+    } catch (err: any) {
+      if (err.name !== 'Cancel') {
+        console.warn('Picker error:', err);
+      }
+    }
+  };
+
+  const screenWidth = Dimensions.get('window').width;
+  const translateX1 = useRef(new Animated.Value(-screenWidth)).current;
+ const translateX2 = useRef(new Animated.Value(-screenWidth)).current;
+
+  useEffect(() => {
+    if (file1 && !isUploading1) {
+      translateX1.setValue(-screenWidth); // reset before animating
+      Animated.timing(translateX1, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [file1, isUploading1]);
+
+  useEffect(() => {
+    if (file2 && !isUploading2) {
+      translateX2.setValue(-screenWidth); // reset before animating
+      Animated.timing(translateX2, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [file2, isUploading2]);
+
   return (
+
     <View style={styles.container}>
-      {/* Back Button */}
-      <TouchableOpacity  onPress={() => navigation.goBack()} style={{ marginBottom: 40 }}>
-        <BackArrow color="#54219D" />
-      </TouchableOpacity>
+      {/* Top bar */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+          <ArrowBack />
+        </TouchableOpacity>
+        <Text style={styles.title}>
+          Upload your documents <Text style={{ color: 'red' }}>*</Text>
+        </Text>
+        <Text style={styles.info}>Accept JPG/PDF ≤ 5 MB</Text>
+      </View>
 
-      {/* Title */}
-      <Text style={styles.title}>Upload your documents</Text>
-      <Text style={styles.subtitle}>Working ID proof (Govt ID, employer card, etc.)</Text>
-      <Text style={styles.info}>Accept JPG/PDF ≤ 5 MB</Text>
+      <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom:100}}>
 
-      {/* Upload Box */}
-      <TouchableOpacity style={styles.uploadBox}>
-        <View style={styles.uploadContent}>
-          <Upload width={100} height={50} />
+
+
+        <View style={{height:height*0.35 ,backgroundColor:'#fff', elevation:2 }}>
+        {/* Upload 1 */}
+       
+        <Text style={styles.label}>Working ID proof (Govt ID, employer card, etc.)</Text>
+        {file1 && 
+        <View style={styles.pillBox}>
+        <View style={styles.pill}>
+          <Text style={styles.pillText}>Uploaded documents</Text>
+        </View></View>}
+         {!file1 &&(<View>
+        <TouchableOpacity style={styles.uploadBox} onPress={pickAndSimulateUpload1}>
+          <Upload width={130} height={100} />
           <Text style={styles.orDropText}>or Drop Files</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity></View>) }
 
-      {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton} onPress={() => navigation.navigate('AgentSignUp4')}>
-        <Text style={styles.saveText} >Save</Text>
+        {isUploading1 && (
+          <View style={styles.progressContainer}>
+            <Progress.Bar
+              progress={progress1}
+              width={width * 0.8}
+              height={10}
+              color="green"
+              borderRadius={5}
+              borderWidth={0}
+              unfilledColor="#e0e0e0"
+            />
+            <Text style={styles.speedText}>{uploadSpeed1}</Text>
+          </View>
+        )}
+
+        {file1 && !isUploading1 && (
+          <Animated.View style={{ transform: [{ translateX:translateX1 }] }}> 
+          <View style={[styles.fileCard]}>
+            
+            <Image source={{ uri: file1.uri }} style={styles.preview} resizeMode="cover" />
+            <View style={{ flex: 1, backgroundColor:'#fff',marginLeft: 12 }}>
+              <View style={{flexDirection:'row' ,alignItems:'center',justifyContent:'space-between'}}>
+                <Text style={styles.fileName}>Government ID card</Text>  
+                <View style={{flexDirection:'row', alignItems:'center',gap:4}}>
+                 <TouchableOpacity onPress={pickAndSimulateUpload1}>
+                <RefreshIcon height={20}/>      
+                </TouchableOpacity>     
+                <TouchableOpacity onPress={() => setFile1(null)} style={styles.crossIcon}>
+                  <Text style={{ fontSize: 12, color:'red' }}>X</Text>
+                </TouchableOpacity>
+               
+                <ThreeDot height={15}/>
+                </View>
+              </View>
+              <Text style={styles.sizeText}>Size - {(file1.size / (1024 * 1024)).toFixed(2)}MB</Text>
+              <Text style={styles.successText}>Successful</Text>
+            </View>
+            
+
+          </View>
+          </Animated.View> 
+        )}</View>
+
+        {/* Upload 2 */}
+         <View style={{height:height*0.35 ,backgroundColor:'#fff', elevation:2 }}>
+      
+        <Text style={styles.label}>Employee ID proof</Text> 
+        {file2 && <View style={styles.pillBox}>
+        <View style={styles.pill}>
+          <Text style={styles.pillText}>Uploaded documents</Text>
+        </View></View>} 
+        {!file2 &&(<View>
+        <TouchableOpacity style={styles.uploadBox} onPress={pickAndSimulateUpload2}>
+          <Upload width={130} height={100} />
+          <Text style={styles.orDropText}>or Drop Files</Text>
+        </TouchableOpacity></View>)}
+
+        {isUploading2 && (
+          <View style={styles.progressContainer}>
+            <Progress.Bar
+              progress={progress2}
+              width={width * 0.8}
+              height={10}
+              color="green"
+              borderRadius={5}
+              borderWidth={0}
+              unfilledColor="#e0e0e0"
+            />
+            <Text style={styles.speedText}>{uploadSpeed2}</Text>
+          </View>
+        )}
+
+        {file2 && !isUploading2 && (
+          <Animated.View style={{ transform: [{ translateX:translateX2 }] }}> 
+          <View style={styles.fileCard}>
+            <Image source={{ uri: file2.uri }} style={styles.preview} resizeMode="cover" />
+            <View style={{ flex: 1, backgroundColor:'#fff',marginLeft: 12 }}>
+              <View style={{flexDirection:'row' ,alignItems:'center',justifyContent:'space-between'}}>
+                <Text style={styles.fileName}>Employee ID card</Text>  
+                <View style={{flexDirection:'row', alignItems:'center',gap:4}}>
+                <TouchableOpacity onPress={pickAndSimulateUpload2}>
+                <RefreshIcon height={20}/> </TouchableOpacity>         
+                <TouchableOpacity onPress={() => setFile2(null)} style={styles.crossIcon}>
+                  <Text style={{ fontSize: 12, color:'red' }}>X</Text>
+                </TouchableOpacity>
+                
+                <ThreeDot height={15}/>
+                </View>
+              </View>
+              <Text style={styles.sizeText}>Size - {(file2.size / (1024 * 1024)).toFixed(2)}MB</Text>
+              <Text style={styles.successText}>Successful</Text>
+            </View>
+          </View>
+          </Animated.View>
+        )}
+
+       </View>
+      </ScrollView>
+
+      {/* Save button */}
+      <TouchableOpacity
+        style={styles.saveButton}
+        onPress={() => navigation.navigate('AgentSignUp4')}
+        disabled={isUploading1 || isUploading2}
+      >
+        <Text style={styles.saveText}>
+          {(isUploading1 || isUploading2) ? 'Uploading...' : 'Save'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -36,81 +259,133 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
 
 export default UploadDocumentsScreen;
 
+
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingTop: 40,
     flex: 1,
-    backgroundColor:'#fff'
- 
+    backgroundColor: '#FDFDFD',
+    paddingHorizontal: 16,
+    paddingTop: 40,
   },
-
- backButton: {
-  position: 'absolute',
-  top: 48,
-  left: 24,
-  width: 40,
-  height: 40,
-  borderRadius: 20,
-  borderWidth: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
-  zIndex: 10,
-},
-
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#5B2C6F',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#555',
-    marginTop: 8,
-  },
-  info: {
-    fontSize: 12,
-    color: '#999',
-    marginTop: 4,
-  },
-  uploadBox: {
-  marginTop: 32,
-  borderWidth: 1,
-  borderColor: '#DDD',
-  borderStyle: 'dashed',
-  borderRadius: 8,
-  padding: 20,
-  //backgroundColor: '#F9F9F9',
-  alignItems: 'flex-start',
-},
-uploadContent: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: 12, // if your React Native version supports it
-  // Or use marginLeft below if gap not supported:
-  // paddingHorizontal: 10,
-},
-
-  uploadIcon: {
+  header: {
     marginBottom: 16,
   },
-  
-  orDropText: {
-  fontSize: 16,
-  color: '#888',
-  marginLeft: 0, // fallback spacing if no `gap`
-},
-  saveButton: {
-    height: 60,
-    marginTop: 'auto',
-    backgroundColor: '#54219D',
-    borderRadius: 48,
-    paddingVertical: 16,
+  backButton: {
+    width: 40,
+    height: 40,
+
+
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',  
-    width: '100%',
     marginBottom: 20,
+
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#3F1976',
+  },
+  info: {
+    fontSize: 10,
+    color: '#4B5768',
+    marginTop: 4,
+  },
+  pillBox:{    
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'center',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: '#54219D',
+    borderRadius: 4,
+    marginBottom: 16,
+    backgroundColor:'#FFFFFF'},
+  pill: {
+    alignSelf: 'center',
+    borderWidth: 1,
+    backgroundColor:'#54219D',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    marginVertical: 16,
+  },
+  pillText: {
+    fontSize: 12,
+    color: '#fff',
+    fontWeight: '600',
+  },
+  label: {
+    fontSize: 12,
+    color: '#656F77',
+    marginBottom: 8,
+    marginTop: 12,
+  },
+  uploadBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'center',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: '#E4E4E4',
+    borderRadius: 4,
+    padding: 16,
+    marginBottom: 16,
+    backgroundColor: '#FFFFFF',
+  },
+  orDropText: {
+    marginLeft: 12,
+    fontSize: 14,
+    color: '#656F77',
+  },
+  progressContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  speedText: {
+    fontSize: 12,
+    marginTop: 6,
+  },
+  fileCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+  },
+  preview: {
+    width: 60,
+    height: 60,
+    borderRadius: 6,
+    backgroundColor: '#eee',
+  },
+  fileName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#000',
+  },
+  sizeText: {
+    fontSize: 12,
+    color: '#656F77',
+  },
+  successText: {
+    fontSize: 12,
+    color: 'green',
+    fontWeight: '600',
+    marginTop: 4,
+  },
+  crossIcon: {
+    padding: 4,
+  },
+  saveButton: {
+    position: 'absolute',
+    bottom: 32,
+    left: 16,
+    right: 16,
+    height: 60,
+    backgroundColor: '#6929C4',
+    borderRadius: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   saveText: {
     color: '#fff',
