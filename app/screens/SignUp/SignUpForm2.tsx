@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   Pressable,
   Image,
-  Alert,
+  //Alert,
 } from 'react-native';
 import VillageIcon from '../../assets/images/VillageIcon.svg';
 import StateIcon from '../../assets/images/StateIcon.svg';
@@ -33,7 +33,7 @@ const SignUpFormScreen2 = ({ navigation, route }: any) => {
   const [state, setState] = useState('');
   const [pincode, setPincode] = useState('');
 
-  const [errorSelect, setError]= useState('');
+  const [error, setError]= useState('');
 
   const handleSubmitAddress = async () => {
     if (!houseNo || !village || !city || !state) {
@@ -59,7 +59,7 @@ const SignUpFormScreen2 = ({ navigation, route }: any) => {
       console.log('Posting to:', `${BASE_URL}/farmer/add-address`);
 
 
-      Alert.alert('Success', response.data.message);
+      //Alert.alert('Success', response.data.message);
       navigation.navigate('primaryRole',{user_id});
     } catch (error: any) {
       console.error('Address Error: ', error);
@@ -72,7 +72,7 @@ const SignUpFormScreen2 = ({ navigation, route }: any) => {
       } else {
         console.error('Request setup error:', error.message);
       }
-      Alert.alert('Error', error.response?.data?.message || 'Something went wrong');
+      error('Error', error.response?.data?.message || 'Something went wrong');
     }
   };
 
@@ -82,14 +82,16 @@ const SignUpFormScreen2 = ({ navigation, route }: any) => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={60}
     >
-        <Pressable onPress={()=>{navigation.goBack()}} style={{marginHorizontal:24}}>
-         <ArrowBack/>
-        </Pressable>
+      <Pressable onPress={()=>{navigation.goBack()}} style={{marginHorizontal:24}}>
+        <ArrowBack/>
+      </Pressable>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
           keyboardShouldPersistTaps="handled"
         >
+           {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
           <View style={styles.container}>
           
             <View style={styles.formGroup}>
@@ -137,12 +139,18 @@ const SignUpFormScreen2 = ({ navigation, route }: any) => {
 
 
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter PINCODE</Text>
+              <Text style={styles.label}>Enter Pincode</Text>
               <View style={styles.inputBox}>
               <GpsIcon height={25} width={25} fill='#A0A0A0'/> 
               <TextInput
                 value={pincode}
-                onChangeText={setPincode}
+                onChangeText={text => {
+                  const cleaned = text.replace(/[^0-9]/g, '');
+                  if (cleaned.length <= 6) {
+                  setPincode(cleaned);
+                }}}
+                keyboardType="number-pad"
+                maxLength={6}
                 placeholder="Turn on gps to drop precise pin"
                 style={styles.input}
                 placeholderTextColor="#C0C0C0"
@@ -240,6 +248,12 @@ const styles = StyleSheet.create({
   loginLink: {
     color: '#79BBA8',
     fontWeight: '500',
+  },
+  errorText: {
+    fontSize: 14,
+    color: '#D00416',
+    marginBottom: 8,
+    textAlign: 'left',
   },
 });
 

@@ -27,6 +27,11 @@ import AgentSignUp3 from './app/screens/SignUp/Agent/agentSignUp3';
 import UploadDocumentsScreen from './app/screens/SignUp/Agent/UploadDocumentsScreen';
 import AgentSignUp4 from './app/screens/SignUp/Agent/agentSignUp4.tsx';
 import BankApproval from './app/screens/SignUp/Agent/bankApproval.tsx';
+import CropPlantSelection from './app/screens/SignUp/Farmer/cropPlantSelection';
+import HorticulturePlantSelection from './app/screens/SignUp/Farmer/HorticulturePlantSelection';
+import SpicePlantSelection from './app/screens/SignUp/Farmer/SpicePLantSelection';
+import FruitPlantSelection from './app/screens/SignUp/Farmer/FruitPlantSelection';
+import VegetableSelectionScreen from './app/screens/SignUp/Farmer/VegetablePlantSelection.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +60,11 @@ const App = () => {
         <Stack.Screen name="AgentSignUp4" component={AgentSignUp4}/>
         <Stack.Screen name="BankApproval" component={BankApproval}/>
         <Stack.Screen name="UploadDocumentsScreen" component={UploadDocumentsScreen}/>
+        <Stack.Screen name="CropPlantSelection" component={CropPlantSelection} />
+        <Stack.Screen name="HorticulturePlantSelection" component={HorticulturePlantSelection} />
+        <Stack.Screen name="SpicePlantSelection" component={SpicePlantSelection} />
+        <Stack.Screen name="FruitPlantSelection" component={FruitPlantSelection} />
+        <Stack.Screen name="VegetablePlantSelection" component={VegetableSelectionScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

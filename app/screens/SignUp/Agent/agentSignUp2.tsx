@@ -197,15 +197,16 @@ const AgentSignUp2 = ({ navigation, route }: any) => {
           </Pressable>
            <View style={{gap:16}}>
             <TouchableOpacity style={styles.button} onPress={handleRegisterAgent}>
-              <Text style={styles.buttonText}>Sign Up</Text>
+              <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
-
+            {/*
             <Text style={styles.footerText}>
               Already have an account?{' '}
               <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
                 Log in
               </Text>
-            </Text></View>
+            </Text>*/}
+            </View>
            </View>
 
 

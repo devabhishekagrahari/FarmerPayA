@@ -155,13 +155,14 @@ const AgentSignUp4 = ({ navigation }: any) => {
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
-
+              {/*
               <Text style={styles.footerText}>
                 Already have an account?{' '}
                 <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
                   Log in
                 </Text>
               </Text>
+              */}
             </View>
           </View>
         </ScrollView>

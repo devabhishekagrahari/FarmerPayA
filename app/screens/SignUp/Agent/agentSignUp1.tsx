@@ -23,7 +23,6 @@ const { width, height } = Dimensions.get('window');
 const AgentSignUp1 = ({ navigation , route}: any) => {
 
   const { user_id, mobile } = route.params;
-
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [aadharCard, setAadharCard] = useState('');
@@ -76,6 +75,12 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
         email: "" // optional if you don’t collect it now
     });
       console.log('Agent Registered: ', response.data);
+      try {
+        const patchRes = await axios.patch(`${BASE_URL}/user/update-isRegistered/${user_id}`);
+        console.log('Status updated to REGISTERED:', patchRes.data);
+      } catch (patchError) {
+        console.error('Failed to update user status:', patchError);
+      }
       navigation.navigate('AgentSignUp2', { user_id, mobile });
 
     }catch(error:any){
@@ -183,26 +188,37 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
         </View>
 
         {/* Designation Options */}
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Select Designation <Text style={{color:'#FF0000'}}>*</Text></Text>
-            <View style={styles.pickerContainer}>
-            <RNPickerSelect
-              onValueChange={setDesignation}
-              value={designation}
-              placeholder={{ label: 'Select Designation', value: null }}
-              items={designationOptions}
-              useNativeAndroidPickerStyle={false}
-              style={{
-                inputAndroid: styles.pickerInput,
-                inputIOS: styles.pickerInput,
-                placeholder: { color: '#C0C0C0' },
-              }}
-              Icon={() => (
-              <Icon name="chevron-down" size={20} color="#C0C0C0" style={styles.pickerIcon} />
-              )}
-            />
-          </View>
-        </View>
+        <View style={{ gap: 8, flexDirection: 'row', justifyContent: 'space-between' }}>
+  <View style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+    <TouchableOpacity onPress={() => setDesignation('Bank Sakhi')} style={styles.checkItem}>
+      {designation === 'Bank Sakhi' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>Bank Sakhi</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => setDesignation('SHG')} style={styles.checkItem}>
+      {designation === 'SHG' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>Self Help Group</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => setDesignation('CSC')} style={styles.checkItem}>
+      {designation === 'CSC' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>CSC</Text>
+    </TouchableOpacity>
+  </View>
+
+  <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+    <TouchableOpacity onPress={() => setDesignation('Vitta Sakhi')} style={styles.checkItem}>
+      {designation === 'Vitta Sakhi' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>Vitta Sakhi</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => setDesignation('Adathiya')} style={styles.checkItem}>
+      {designation === 'Adathiya' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>Adathiya</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+
 
         {/* Adhaar Card */}
         <View style={styles.inputGroup}>

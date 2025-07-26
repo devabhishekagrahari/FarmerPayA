@@ -33,7 +33,7 @@ export default function PrimaryRoleScreen({ navigation,route }: any) {
   const { user_id } = route.params;
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [errorSelect, setError]= useState('');
+  const [error, setError]= useState('');
   const renderItem = ({ item }: { item: Role }) => {
     const isSelected = selectedId === item.id;
     return (
@@ -58,6 +58,7 @@ export default function PrimaryRoleScreen({ navigation,route }: any) {
     const selectedRole = roles.find((role) => role.id === selectedId);
     if (!selectedRole){
       console.error('Please select an activity');
+      setError('Please select an activity');
       return;
     }
     setError('');
@@ -100,7 +101,8 @@ export default function PrimaryRoleScreen({ navigation,route }: any) {
 
       <Text style={styles.title}>Who are you?</Text>
       <Text style={styles.subtitle}>Let us know about your primary role</Text>
-
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      
       <FlatList
         data={roles}
         renderItem={renderItem}
@@ -245,5 +247,11 @@ const styles = StyleSheet.create({
   nextText: { 
     color: '#fff', 
     fontWeight: 'bold' 
+  },
+  errorText: {
+    fontSize: 14,
+    color: '#D00416',
+    marginBottom: 8,
+    textAlign: 'left',
   },
 });

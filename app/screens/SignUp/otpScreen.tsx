@@ -33,6 +33,7 @@ const OtpVerification = ({
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(30);
   const [error, setError] = useState('');
+  const [noerror, setnoError] = useState('');
   const [infoMessage, setInfoMessage] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -94,33 +95,52 @@ const handleVerify = async () => {
       otp: enteredOtp,
     });
 
-    const { isRegistered, message, user_id } = response.data;
+    const {user_id } = response.data;
 
-    setError(''); // Clear any previous errors
+    console.log(' OTP Verified. user_id:', user_id);
+
+    setError(''); 
     setInfoMessage('');
     console.log('mobile:', mobile);
-console.log('enteredOtp:', enteredOtp);
+    console.log('enteredOtp:', enteredOtp);
 
-    if (isRegistered) {
-      // Registered user, proceed accordingly
-      navigation.navigate('Main', { mobile, user_id });
-    } else {
-      // Not registered, take to onboarding flow
-      setError('OTP verified. Let’s continue...');
-      setTimeout(() => {
-        setError('');
-        navigation.navigate('WhoAreU', { mobile, user_id });
-      }, 1000);
+    try {
+      const userRes = await axios.get(`${BASE_URL}/user/${user_id}`);
+
+      console.log('📦 Full userRes.data from GET /user/:id →', userRes.data);
+
+      console.log('✅ JSON stringified:', JSON.stringify(userRes.data));
+
+      const user = Array.isArray(userRes.data) ? userRes.data[0] : null;
+      const isRegistered = user?.is_registered === 1;
+
+      console.log('🧾 is_registered:', user?.is_registered);
+
+      if (isRegistered) {
+
+        console.log('🚀 Navigating to Main screen...');
+        setnoError('');
+        navigation.navigate('Main', { mobile, user_id });
+      } else {
+        console.log('📝 User not registered yet. Navigating to WhoAreU...');
+        setnoError('OTP verified. Let’s continue...');
+        setTimeout(() => {
+          setnoError('');
+          navigation.navigate('WhoAreU', { mobile, user_id });
+        }, 1000);
+      }
+    } catch (statusErr) {
+      console.error('Error checking user status:', statusErr);
+      setError('Failed to fetch user status. Try again.');
     }
-  } catch (err) {
+  }catch (err) {
     if (axios.isAxiosError(err)) {
       console.error('OTP error:', err.response?.data);
       setError(err.response?.data?.message || 'OTP verification failed.');
     } else {
-      console.error('Unknown error:', err);
+      console.error('❌ Unknown error:', err);
       setError('Something went wrong.');
     }
-     setInfoMessage('');
   }
 };
 
@@ -182,6 +202,12 @@ console.log('enteredOtp:', enteredOtp);
 
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
+      {noerror === 'OTP verified. Let’s continue...' ? (
+        <Text style={styles.successText}>{noerror}</Text>
+      ) : noerror ? (
+        <Text style={styles.errorText}>{noerror}</Text>
+      ) : null}
+
       {timer > 0 ? (
         <Text style={styles.resendText}>
           If you did not receive the OTP,{' '}
@@ -193,7 +219,7 @@ console.log('enteredOtp:', enteredOtp);
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
+      <TouchableOpacity style={styles.verifyButton} onPress={ handleVerify}>
         <Text style={styles.verifyText}>Verify</Text>
       </TouchableOpacity>
     </View>
@@ -253,6 +279,11 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 14,
     color: '#D00416',
+    marginBottom: 8,
+  },
+  successText: {
+    fontSize: 14,
+    color: '#4CAF50',
     marginBottom: 8,
   },
   verifyButton: {

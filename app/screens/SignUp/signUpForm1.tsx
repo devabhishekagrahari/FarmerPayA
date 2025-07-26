@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   Pressable,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowBack from '../../assets/images/ArrowBack.svg';
@@ -14,7 +15,7 @@ import HomeIcon from '../../assets/images/HomeIcon.svg';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/api';
-import { Alert } from 'react-native';
+//import { Alert } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 const SignUpFormScreen1 = ({ navigation, route }: any) => {
@@ -23,7 +24,8 @@ const SignUpFormScreen1 = ({ navigation, route }: any) => {
 
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
-                  {/* Gender Drop Down */}
+  const [error, setError] = useState('');
+  {/* Gender Drop Down */}
   const genderOptions = [
     { label: 'Male', value: 'male' },
     { label: 'Female', value: 'female' },
@@ -35,15 +37,14 @@ const SignUpFormScreen1 = ({ navigation, route }: any) => {
     { label: '55+', value: '55+' },
   ];
 
-  // Replace fatherName with gender in your state:
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
 
 const handleRegisterFarmer = async () => {
   try {
-    // Optional: Validate fields before sending
     if (!fullName || !gender || !age || !contact) {
-      Alert.alert('Please fill all fields.');
+      setError('');
+      setError('Please fill all fields.');
       return;
     }
 
@@ -52,33 +53,41 @@ const handleRegisterFarmer = async () => {
       full_name: fullName,
       gender,
       age,
-      mobile_number: contact, // must match backend naming
-      email: '' // if you have email input, use it here
+      mobile_number: contact, 
+      email: '' 
     });
 
     if (response.status === 201) {
-      Alert.alert('Farmer registered successfully');
-      navigation.navigate('SignUpForm2',{
-        user_id }
-      );
+      console.log('Farmer registered successfully');
+
+      try {
+        const patchRes = await axios.patch(`${BASE_URL}/user/update-isRegistered/${user_id}`);
+        console.log('Status updated to REGISTERED:', patchRes.data);
+      } catch (patchError) {
+        console.error('Failed to update user status:', patchError);
+      }
+
+      navigation.navigate('SignUpForm2',{user_id });
     }
   } catch (error) {
     const err = error as any;
     console.error('Registration Error:', err?.response?.data || err?.message);
-    Alert.alert(err?.response?.data?.message || 'Something went wrong');
+    setError('');
+    setError(err?.response?.data?.message || 'Something went wrong');
   }
 };
 
-
   return (
+    <ScrollView>
     <View style={styles.container}>
-              <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
-               <ArrowBack/>
-              </Pressable>
+      <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
+        <ArrowBack/>
+      </Pressable>
       <View style={styles.headerContainer}>
         <Text style={styles.heading}>Hello! Farmer</Text>
         <Text style={styles.subheading}>Create your account to continue</Text>
       </View>
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       <View style={styles.formContainer}>
 
@@ -113,63 +122,61 @@ const handleRegisterFarmer = async () => {
           </View>
         </View> 
 
-
-
-<View style={styles.inputGroup}>
-  <Text style={styles.label}>Select Gender</Text>
-  <View style={styles.pickerContainer}>
-    <RNPickerSelect
-      onValueChange={setGender}
-      value={gender}
-      placeholder={{ label: 'Select your Gender', value: null }}
-      items={genderOptions}
-      useNativeAndroidPickerStyle={false}
-      style={{
-        inputAndroid: styles.pickerInput,
-        inputIOS: styles.pickerInput,
-        placeholder: {
-          color: '#C0C0C0',
-        },
-      }}
-      Icon={() => (
-        <Icon
-          name="chevron-down"
-          size={20}
-          color="#C0C0C0"
-          style={styles.pickerIcon}
-        />
-      )}
-    />
-  </View>
-</View>
-<View style={styles.inputGroup}>
-  <Text style={styles.label}>Select Age</Text>
-  <View style={styles.pickerContainer}>
-    <RNPickerSelect
-      onValueChange={setAge}
-      value={age}
-      placeholder={{ label: 'Select your Age group', value: null }}
-      items={ageOptions}
-      useNativeAndroidPickerStyle={false}
-      style={{
-        inputAndroid: styles.pickerInput,
-        inputIOS: styles.pickerInput,
-        placeholder: {
-          color: '#C0C0C0',
-        },
-      }}
-      Icon={() => (
-        <Icon
-          name="chevron-down"
-          size={20}
-          color="#C0C0C0"
-          style={styles.pickerIcon}
-        />
-      )}
-    />
-  </View>
-</View>
-{/*
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Select Gender</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              onValueChange={setGender}
+              value={gender}
+              placeholder={{ label: 'Select your Gender', value: null }}
+              items={genderOptions}
+              useNativeAndroidPickerStyle={false}
+              style={{
+                inputAndroid: styles.pickerInput,
+                inputIOS: styles.pickerInput,
+                placeholder: {
+                  color: '#C0C0C0',
+                },
+              }}
+              Icon={() => (
+                <Icon
+                  name="chevron-down"
+                  size={20}
+                  color="#C0C0C0"
+                  style={styles.pickerIcon}
+                />
+              )}
+            />
+          </View>
+        </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Select Age</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              onValueChange={setAge}
+              value={age}
+              placeholder={{ label: 'Select your Age group', value: null }}
+              items={ageOptions}
+              useNativeAndroidPickerStyle={false}
+              style={{
+                inputAndroid: styles.pickerInput,
+                inputIOS: styles.pickerInput,
+                placeholder: {
+                  color: '#C0C0C0',
+                },
+              }}
+              Icon={() => (
+                <Icon
+                  name="chevron-down"
+                  size={20}
+                  color="#C0C0C0"
+                  style={styles.pickerIcon}
+                />
+              )}
+            />
+          </View>
+        </View>
+        {/*
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter House Number</Text>
           <View style={styles.inputBox}>
@@ -184,10 +191,7 @@ const handleRegisterFarmer = async () => {
             />
           </View>
         </View> 
-        */}
-
-        {/* 
-        
+      
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Father’s Name</Text>
           <View style={styles.inputBox}>
@@ -202,8 +206,7 @@ const handleRegisterFarmer = async () => {
           </View>
         </View>
         */}
-     </View>
-     
+      </View>
 
       {/* Continue Button */}
       <TouchableOpacity style={styles.continueButton} onPress={handleRegisterFarmer}>
@@ -221,8 +224,8 @@ const handleRegisterFarmer = async () => {
         </Text>
       </Text>
     </View>
+    </ScrollView>
   );
-
 };
 export default SignUpFormScreen1;
 
@@ -320,5 +323,10 @@ pickerIcon: {
   right:16,
   top: 14,
 },
-
+  errorText: {
+    fontSize: 14,
+    color: '#D00416',
+    marginBottom: 8,
+    textAlign: 'left',
+  },
 });

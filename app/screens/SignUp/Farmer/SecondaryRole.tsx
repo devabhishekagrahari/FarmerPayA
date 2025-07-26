@@ -25,7 +25,7 @@ export default function SecondaryRoleScreen({ navigation,route }: any) {
   const { user_id } = route.params;
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [errorSelect, setError]= useState('');
+  const [error, setError]= useState('');
   const renderItem = ({ item }: any) => {
     const isSelected = selectedId === item.id;
     return (
@@ -48,6 +48,7 @@ export default function SecondaryRoleScreen({ navigation,route }: any) {
     const selectedRole = activities.find((role) => role.id === selectedId);
     if (!selectedRole){
       console.error('Please select an activity');
+      setError('Please select an activity');
       return;
     }
     setError('');
@@ -62,7 +63,17 @@ export default function SecondaryRoleScreen({ navigation,route }: any) {
       }
     );
     console.log('Secondary role saved successfully:', response.data);
-    navigation.navigate('PlantSelection', {user_id});
+    if (formattedRole.includes('Crop')) {
+      navigation.navigate('CropPlantSelection', { user_id });
+    } else if (formattedRole.includes('Horticulture')) {
+      navigation.navigate('HorticulturePlantSelection', { user_id });
+    } else if (formattedRole.includes('Spice')) {
+      navigation.navigate('SpicePlantSelection', { user_id });
+    } else if (formattedRole.includes('Fruit')) {
+      navigation.navigate('FruitPlantSelection', { user_id });
+    } else {
+      navigation.navigate('PlantSelection', { user_id }); // fallback (optional)
+    }
 
     }catch (error: any) {
       console.error('Error saving secondary role (frontend catch):', {
@@ -92,6 +103,7 @@ export default function SecondaryRoleScreen({ navigation,route }: any) {
 
       <Text style={styles.title}>What do you do?</Text>
       <Text style={styles.subtitle}>Let us know about your secondary role</Text>
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       <FlatList
         data={activities}
@@ -211,4 +223,10 @@ micInnerCircle: {
     paddingVertical: 14, borderRadius: 25, alignItems: 'center',
   },
   nextText: { color: '#fff', fontWeight: 'bold' },
+  errorText: {
+    fontSize: 14,
+    color: '#D00416',
+    marginBottom: 8,
+    textAlign: 'left',
+  },
 });

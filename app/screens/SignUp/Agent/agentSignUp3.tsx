@@ -141,6 +141,14 @@ const AgentSignUp3 = ({ navigation }: any) => {
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
                   value={formData.pincode}
+                  onChangeText={text => {
+                  const cleaned = text.replace(/[^0-9]/g, '');
+                  if (cleaned.length <= 6) {
+                  setFormData({ ...formData, pincode: text });
+                  }
+                }}
+                keyboardType="number-pad"
+                maxLength={6}
                 />
               </View>
             </View>
@@ -160,15 +168,16 @@ const AgentSignUp3 = ({ navigation }: any) => {
 
             <View style={{ gap: 16 }}>
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Sign Up</Text>
+                <Text style={styles.buttonText}>Continue</Text>
               </TouchableOpacity>
-
+              {/*
               <Text style={styles.footerText}>
                 Already have an account?{' '}
                 <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
                   Log in
                 </Text>
               </Text>
+              */}
             </View>
           </View>
         </ScrollView>
