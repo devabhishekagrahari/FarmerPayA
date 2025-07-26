@@ -133,15 +133,9 @@ const AgentSignUp2 = ({ navigation }: any) => {
           </Pressable>
            <View style={{gap:16}}>
             <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AgentSignUp3',{formData,checked})}}>
-              <Text style={styles.buttonText}>Sign Up</Text>
+              <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
-
-            <Text style={styles.footerText}>
-              Already have an account?{' '}
-              <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
-                Log in
-              </Text>
-            </Text></View>
+</View>
            </View>
 
 
@@ -158,7 +152,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
     label0: {
-    marginHorizontal:32,
+    marginHorizontal:24,
     color:'#797979',
     width: 245,
     paddingTop:40,

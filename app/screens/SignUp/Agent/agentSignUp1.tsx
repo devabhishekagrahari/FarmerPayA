@@ -126,36 +126,41 @@ const AgentSignUp1 = ({ navigation }: any) => {
         {/* Designation Options */}
         <View style={{gap:8, flexDirection:'row',justifyContent:'space-between'}}>
           <View style={{flexDirection:'column',justifyContent:'space-between',alignItems:'flex-start'}}>
-        <TouchableOpacity onPress={()=>{setChecked({...checked,bankSakhi:!checked.bankSakhi});}} style={styles.checkItem}> 
+        <TouchableOpacity onPress={
+          ()=>{setChecked({ bankSakhi: true,shg: false,csc:false,vittaSakhi: false,Adathiya:false});}} style={styles.checkItem}> 
           {checked.bankSakhi?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Bank Sakhi</Text>
+          <View style={[styles.circleCheck]}/>}
+          <Text> Bank Sakhi</Text>
         </TouchableOpacity> 
 
-                <TouchableOpacity onPress={()=>{setChecked({...checked,shg:!checked.shg});}} style={styles.checkItem}> 
-          {checked.shg?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Self Help Group</Text>
+        <TouchableOpacity onPress={
+              ()=>{setChecked({ bankSakhi: false,shg: true,csc:false,vittaSakhi: false,Adathiya:false});}} style={styles.checkItem}> 
+              {checked.shg?<View style={styles.checkedCircle}/>:
+              <View style={[styles.circleCheck]}/>}
+              <Text> Self Help Group</Text>
         </TouchableOpacity> 
 
-                <TouchableOpacity onPress={()=>{setChecked({...checked,csc:!checked.csc});}} style={styles.checkItem}> 
-          {checked.csc?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> CSC</Text>
+        <TouchableOpacity onPress={
+          ()=>{setChecked({ bankSakhi: false,shg: false,csc:true,vittaSakhi: false,Adathiya:false});}} style={styles.checkItem}> 
+            {checked.csc?<View style={styles.checkedCircle}/>:
+          <View style={[styles.circleCheck]}/>}
+          <Text> CSC</Text>
         </TouchableOpacity> 
 
         </View>
         <View style={{flexDirection:'column', alignItems:'flex-start'}}>
-                <TouchableOpacity onPress={()=>{setChecked({...checked,vittaSakhi:!checked.vittaSakhi});}} style={styles.checkItem}> 
-          {checked.vittaSakhi?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Vitta Sakhi</Text>
+        <TouchableOpacity onPress={
+            ()=>{setChecked({ bankSakhi: false,shg: false,csc:false,vittaSakhi: true,Adathiya:false});}} style={styles.checkItem}> 
+                {checked.vittaSakhi?<View style={styles.checkedCircle}/>:
+                <View style={[styles.circleCheck]}/>}
+                <Text> Vitta Sakhi</Text>
         </TouchableOpacity> 
 
-                <TouchableOpacity onPress={()=>{setChecked({...checked,Adathiya:!checked.Adathiya});}} style={styles.checkItem}> 
-          {checked.Adathiya?<View style={styles.checkedCircle}/>:
-        <View style={[styles.circleCheck]}/>}
-        <Text> Adathiya</Text>
+        <TouchableOpacity onPress={
+          ()=>{setChecked({ bankSakhi: false,shg: false,csc:false,vittaSakhi: false,Adathiya:true});}} style={styles.checkItem}> 
+              {checked.Adathiya?<View style={styles.checkedCircle}/>:
+            <View style={[styles.circleCheck]}/>}
+            <Text> Adathiya</Text>
         </TouchableOpacity> 
 
        </View>
