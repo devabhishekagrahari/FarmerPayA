@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     bottom: 20,
     marginHorizontal:8,
-
+    
     alignItems:'center'
   },
   gradientBorder: {

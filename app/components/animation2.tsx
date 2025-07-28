@@ -73,25 +73,25 @@ const AnimatedRow: React.FC<AnimatedRowProps> = ({ direction, items, onDone }) =
 };
 
 interface DualAnimatedRowsProps {
-  inView: boolean;
+  isFocused: boolean;
   navigation: any;
 }
 
-const DualAnimatedRows1: React.FC<DualAnimatedRowsProps> = ({ inView ,navigation}) => {
+const DualAnimatedRows1: React.FC<DualAnimatedRowsProps> = ({ isFocused ,navigation}) => {
   const [showColumn, setShowColumn] = useState(false);
   const [row1Done, setRow1Done] = useState(false);
   const [row2Done, setRow2Done] = useState(false);
   const [cycleId, setCycleId] = useState(0); // unique key per cycle to force re-mount
 
-  useEffect(() => {
-    if (inView) {
-      // restart animation cycle
-      setRow1Done(false);
-      setRow2Done(false);
-      setShowColumn(false);
-      setCycleId((prev) => prev + 1); // force rerender to reset AnimatedRow
-    }
-  }, [inView]);
+useEffect(() => {
+  if (isFocused) {
+    // restart animation cycle on screen focus
+    setRow1Done(false);
+    setRow2Done(false);
+    setShowColumn(false);
+    setCycleId((prev) => prev + 1);
+  }
+}, [isFocused]);
 
   useEffect(() => {
     if (row1Done && row2Done) {

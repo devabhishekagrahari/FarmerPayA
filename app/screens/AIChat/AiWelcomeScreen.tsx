@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
   Text,
@@ -12,10 +12,12 @@ import DualAnimatedRows from '../../components/animation';
 import ChatInputBar from '../../components/AiAdvisoryComponents/chatInputBar';
 import DualAnimatedRows1 from '../../components/animation2';
 
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 // ✅ adjust this import if needed
 
 const AiWelcomeScreen = ({navigation}:any) => {
   const [inputText ,setInputText]=useState('');
+  const isFocused = useIsFocused();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
@@ -28,7 +30,8 @@ const AiWelcomeScreen = ({navigation}:any) => {
           <Text style={styles.subtitle}>What farming help do you need today?</Text>
         </View>
         <View style={{justifyContent:'center',width:'100%',alignItems:'center'}}>
-        <DualAnimatedRows1 inView={true} navigation={navigation} />
+        <DualAnimatedRows1 isFocused={isFocused} navigation={navigation} />
+
         </View>
 
       </ImageBackground>
