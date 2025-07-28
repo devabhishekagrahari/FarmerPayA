@@ -112,7 +112,7 @@ const AgentSignUp3 = ({ navigation }: any) => {
               { label: 'Enter House Number', key: 'houseNo', icon: <HomeIcon height={20} width={20} /> },
               { label: 'Enter Village', key: 'villageName', icon: <VillageIcon height={25} width={25} /> },
               { label: 'Enter City/District Name', key: 'city', icon: <VillageIcon height={25} width={25} /> },
-              { label: 'Enter City/District PINCODE', key: 'pincode', icon: <VillageIcon height={25} width={25} />, keyboardType: 'number-pad' },
+              { label: 'Enter Pincode', key: 'pincode', icon: <VillageIcon height={25} width={25} />, keyboardType: 'number-pad' },
               { label: 'Enter State', key: 'state', icon: <StateIcon height={25} width={25} /> },
             ].map(({ label, key, icon, keyboardType }) => (
               <View style={styles.formGroup} key={key}>
@@ -132,39 +132,7 @@ const AgentSignUp3 = ({ navigation }: any) => {
               </View>
               ))}
 
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter City/District PINCODE</Text>
-              <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} fill="#A0A0A0" />
-                <TextInput
-                  placeholder="Turn on gps to drop precise pin"
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.pincode}
-                  onChangeText={text => {
-                  const cleaned = text.replace(/[^0-9]/g, '');
-                  if (cleaned.length <= 6) {
-                  setFormData({ ...formData, pincode: text });
-                  }
-                }}
-                keyboardType="number-pad"
-                maxLength={6}
-                />
-              </View>
-            </View>
-
-            <View style={styles.formGroup}>
-              <Text style={styles.label}>Enter State</Text>
-              <View style={styles.inputBox}>
-                <StateIcon height={25} width={25} />
-                <TextInput
-                  placeholder="Choose your state"
-                  style={styles.input}
-                  placeholderTextColor="#C0C0C0"
-                  value={formData.state} 
-                />
-              </View>
-            </View>
+            
 
             <View style={{ gap: 16 }}>
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
@@ -195,7 +163,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   label0: {
-    marginHorizontal: 32,
+    marginHorizontal: 22,
     color: '#797979',
     paddingTop: 40,
     fontSize: 14,

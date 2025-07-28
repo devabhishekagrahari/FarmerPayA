@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
     label0: {
-    marginHorizontal:32,
+    marginHorizontal:22,
     color:'#797979',
     width: 245,
     paddingTop:40,
