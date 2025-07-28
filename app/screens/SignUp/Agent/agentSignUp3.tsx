@@ -135,17 +135,14 @@ const AgentSignUp3 = ({ navigation }: any) => {
             
 
             <View style={{ gap: 16 }}>
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('UploadDocumentsScreen')}
+              >
                 <Text style={styles.buttonText}>Continue</Text>
               </TouchableOpacity>
-              {/*
-              <Text style={styles.footerText}>
-                Already have an account?{' '}
-                <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
-                  Log in
-                </Text>
-              </Text>
-              */}
+
+
             </View>
           </View>
         </ScrollView>

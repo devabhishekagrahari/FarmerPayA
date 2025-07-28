@@ -21,11 +21,12 @@ import UpiIcon from '../assets/images/nav/upi.svg';
 import UpiActiveIcon from '../assets/images/nav/active-upi.svg';
 import ProfileActive from '../assets/images/nav/active-profile.svg';
 import ProfileInactive from '../assets/images/nav/profile.svg';
+import QrScreen from '../screens/scanner/qr.tsx';
 
 const { width, height } = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
 
-const AppNavigator = () => (
+const AppNavigator = ({navigation}:any) => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarShowLabel: false,
@@ -80,12 +81,12 @@ const AppNavigator = () => (
     <Tab.Screen name="Chat" component={AiWelcomeScreen} />
     <Tab.Screen
       name="Scanner"
-      component={HomeScreen}
+      component={QrScreen}
       options={{
         tabBarButton: (props) => (
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => console.log('Scanner pressed')}
+            onPress={() =>{navigation.navigate('QrScreen')}}
             style={styles.scannerButtonWrapper}
           >
             {props.children}

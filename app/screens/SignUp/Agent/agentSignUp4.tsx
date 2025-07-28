@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,9 @@ import {
   Platform,
   TouchableOpacity,
   Pressable,
+  Dimensions,
+  Animated,
+  Image,
 } from 'react-native';
 
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
@@ -18,7 +21,16 @@ import BankIcon from '../../../assets/images/BankIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 //import UserIcon from '../../../assets/images/agentSignUp/UserIcon.svg';
 import Upload from '../../../assets/images/Button.svg'; 
+import { pick, types } from '@react-native-documents/picker';
+
+import DeleteIcon from '../../../assets/images/agentSignUp/DeleteIcon.svg';
+import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
+
+import * as Progress from 'react-native-progress';
 import { useRoute } from '@react-navigation/native';
+
+const {width , height}= Dimensions.get('window');
+
 
 interface FormData {
   houseNo?: string;
@@ -29,6 +41,12 @@ interface FormData {
 }
 
 const AgentSignUp4 = ({ navigation }: any) => {
+
+const [file2, setFile2] = useState<any>(null);
+ const [progress2, setProgress2] = useState(0);
+ const [uploadSpeed2, setUploadSpeed2] = useState('');
+ const [isUploading2, setIsUploading2] = useState(false);
+ const translateX2 = useRef(new Animated.Value(-width)).current;
     const [ formData , setFormData ] = useState({
           houseNo: '',
           villageName: '',
@@ -36,7 +54,62 @@ const AgentSignUp4 = ({ navigation }: any) => {
           state: '',
           pincode: '',
     })
-  
+
+
+
+  const simulateUpload = (
+    fileSize: number,
+    setProgressFn: (val: number) => void,
+    setSpeedFn: (val: string) => void,
+    setUploadingFn: (val: boolean) => void
+  ) => {
+    setUploadingFn(true);
+    setProgressFn(0);
+    setSpeedFn('');
+    const start = Date.now();
+    let uploaded = 0;
+    const chunk = 50 * 1024;
+
+    const timer = setInterval(() => {
+      if (uploaded >= fileSize) {
+        clearInterval(timer);
+        setProgressFn(1);
+        setSpeedFn('Upload complete!');
+        setUploadingFn(false);
+        return;
+      }
+      uploaded += chunk;
+      const pct = uploaded / fileSize;
+      setProgressFn(pct > 1 ? 1 : pct);
+
+      const elapsed = (Date.now() - start) / 1000;
+      const speed = ((uploaded / 1024) / elapsed).toFixed(2);
+      setSpeedFn(`${speed} KB/s`);
+    }, 500);
+  };
+
+    const pickAndSimulateUpload2 = async () => {
+      try {
+        const [res] = await pick({ type: [types.allFiles] });
+        setFile2(res);
+        simulateUpload(res.size ?? 100 * 1024, setProgress2, setUploadSpeed2, setIsUploading2);
+      } catch (err: any) {
+        if (err.name !== 'Cancel') {
+          console.warn('Picker error:', err);
+        }
+      }
+    };
+
+      useEffect(() => {
+        if (file2 && !isUploading2) {
+          translateX2.setValue(-width); // reset before animating
+          Animated.timing(translateX2, {
+            toValue: 0,
+            duration: 500,
+            useNativeDriver: true,
+          }).start();
+        }
+      }, [file2, isUploading2]);
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, paddingTop: 40, backgroundColor: '#fff' }}
@@ -137,16 +210,63 @@ const AgentSignUp4 = ({ navigation }: any) => {
               </View>
             </View>
  
-            <View style={styles.formGroup}>
-                <Text style={styles.label}>Upload your Cancel Check</Text>
-                      {/* Upload Box */}
-                      <TouchableOpacity style={styles.uploadBox}>
-                        <View style={styles.uploadContent}>
-                          <Upload width={100} height={50} />
-                          <Text style={styles.orDropText}>or Drop Files</Text>
-                        </View>
-                      </TouchableOpacity>
+        {/* Upload 2 */}
+
+
+        <View style={{height:height*0.25 ,backgroundColor:'#fff'}}>
+      
+        <Text style={styles.label}>Upload Cancelled Check</Text> 
+        {file2 && <View style={styles.pillBox}>
+        <View style={styles.pill}>
+          <Text style={styles.pillText}>Uploaded documents</Text>
+        </View></View>} 
+
+        {!file2 &&(<View>
+        <TouchableOpacity style={styles.uploadBox} onPress={pickAndSimulateUpload2}>
+          <Upload width={130} height={100} />
+
+        </TouchableOpacity></View>)}
+
+        {isUploading2 && (
+          <View style={styles.progressContainer}>
+            <Progress.Bar
+              progress={progress2}
+              width={width * 0.8}
+              height={10}
+              color="green"
+              borderRadius={5}
+              borderWidth={0}
+              unfilledColor="#e0e0e0"
+            />
+            <Text style={styles.speedText}>{uploadSpeed2}</Text>
+          </View>
+        )}
+
+        {file2 && !isUploading2 && (
+          <Animated.View style={{ transform: [{ translateX:translateX2 }] }}> 
+          <View style={styles.fileCard}>
+            <Image source={{ uri: file2.uri }} style={styles.preview} resizeMode="cover" />
+            <View style={{ flex: 1, backgroundColor:'#fff',marginLeft: 12 }}>
+              <View style={{flexDirection:'row' ,alignItems:'center',justifyContent:'space-between'}}>
+                <Text style={styles.fileName}>Employee ID card</Text>  
+                <View style={{flexDirection:'row', alignItems:'center',gap:4}}>
+                <TouchableOpacity onPress={pickAndSimulateUpload2}>
+                <RefreshIcon height={20}/> </TouchableOpacity>         
+                <TouchableOpacity onPress={() => setFile2(null)} style={styles.crossIcon}>
+                  <DeleteIcon/>
+                </TouchableOpacity>
+                
+               
+                </View>
+              </View>
+              <Text style={styles.sizeText}>Size - {(file2.size / (1024 * 1024)).toFixed(2)}MB</Text>
+              <Text style={styles.successText}>Successful</Text>
             </View>
+          </View>
+          </Animated.View>
+        )}
+
+      </View>
 
             <View style={{ gap: 16 }}>
               <TouchableOpacity
@@ -155,16 +275,10 @@ const AgentSignUp4 = ({ navigation }: any) => {
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
-              {/*
-              <Text style={styles.footerText}>
-                Already have an account?{' '}
-                <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
-                  Log in
-                </Text>
-              </Text>
-              */}
+
+
             </View>
-          </View>
+      </View>
         </ScrollView>
 
     </KeyboardAvoidingView>
@@ -240,9 +354,11 @@ uploadBox: {
   borderColor: '#DDD',
   borderStyle: 'dashed',
   borderRadius: 8,
-  padding: 20,
+  padding: 8,
   //backgroundColor: '#F9F9F9',
-  alignItems: 'flex-start',
+  alignItems: 'center',
+  justifyContent:'center'
+
 },
 uploadContent: {
   flexDirection: 'row',
@@ -256,6 +372,67 @@ uploadContent: {
   fontSize: 12,
   color: '#888',
   marginLeft: 0, // fallback spacing if no `gap`
-},
+},  pillBox:{    
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'center',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: '#54219D',
+    borderRadius: 4,
+    marginBottom: 16,
+    backgroundColor:'#FFFFFF'},
+  pill: {
+    alignSelf: 'center',
+    borderWidth: 1,
+    backgroundColor:'#54219D',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    marginVertical: 16,
+  },
+  pillText: {
+    fontSize: 12,
+    color: '#fff',
+    fontWeight: '600',
+  },progressContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  speedText: {
+    fontSize: 12,
+    marginTop: 6,
+  },
+  fileCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+  },
+  preview: {
+    width: 60,
+    height: 60,
+    borderRadius: 6,
+    backgroundColor: '#eee',
+  },
+  fileName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#000',
+  },
+  sizeText: {
+    fontSize: 12,
+    color: '#656F77',
+  },
+  successText: {
+    fontSize: 12,
+    color: 'green',
+    fontWeight: '600',
+    marginTop: 4,
+  },
+  crossIcon: {
+    padding: 4,
+  },
 
 });

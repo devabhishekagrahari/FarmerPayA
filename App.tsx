@@ -32,6 +32,7 @@ import HorticulturePlantSelection from './app/screens/SignUp/Farmer/Horticulture
 import SpicePlantSelection from './app/screens/SignUp/Farmer/SpicePLantSelection';
 import FruitPlantSelection from './app/screens/SignUp/Farmer/FruitPlantSelection';
 import VegetableSelectionScreen from './app/screens/SignUp/Farmer/VegetablePlantSelection.tsx';
+import QrScreen from './app/screens/scanner/qr.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,7 @@ const App = () => {
         <Stack.Screen name="SpicePlantSelection" component={SpicePlantSelection} />
         <Stack.Screen name="FruitPlantSelection" component={FruitPlantSelection} />
         <Stack.Screen name="VegetablePlantSelection" component={VegetableSelectionScreen} />
+        <Stack.Screen name="QrScreen" component={QrScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

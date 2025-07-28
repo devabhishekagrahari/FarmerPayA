@@ -196,17 +196,16 @@ const AgentSignUp2 = ({ navigation, route }: any) => {
                          <Text style={{fontSize: 12,fontWeight: '500',color: '#797979',}}>Use this as Correspondence Address</Text>
           </Pressable>
            <View style={{gap:16}}>
-            <TouchableOpacity style={styles.button} onPress={handleRegisterAgent}>
-              <Text style={styles.buttonText}>Continue</Text>
+            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AgentSignUp3',{formData,checked})}}>
+              <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
-            {/*
+
             <Text style={styles.footerText}>
               Already have an account?{' '}
               <Text style={styles.loginLink} onPress={() => navigation.navigate('Login')}>
                 Log in
               </Text>
-            </Text>*/}
-            </View>
+            </Text></View>
            </View>
 
 
@@ -223,7 +222,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
     label0: {
-    marginHorizontal:22,
+    marginHorizontal:32,
     color:'#797979',
     width: 245,
     paddingTop:40,
