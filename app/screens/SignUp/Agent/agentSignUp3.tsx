@@ -62,7 +62,7 @@ useEffect(() => {
         <ArrowBack />
       </Pressable>
 
-      <Text style={styles.label0}>CORRESPONDANCE ADDRESS</Text>
+      <Text style={styles.label0}>Correspondance  Address</Text>
 
             {/* Checkbox */}
 

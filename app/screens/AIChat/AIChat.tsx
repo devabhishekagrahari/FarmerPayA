@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import  {VoiceChat}  from '../../components/AiAdvisoryComponents/VoiceBubble';
 import ChatInputBar from '../../components/AiAdvisoryComponents/chatInputBar';
 import CustomTopBar from '../../components/customTopBar';
 import DualAnimatedRows from '../../components/animation';
+import { useRoute } from '@react-navigation/native';
 
 
 interface historyProps {
@@ -54,7 +55,9 @@ const options = [
 ];
 
 // Mixed chat history: both voice and text
-const history:historyProps[] = [
+ 
+const AIChat = ({navigation}:any) => {
+  const [history, setHistory] = useState<historyProps[]>([
   {
     id:'1',
     type: 'text',
@@ -77,12 +80,36 @@ const history:historyProps[] = [
     answer: `The MSP for wheat in 2024-25 is ₹2,275 per quintal.`,
     onPress: () => console.log('Edit MSP'),
   },
-];
+]);
 
-const AIChat = () => {
+
   const [inputText, setInputText] = useState('');
+  const handleSubmit = () => {
+    if (!inputText.trim()) return;
 
+    const newItem: historyProps = {
+      id: '4', // unique ID based on timestamp
+      type: 'text',
+      prompt: inputText,
+      answer: 'Default answer coming soon...Default answer coming soon...Default answer coming soon...Default answer coming soon...', // ⬅️ you can customize this
+      onPress: () => console.log(`Edit prompt: ${inputText.trim()}`),
+    };
 
+    setHistory(prev => [ ...prev,newItem]); // add to top of list
+    setInputText('');
+  };
+
+  const route = useRoute<any>();
+  useEffect(()=>{
+    if(route?.params?.inputText){
+      setInputText(route.params.inputText);
+    }
+  },[route?.params?.inputText]);
+  useEffect(()=>{
+    if(route?.params?.item){
+      setInputText(route.params.item);
+    }
+  },[route?.params?.item]);
   function alert(arg0: string) {
     throw new Error('Function not implemented.');
   }
@@ -123,11 +150,13 @@ return (
 
       <View style={{ marginBottom: -14, width: '100%' }}>
         <ChatInputBar
+        navigation={navigation}
           value={inputText}
           onChangeText={(text) => {
             setInputText(text);
             console.log('Typed:', text);
           }}
+          onSubmitEditing={handleSubmit}
           onMicPress={() => Alert.alert('Mic pressed')}
           onGalleryPress={() => Alert.alert('Gallery pressed')}
         />

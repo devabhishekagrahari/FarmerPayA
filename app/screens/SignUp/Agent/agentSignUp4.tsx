@@ -184,7 +184,7 @@ const [file2, setFile2] = useState<any>(null);
               </View>
             </View>
 
-            <View style={styles.formGroup}>
+            {/* <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Partner Bank Name</Text>
               <View style={styles.inputBox}>
                 <BankIcon height={25} width={25} />
@@ -208,7 +208,7 @@ const [file2, setFile2] = useState<any>(null);
                   value={formData.state} 
                 />
               </View>
-            </View>
+            </View> */}
  
         {/* Upload 2 */}
 
@@ -275,8 +275,11 @@ const [file2, setFile2] = useState<any>(null);
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
-
-
+              <View style={{justifyContent:'center',flexDirection:'column'}}>
+               <Text style={{textAlign:'center', fontSize:12}}>We collect basic personal and performance info to track your sales, calculate payouts, and deliver rewards. Your data stays secure and is used only as described in our 
+               </Text>
+               <Text style={{textAlign:'center' ,fontSize:12 ,color:'#54219D'}}>Privacy Policy</Text>
+              </View>
             </View>
       </View>
         </ScrollView>

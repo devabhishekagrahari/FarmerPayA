@@ -1,16 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 const { width, height } = Dimensions.get('window');
-
-
-const ServiceCard = ({ title, icon }: { title: string; icon: any }) => (
+import LoanIcon from '../assets/images/components/services/LoansIcon.svg';
+import InsuranceIcon from '../assets/images/components/services/InsuranceIcon.svg';
+import SchemeIcon from '../assets/images/components/services/Schemes.svg';
+import ScoreIcon from '../assets/images/components/services/ScoreIcon.svg';
+const ServiceCard = ({ title, icon ,Icon}: { title: string; icon?: any, Icon?: React.FC<SvgProps> }) => (
 
   <TouchableOpacity style={styles.card}>
     <View style={{width:'54%',  paddingTop: 16, paddingLeft:16}}>
       <Text style={styles.label}>{title}</Text>
       </View>
-      <View style={{width:'45%' }}>
-         <Image source={icon} style={styles.icon} />
+      <View style={{width:'45%' , padding:3 }}>
+      {icon ? (
+        <Image source={icon} style={styles.icon} />
+      ) : Icon ? (
+        <Icon />
+      ) : null}
       </View>
   </TouchableOpacity>
 
@@ -22,9 +29,9 @@ const Services=()=>{
       <Text style={styles.sectionTitle}>Services</Text>
       <View style={styles.servicesGrid}>
         <View style={{ width:'48.8%'}}>
-        <ServiceCard title='Loans' icon={require('../assets/images/loans.png')} />
-        <ServiceCard title='Insurance' icon={require('../assets/images/insurance.png')} />
-        <ServiceCard title='Schemes' icon={require('../assets/images/schemes.png')} /></View>
+        <ServiceCard title='Loans' Icon={LoanIcon} />
+        <ServiceCard title='Insurance' Icon={InsuranceIcon} />
+        <ServiceCard title='Schemes' Icon={SchemeIcon} /></View>
         <View style={{ width:'48.8%',marginLeft:6}}>
           <View style={{height:'62.255%', marginBottom:3 }}>
               <TouchableOpacity style={styles.card2}>
@@ -33,7 +40,7 @@ const Services=()=>{
               </TouchableOpacity>
           </View>
           <View style={{height:'20%',marginTop:6}}>
-            <ServiceCard title='My Score' icon={require('../assets/images/score.png')} />
+            <ServiceCard title='My Score' Icon={ScoreIcon} />
           </View>
         </View>
       </View>

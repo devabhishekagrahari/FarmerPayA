@@ -120,7 +120,7 @@ const DualAnimatedRows1: React.FC<DualAnimatedRowsProps> = ({ inView ,navigation
   data={[...QUESTIONS1]}
   keyExtractor={(item, index) => `${item}-${index}`}
   renderItem={({ item }) => (
-     <TouchableOpacity onPress={()=>{navigation.navigate('AiChat')}}>
+     <TouchableOpacity onPress={() => navigation.navigate('AiChat', { item })}>
     <LinearGradient
       colors={['#FF0000', '#FFA500']}
       start={{ x: 0, y: 0 }}

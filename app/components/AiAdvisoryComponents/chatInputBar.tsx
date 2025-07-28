@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import MicIcon from '../../assets/images/MicIcon.svg'
+import { Text } from 'react-native';
 
 
 interface ChatInputBarProps {
@@ -17,6 +18,8 @@ interface ChatInputBarProps {
   onChangeText?: (text: string) => void;
   onMicPress?: () => void;
   onGalleryPress?: () => void;
+  navigation: any;
+  onSubmitEditing?: () => void;
 }
 
 const ChatInputBar: React.FC<ChatInputBarProps> = ({
@@ -24,9 +27,14 @@ const ChatInputBar: React.FC<ChatInputBarProps> = ({
   onChangeText,
   onMicPress,
   onGalleryPress,
+  navigation,
+  onSubmitEditing,
 }) => {
    const {height, width} = useWindowDimensions();
-
+   const handleSubmit=()=>{
+      if(onSubmitEditing) {onSubmitEditing(); return;}
+      navigation.navigate('AiChat',{inputText:value});
+   }
   return (
     <View style={styles.inputWrapper}>
       <LinearGradient
@@ -36,20 +44,29 @@ const ChatInputBar: React.FC<ChatInputBarProps> = ({
         style={[styles.gradientBorder,{width:width*0.75}]}
       >
         <View style={styles.inputBar}>
-
+             
           <TextInput
             style={styles.input}
             placeholder="Type a message..."
             placeholderTextColor="#888"
             value={value}
             onChangeText={onChangeText}
+            multiline={true}
+            onSubmitEditing={handleSubmit
+            }
           />          
+
           <TouchableOpacity onPress={onGalleryPress}>
             <Image
               source={require('../../assets/images/gallery-add.png')}
               style={styles.iconImg}
             />
           </TouchableOpacity>
+          {value && (
+                    <TouchableOpacity onPress={handleSubmit}>
+            <Text style={{color:'blue'}}>Send</Text>
+          </TouchableOpacity>  
+          )}
 
         </View>
       </LinearGradient>
@@ -74,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   gradientBorder: {
-    height:58,
+    minHeight:58,
     justifyContent:'center',
     alignItems:'center',
     padding:2,
@@ -97,6 +114,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 14,
+    width:100,
     color: '#72777A',
     marginHorizontal: 12,
     alignSelf:'center',

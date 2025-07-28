@@ -39,7 +39,7 @@ const AgentSignUp2 = ({ navigation }: any) => {
          <ArrowBack/>
         </Pressable>
 
-        <Text style={styles.label0}>PERMANENT ADDRESS</Text>
+        <Text style={styles.label0}>Permanent Address</Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
