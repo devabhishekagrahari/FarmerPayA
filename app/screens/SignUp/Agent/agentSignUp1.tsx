@@ -114,8 +114,8 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
       </View>
 
       <View style={styles.formContainer}>
-        {/* Full Name */}
-        <Text style={{color:'#FF0000'}}>* Indicates Required</Text>
+        {/* Full Name 
+        <Text style={{color:'#FF0000'}}>* Indicates Required</Text>*/}
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Enter Full Name <Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
@@ -188,6 +188,7 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
         </View>
 
         {/* Designation Options */}
+        <Text style={styles.label}>Enter Designation <Text style={{color:'#FF0000'}}>*</Text></Text>
         <View style={{ gap: 8, flexDirection: 'row', justifyContent: 'space-between' }}>
   <View style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
     <TouchableOpacity onPress={() => setDesignation('Bank Sakhi')} style={styles.checkItem}>

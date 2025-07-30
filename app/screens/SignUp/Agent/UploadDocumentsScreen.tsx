@@ -15,12 +15,19 @@ import DeleteIcon from '../../../assets/images/agentSignUp/DeleteIcon.svg';
 import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
 import Upload from '../../../assets/images/Button.svg';
 import * as Progress from 'react-native-progress';
+import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/api';
 
 const { width,height } = Dimensions.get('window');
 
 const UploadDocumentsScreen = ({ navigation }: any) => {
+  const route = useRoute<any>();
+  const {
+      user_id,
+      mobile,
+    } = route.params;
+
   const [file1, setFile1] = useState<any>(null);
   const [file2, setFile2] = useState<any>(null);
 
@@ -145,7 +152,7 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
   }
 
   const formData = new FormData();
-  formData.append('user_id', '1'); // Replace with actual user_id dynamically
+  formData.append('user_id', user_id);
   formData.append('govt_id_proof', {
     uri: file1.uri,
     type: file1.type,
@@ -164,7 +171,7 @@ const UploadDocumentsScreen = ({ navigation }: any) => {
       },
     });
     console.log('Upload success:', response.data);
-    navigation.navigate('AgentSignUp4');
+    navigation.navigate('AgentSignUp4',{user_id});
   } catch (error) {
     console.error('Upload error:', error);
     setErrorMessage('Upload failed. Please try again.');

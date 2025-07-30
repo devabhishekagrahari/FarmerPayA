@@ -196,8 +196,8 @@ const AgentSignUp2 = ({ navigation, route }: any) => {
                          <Text style={{fontSize: 12,fontWeight: '500',color: '#797979',}}>Use this as Correspondence Address</Text>
           </Pressable>
            <View style={{gap:16}}>
-            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('AgentSignUp3',{formData,checked})}}>
-              <Text style={styles.buttonText}>Sign Up</Text>
+            <TouchableOpacity style={styles.button} onPress={handleRegisterAgent}>
+              <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
 
             <Text style={styles.footerText}>

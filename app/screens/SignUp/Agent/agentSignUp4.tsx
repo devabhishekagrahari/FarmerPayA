@@ -15,22 +15,20 @@ import {
   Animated,
   Image,
 } from 'react-native';
-
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import BankIcon from '../../../assets/images/BankIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 //import UserIcon from '../../../assets/images/agentSignUp/UserIcon.svg';
 import Upload from '../../../assets/images/Button.svg'; 
 import { pick, types } from '@react-native-documents/picker';
-
 import DeleteIcon from '../../../assets/images/agentSignUp/DeleteIcon.svg';
 import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
-
 import * as Progress from 'react-native-progress';
 import { useRoute } from '@react-navigation/native';
+import axios from 'axios';
+import { BASE_URL } from '../../../utils/api';
 
 const {width , height}= Dimensions.get('window');
-
 
 interface FormData {
   houseNo?: string;
@@ -41,21 +39,22 @@ interface FormData {
 }
 
 const AgentSignUp4 = ({ navigation }: any) => {
-
-const [file2, setFile2] = useState<any>(null);
- const [progress2, setProgress2] = useState(0);
- const [uploadSpeed2, setUploadSpeed2] = useState('');
- const [isUploading2, setIsUploading2] = useState(false);
- const translateX2 = useRef(new Animated.Value(-width)).current;
-    const [ formData , setFormData ] = useState({
-          houseNo: '',
-          villageName: '',
-          city: '',
-          state: '',
-          pincode: '',
-    })
-
-
+  const route = useRoute<any>();
+  const {user_id,mobile,} = route.params;
+  const [file2, setFile2] = useState<any>(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [progress2, setProgress2] = useState(0);
+  const [uploadSpeed2, setUploadSpeed2] = useState('');
+  const [isUploading2, setIsUploading2] = useState(false);
+  const translateX2 = useRef(new Animated.Value(-width)).current;
+  const [formData, setFormData] = useState({
+    accountHolderName: '',
+    bankAccountNumber: '',
+    confirmBankAccountNumber: '',
+    ifscCode: '',
+    bankName: '',
+    branchCode: '',
+  });
 
   const simulateUpload = (
     fileSize: number,
@@ -88,7 +87,7 @@ const [file2, setFile2] = useState<any>(null);
     }, 500);
   };
 
-    const pickAndSimulateUpload2 = async () => {
+  const pickAndSimulateUpload2 = async () => {
       try {
         const [res] = await pick({ type: [types.allFiles] });
         setFile2(res);
@@ -98,18 +97,89 @@ const [file2, setFile2] = useState<any>(null);
           console.warn('Picker error:', err);
         }
       }
-    };
+  };
 
-      useEffect(() => {
-        if (file2 && !isUploading2) {
-          translateX2.setValue(-width); // reset before animating
-          Animated.timing(translateX2, {
-            toValue: 0,
-            duration: 500,
-            useNativeDriver: true,
-          }).start();
-        }
-      }, [file2, isUploading2]);
+  useEffect(() => {
+    if (file2 && !isUploading2) {
+      translateX2.setValue(-width); // reset before animating
+      Animated.timing(translateX2, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [file2, isUploading2]);
+
+  const handleSubmit = async () => {
+  const {
+    accountHolderName,
+    bankAccountNumber,
+    confirmBankAccountNumber,
+    ifscCode,
+    bankName,
+    branchCode,
+  } = formData;
+
+  console.log('📋 Form Data:', formData);
+  console.log('📎 Uploaded File:', file2);
+
+  // Validate required fields
+  if (
+    !accountHolderName ||
+    !bankAccountNumber ||
+    !confirmBankAccountNumber ||
+    !ifscCode ||
+    !bankName ||
+    !branchCode
+  ) {
+    console.warn('⚠️ Missing Fields');
+    setErrorMessage('Please fill in all required bank details.');
+    return;
+  }
+
+  if (bankAccountNumber !== confirmBankAccountNumber) {
+    console.warn('⚠️ Bank account numbers do not match');
+    setErrorMessage('Bank account numbers do not match.');
+    return;
+  }
+
+  if (!file2) {
+    console.warn('⚠️ No cancelled cheque uploaded');
+    setErrorMessage('Please upload the cancelled cheque.');
+    return;
+  }
+
+  const form = new FormData();
+  form.append('user_id', user_id);
+  form.append('account_holder_name', accountHolderName);
+  form.append('bank_account_no', bankAccountNumber);
+  form.append('confirm_bank_account_no', confirmBankAccountNumber);
+  form.append('ifsc_code', ifscCode);
+  form.append('partner_bank', bankName);
+  form.append('partner_bank_branch_code', branchCode);
+  form.append('cancelled_cheque', {
+    uri: file2.uri,
+    type: file2.type,
+    name: file2.name || 'cancelled_cheque.jpg',
+  });
+  console.log('📨 Submitting FormData to API...');
+  try {
+    const res = await axios.post(`${BASE_URL}/agent/bank-details`, form, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log('Success:', res.data);
+    navigation.navigate('BankApproval');
+  } catch (err:any) {
+    console.error('Error uploading bank details:', err);
+    if (err.response) {
+      console.log('📬 Server Response:', err.response.data);
+    }
+    setErrorMessage('Submission failed. Please try again.');
+  }
+};
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, paddingTop: 40, backgroundColor: '#fff' }}
@@ -138,8 +208,8 @@ const [file2, setFile2] = useState<any>(null);
                   placeholder="Enter your Account Holder Name"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
-                  value={formData.houseNo}
-                  onChangeText={(Text)=>{setFormData({...formData,houseNo:Text})}}
+                  value={formData.accountHolderName}
+                  onChangeText={(Text)=>{setFormData({...formData,accountHolderName:Text})}}
                  
                 />
               </View>
@@ -153,7 +223,8 @@ const [file2, setFile2] = useState<any>(null);
                   placeholder="Enter your Bank Account Number"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
-                  value={formData.villageName}
+                  value={formData.bankAccountNumber}
+                  onChangeText={(text) => setFormData({ ...formData, bankAccountNumber: text })}
                 />
               </View>
             </View>
@@ -166,7 +237,8 @@ const [file2, setFile2] = useState<any>(null);
                   placeholder="Enter Your Bank Account Number"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
-                  value={formData.city}
+                  value={formData.confirmBankAccountNumber}
+                  onChangeText={(text) => setFormData({ ...formData, confirmBankAccountNumber: text })}
                 />
               </View>
             </View>
@@ -179,7 +251,8 @@ const [file2, setFile2] = useState<any>(null);
                   placeholder="Enter 11-character alphanumeric code"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
-                  value={formData.pincode}
+                  value={formData.ifscCode}
+                  onChangeText={(text) => setFormData({ ...formData, ifscCode: text })}
                 />
               </View>
             </View>
@@ -192,7 +265,8 @@ const [file2, setFile2] = useState<any>(null);
                   placeholder="Enter your partner bank name"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
-                  value={formData.state} 
+                  value={formData.bankName} 
+                  onChangeText={(text) => setFormData({ ...formData, bankName: text })}
                 />
               </View>
             </View>
@@ -205,7 +279,8 @@ const [file2, setFile2] = useState<any>(null);
                   placeholder="Enter your Partner Bank's Branch Code"
                   style={styles.input}
                   placeholderTextColor="#C0C0C0"
-                  value={formData.state} 
+                  value={formData.branchCode} 
+                  onChangeText={(text) => setFormData({ ...formData, branchCode: text })}
                 />
               </View>
             </View>
@@ -271,12 +346,10 @@ const [file2, setFile2] = useState<any>(null);
             <View style={{ gap: 16 }}>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('BankApproval')}
+                onPress={handleSubmit}
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
-
-
             </View>
       </View>
         </ScrollView>
