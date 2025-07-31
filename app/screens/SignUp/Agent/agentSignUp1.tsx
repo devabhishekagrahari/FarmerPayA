@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   },
   continueButtonText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 16,
   },
   footerText: {
     textAlign: 'center',

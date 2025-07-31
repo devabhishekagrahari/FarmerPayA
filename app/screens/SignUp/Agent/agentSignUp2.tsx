@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF',
   },
   footerText: {

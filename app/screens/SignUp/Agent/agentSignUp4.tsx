@@ -276,9 +276,9 @@ const [file2, setFile2] = useState<any>(null);
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
               <View style={{justifyContent:'center',flexDirection:'column'}}>
-               <Text style={{textAlign:'center', fontSize:12}}>We collect basic personal and performance info to track your sales, calculate payouts, and deliver rewards. Your data stays secure and is used only as described in our 
+               <Text style={{textAlign:'center', fontSize:10}}>We collect basic personal and performance info to track your sales, calculate payouts, and deliver rewards. Your data stays secure and is used only as described in our 
                </Text>
-               <Text style={{textAlign:'center' ,fontSize:12 ,color:'#54219D'}}>Privacy Policy</Text>
+               <Text style={{textAlign:'center' ,fontSize:10 ,color:'#54219D'}}>Privacy Policy</Text>
               </View>
             </View>
       </View>
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF',
   },
   footerText: {

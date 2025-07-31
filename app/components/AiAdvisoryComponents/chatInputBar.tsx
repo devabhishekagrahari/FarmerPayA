@@ -52,8 +52,7 @@ const ChatInputBar: React.FC<ChatInputBarProps> = ({
             value={value}
             onChangeText={onChangeText}
             multiline={true}
-            onSubmitEditing={handleSubmit
-            }
+            onSubmitEditing={handleSubmit}
           />          
 
           <TouchableOpacity onPress={onGalleryPress}>
