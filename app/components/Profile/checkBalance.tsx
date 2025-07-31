@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
-import MobileImage from "../../assets/images/profile/mobileImage.svg";
-import BankIcon from "../../assets/images/profile/BankIcon .svg";
+import MobileImage from "../../assets/images/Profile/mobileImage.svg";
+import BankIcon from "../../assets/images/Profile/BankIcon .svg";
 const {height,width} = Dimensions.get('window');
 const CheckBalanceCard: React.FC = () => {
   return (

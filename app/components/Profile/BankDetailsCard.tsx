@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
   borderWidth: 1,
   borderColor: '#C0C0C0',
   padding: 16,
-  marginVertical: 10,
-  marginHorizontal: 20,
   shadowColor: 'transparent',     // remove shadow if unwanted
   elevation: 0,                   // no Android elevation
 },
