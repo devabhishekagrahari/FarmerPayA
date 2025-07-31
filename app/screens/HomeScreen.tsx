@@ -19,7 +19,7 @@ import AddDetailSlider from '../components/detailsSlider/detailSlider';
 import RecommendedVideoSlider from '../components/recommendedVideoCard.tsx/videoCardSlider';
 import Services from '../components/ServiceCard';
 import { InView, IOScrollView } from 'react-native-intersection-observer';
-import CheckBalanceCard from '../components/Profile/checkBalance';
+import CheckBalanceCard from '../components/profile/checkBalance';
 
 const HomeScreen = ({navigation}:any) => {
   const [aiVisible, setAiVisible] = useState(false);

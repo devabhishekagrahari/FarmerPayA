@@ -19,12 +19,36 @@ type Role = {
 };
 
 const roles: Role[] = [
-  { id: '1', title: 'Agricultural Farmer', image: require('../../../assets/images/selection/agricultural-farmer.jpg') },
-  { id: '2', title: 'Dairy Farmer', image: require('../../../assets/images/selection/dairy-farmer.jpg') },
-  { id: '3', title: 'Fisherman', image: require('../../../assets/images/selection/fisherman.jpg') },
-  { id: '4', title: 'Beekeeper', image: require('../../../assets/images/selection/beekeeper.png') },
-  { id: '5', title: 'Forest Gatherer', image: require('../../../assets/images/selection/forest-gatherer.png') },
-  { id: '6', title: 'Floriculturist', image: require('../../../assets/images/selection/floriculturist.jpg') },
+  {
+    id: '1',
+    title: 'Agricultural Farmer',
+    image: require('../../../assets/images/selection/agricultural-farmer.jpg'),
+  },
+  {
+    id: '2',
+    title: 'Dairy Farmer',
+    image: require('../../../assets/images/selection/dairy-farmer.jpg'),
+  },
+  {
+    id: '3',
+    title: 'Fisherman',
+    image: require('../../../assets/images/selection/fisherman.jpg'),
+  },
+  {
+    id: '4',
+    title: 'Beekeeper',
+    image: require('../../../assets/images/selection/beekeeper.png'),
+  },
+  {
+    id: '5',
+    title: 'Forest Gatherer',
+    image: require('../../../assets/images/selection/forest-gatherer.png'),
+  },
+  {
+    id: '6',
+    title: 'Floriculturist',
+    image: require('../../../assets/images/selection/floriculturist.jpg'),
+  },
 ];
 
 export default function PrimaryRoleScreen({ navigation }: any) {
@@ -37,22 +61,25 @@ export default function PrimaryRoleScreen({ navigation }: any) {
         style={styles.card}
         onPress={() => setSelectedId(item.id)}
       >
-      <View style={[ styles.imageContainer,
-        selectedId === item.id && styles.selectedImageBorder,
-    ]}
-  >
-    <Image source={item.image} style={styles.image} />
-  </View>
-
-  <Text style={styles.cardText}>{item.title}</Text>
-</TouchableOpacity>
-
+        <View
+          style={[
+            styles.imageContainer,
+            selectedId === item.id && styles.selectedImageBorder,
+          ]}
+        >
+          <Image source={item.image} style={styles.image} />
+        </View>
+        <Text style={styles.cardText}>{item.title}</Text>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity  onPress={() => navigation.goBack()} style={{ marginBottom: 32 }}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={{ marginBottom: 32 }}
+      >
         <BackArrow color="#54219D" />
       </TouchableOpacity>
 
@@ -68,7 +95,7 @@ export default function PrimaryRoleScreen({ navigation }: any) {
       <FlatList
         data={roles}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         numColumns={2}
         contentContainerStyle={styles.grid}
         columnWrapperStyle={{ justifyContent: 'space-between' }}
@@ -76,11 +103,11 @@ export default function PrimaryRoleScreen({ navigation }: any) {
 
       <View style={styles.bottomContainer}>
         <TouchableOpacity style={styles.micWrapper}>
-            <View style={styles.micOuterCircle}>
-                <View style={styles.micInnerCircle}>
-                    <MicIcon width={28} height={28} color="#FFFFFF" />
-                </View>
+          <View style={styles.micOuterCircle}>
+            <View style={styles.micInnerCircle}>
+              <MicIcon width={28} height={28} color="#FFFFFF" />
             </View>
+          </View>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -95,23 +122,23 @@ export default function PrimaryRoleScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 16, 
-    backgroundColor: '#FFFFFF' 
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#FFFFFF',
   },
   backButton: {
-    width: 40, 
-    height: 40, 
-    borderRadius: 20, 
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#54219D', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    borderColor: '#54219D',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 8,
   },
   selectedImageBorder: {
-    borderColor: '#54219D', 
+    borderColor: '#54219D',
   },
   progressContainer: {
     flexDirection: 'row',
@@ -130,19 +157,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0E0E0',
     borderRadius: 2,
   },
-  title: { 
-    fontSize: 24, 
-    fontWeight: '700', 
-    color: '#3F1976', 
-    marginBottom: 4 
+  title: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#3F1976',
+    marginBottom: 4,
   },
-  subtitle: { 
-    fontSize: 14, 
-    color: '#666', 
-    marginBottom: 20 
+  subtitle: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20,
   },
-  grid: { 
-    paddingBottom: 20 
+  grid: {
+    paddingBottom: 20,
   },
   card: {
     alignItems: 'center',
@@ -167,13 +194,13 @@ const styles = StyleSheet.create({
     height: 65,
     borderRadius: 65 / 2,
   },
-  cardText: { 
-    fontSize: 13, 
-    textAlign: 'center' 
+  cardText: {
+    fontSize: 13,
+    textAlign: 'center',
   },
   bottomContainer: {
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   micWrapper: {
@@ -199,15 +226,15 @@ const styles = StyleSheet.create({
   },
 
   nextButton: {
-    flex: 1, 
-    marginLeft: 16, 
+    flex: 1,
+    marginLeft: 16,
     backgroundColor: '#54219D',
-    paddingVertical: 14, 
-    borderRadius: 25, 
+    paddingVertical: 14,
+    borderRadius: 25,
     alignItems: 'center',
   },
-  nextText: { 
-    color: '#fff', 
-    fontWeight: 'bold' 
+  nextText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });

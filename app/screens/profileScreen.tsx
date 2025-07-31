@@ -1,7 +1,7 @@
 import React from "react";
 import {  ScrollView, Text, View } from "react-native";
-import CheckBalanceCard from "../components/Profile/checkBalance";
-import SettingsCompo from "../components/Profile/settings";
+import CheckBalanceCard from "../components/profile/checkBalance";
+import SettingsCompo from "../components/profile/settings";
 
 
 const ProfileScreen=()=>{

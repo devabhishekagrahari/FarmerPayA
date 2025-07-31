@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../screens/HomeScreen';;
+import HomeScreen from '../screens/HomeScreen';
 import Language_unavailableScreen from '../components/emptyState/Language-unavailable';
 import AIChat from '../screens/AIChat/AIChat.tsx';
 import NotificationScreen from '../components/emptyState/no-notification.tsx';
@@ -27,7 +27,7 @@ import ProfileScreen from '../screens/Profile/Profile.tsx'; // Adjust path if ne
 const { width, height } = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
 
-const AppNavigator = ({navigation}:any) => (
+const AppNavigator = ({ navigation }: any) => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarShowLabel: false,
@@ -54,12 +54,21 @@ const AppNavigator = ({navigation}:any) => (
             IconComponent = HomeInactive;
         }
 
-  const isScanner = route.name === 'Scanner';
+        const isScanner = route.name === 'Scanner';
 
         return (
-          <View style={isScanner ? styles.scannerIconContainer : styles.iconWrapper}>
-            {focused&&<View style={{height:2, width:15, backgroundColor:'#6929C4' }}/>}
-            <IconComponent width={isScanner ? 56 : 56} height={isScanner ? 56 : 56}/>
+          <View
+            style={isScanner ? styles.scannerIconContainer : styles.iconWrapper}
+          >
+            {focused && (
+              <View
+                style={{ height: 2, width: 15, backgroundColor: '#6929C4' }}
+              />
+            )}
+            <IconComponent
+              width={isScanner ? 56 : 56}
+              height={isScanner ? 56 : 56}
+            />
           </View>
         );
       },
@@ -84,10 +93,12 @@ const AppNavigator = ({navigation}:any) => (
       name="Scanner"
       component={QrScreen}
       options={{
-        tabBarButton: (props) => (
+        tabBarButton: props => (
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() =>{navigation.navigate('QrScreen')}}
+            onPress={() => {
+              navigation.navigate('QrScreen');
+            }}
             style={styles.scannerButtonWrapper}
           >
             {props.children}
@@ -106,11 +117,11 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop:16
+    paddingTop: 16,
   },
   notFocused: {
-  marginTop: 8, // 👈 tweak this value to control spacing
-},
+    marginTop: 8, // 👈 tweak this value to control spacing
+  },
   svgIcon: {
     width: 24,
     height: 24,

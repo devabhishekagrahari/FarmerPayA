@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Avatar from "../../assets/images/profile/Avatar.svg"
-import QuestionIcon from "../../assets/images/profile/questionIcon.svg"
-import UpiIcon from "../../assets/images/profile/upiIcon.svg"
-import SecurityIcon from "../../assets/images/profile/securityIcon.svg"
-import LockIcon from "../../assets/images/profile/lockIcon.svg"
-import PrivacyIcon from "../../assets/images/profile/privacyIcon.svg"
+import Avatar from "../../assets/images/Profile/Avatar.svg"
+import QuestionIcon from "../../assets/images/Profile/questionIcon.svg"
+import UpiIcon from "../../assets/images/Profile/upiIcon.svg"
+import SecurityIcon from "../../assets/images/Profile/securityIcon.svg"
+import LockIcon from "../../assets/images/Profile/lockIcon.svg"
+import PrivacyIcon from "../../assets/images/Profile/privacyIcon.svg"
 
 const SettingsCompo=()=>{
     return(
