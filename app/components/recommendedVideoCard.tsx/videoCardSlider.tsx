@@ -29,13 +29,13 @@ const RecommendedVideoSlider: React.FC = () => {
 
       <Animated.FlatList
         data={videoData}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 16 }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: true }
+          { useNativeDriver: true },
         )}
         scrollEventThrottle={16}
         renderItem={({ item, index }) => {

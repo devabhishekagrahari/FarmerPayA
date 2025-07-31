@@ -20,6 +20,21 @@ const schemes: Scheme[] = [
 ];
 
 const SchemeSlider: React.FC = () => {
+  const renderSchemeCard = ({ item, index }: { item: Scheme; index: number }) => {
+    const isFirst = index === 0;
+    const isLast = index === schemes.length - 1;
+    
+    return (
+      <View style={[
+        styles.cardContainer,
+        isFirst && styles.firstCard,
+        isLast && styles.lastCard
+      ]}>
+        <SchemeCard {...item} />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.heading}>Find Schemes for you</Text>
@@ -29,8 +44,7 @@ const SchemeSlider: React.FC = () => {
         keyExtractor={(_, index) => index.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <SchemeCard {...item} />}
-        contentContainerStyle={styles.slider}
+        renderItem={renderSchemeCard}
       />
     </View>
   );
@@ -40,7 +54,6 @@ export default SchemeSlider;
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingHorizontal: 16,
     width: '100%',
   },
   heading: {
@@ -48,8 +61,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#2E0B8C',
     marginBottom: 12,
+    paddingHorizontal: 16,
   },
-  slider: {
+  cardContainer: {
+    // Base container for each card
+  },
+  firstCard: {
+    paddingLeft: 16,
+  },
+  lastCard: {
     paddingRight: 16,
   },
 });

@@ -27,9 +27,9 @@ const insurances: Insurance[] = [
     emojiImage: require('../../assets/images/nextArrow.png'),
     bgColor1: '#FFECE5',
     bgColor2: '#FADDDA',
-    titleColor:'#252E3D'
+    titleColor: '#252E3D',
   },
-    {
+  {
     title: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
     emojiImage: require('../../assets/images/bimaYojna.png'),
     bgColor1: '#FF8B8B',
@@ -52,10 +52,8 @@ const insurances: Insurance[] = [
     emojiImage: require('../../assets/images/nextArrow.png'),
     bgColor1: '#FFECE5',
     bgColor2: '#FADDDA',
-    titleColor:'#252E3D'
+    titleColor: '#252E3D',
   },
-    
-    
 ];
 
 // Helper to chunk into groups of 4
@@ -113,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 6,
     marginTop: 24,
     marginBottom: 16,
-    paddingHorizontal:16
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 16,
@@ -125,8 +123,7 @@ const styles = StyleSheet.create({
     width: PAGE_WIDTH,
     marginRight: 22,
     justifyContent: 'space-between',
-    left:-10
-
+    left: -10,
   },
   row: {
     flexDirection: 'row',

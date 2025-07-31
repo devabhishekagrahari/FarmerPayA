@@ -27,13 +27,17 @@ const FarmerPayUPI = () => {
 
       <View style={styles.optionsRow}>
         {UPI_OPTIONS.map((item, index) => (
-          <Pressable key={index}  onPress={() => {}}>
-            <Image source={item.icon} style={styles.optionBox} resizeMode="contain" />
+          <Pressable key={index} onPress={() => {}}>
+            <Image
+              source={item.icon}
+              style={styles.optionBox}
+              resizeMode="contain"
+            />
             <Text style={styles.label}>{item.label}</Text>
           </Pressable>
         ))}
-      </View>    
-      <AdSlider/>
+      </View>
+      <AdSlider />
     </View>
   );
 };
@@ -45,14 +49,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
     backgroundColor: '#fff',
-    marginBottom:24,
+    marginBottom: 24,
     flex: 1,
   },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 8,
-    color:'#1F077A',
+    color: '#1F077A',
     marginBottom: 12,
   },
   optionsRow: {
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   optionBox: {
-    width: width * 0.42 ,
+    width: width * 0.42,
     height: 60,
     aspectRatio: 1.1,
     backgroundColor: '#4506A00D',
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#4506A0',
     fontWeight: '500',
-    marginTop:6
+    marginTop: 6,
   },
   banner: {
     borderRadius: 14,

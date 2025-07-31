@@ -1,7 +1,12 @@
 // App.tsx
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// removed the native-stack as they does not support cardStyleInterpolator
+// import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 import SplashScreen from './app/screens/SignUp/splashScreen';
 import PrimaryRoleScreen from './app/screens/SignUp/Farmer/PrimaryRole.tsx';
 import SecondaryRoleScreen from './app/screens/SignUp/Farmer/SecondaryRole.tsx';
@@ -30,14 +35,17 @@ import BankApproval from './app/screens/SignUp/Agent/bankApproval.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
 import ProfileScreen from './app/screens/profileScreen.tsx';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="primaryRole"
-        screenOptions={{ headerShown: false }}
+        screenOptions={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       >
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Splash2" component={ProfileScreen} />
@@ -53,7 +61,6 @@ const App = () => {
         <Stack.Screen name="Main" component={AppNavigator} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="AiChat" component={AIChat} />
-
         <Stack.Screen name="WhoAreU" component={WhoAreUScreen} />
         <Stack.Screen name="AgentSignUp1" component={AgentSignUp1} />
         <Stack.Screen name="AgentSignUp2" component={AgentSignUp2} />

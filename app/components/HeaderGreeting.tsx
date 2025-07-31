@@ -19,30 +19,35 @@ const Header = () => {
   const navigation = useNavigation();
   return (
     <LinearGradient
-      colors={[ '#6929C4','#4506A0']}
+      colors={['#6929C4', '#4506A0']}
       start={{ x: 0.15, y: 0.5 }}
       end={{ x: 1, y: 0.5 }}
       style={styles.container}
-      >
+    >
       <ImageBackground
-        source={require('../assets/images/grid.png')} // use your image path
+        source={require('../assets/images/grid.png')}
         resizeMode="cover"
         style={styles.grid}
       >
         <View style={styles.topRow}>
           <View style={styles.logoRow}>
-            <Image source={require('../assets/images/smLogo.png')} style={styles.logo} />
+            <Image
+              source={require('../assets/images/smLogo.png')}
+              style={styles.logo}
+            />
             <Text style={styles.appName}>Farme₹Pay</Text>
           </View>
           <View style={styles.iconsRow}>
-            <TouchableOpacity 
-              style={styles.iconButton} 
+            <TouchableOpacity
+              style={styles.iconButton}
               onPress={() => navigation.navigate('Notification')}
             >
-              <Image source={require('../assets/images/notificationIcon.png')}/>
+              <Image
+                source={require('../assets/images/notificationIcon.png')}
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Image source={require('../assets/images/signIcon.png')}/>
+              <Image source={require('../assets/images/signIcon.png')} />
             </TouchableOpacity>
           </View>
         </View>
@@ -54,7 +59,7 @@ const Header = () => {
             <Text style={styles.subText}>How can we help you today?</Text>
           </View>
           <Image
-            source={require('../assets/images/farmer.png')} // illustration image
+            source={require('../assets/images/farmer.png')}
             style={styles.farmerImg}
             resizeMode="contain"
           />
@@ -67,15 +72,14 @@ const Header = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: height * 0.30,
-    resizeMode:'contain'
+    height: height * 0.3,
+    resizeMode: 'contain',
   },
   grid: {
     flex: 1,
     paddingHorizontal: 16,
-    aspectRatio:1.6,
+    aspectRatio: 1.6,
     paddingTop: 20,
-
   },
   topRow: {
     flexDirection: 'row',
@@ -95,8 +99,8 @@ const styles = StyleSheet.create({
   logo: {
     width: 30,
     height: 40,
-    opacity:2,
-    resizeMode:'contain'
+    opacity: 2,
+    resizeMode: 'contain',
   },
   iconsRow: {
     flexDirection: 'row',
@@ -109,11 +113,10 @@ const styles = StyleSheet.create({
   },
   contentRow: {
     flexDirection: 'row',
-
   },
   textBlock: {
-   top:height*0.09,
-   height: height*0.2,
+    top: height * 0.09,
+    height: height * 0.2,
   },
   greeting: {
     fontSize: 14,
@@ -129,12 +132,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'white',
   },
-farmerImg: {
-  width: width * 0.45,    // 195 out of 441px ≈ 0.44
-  height: height * 0.245,  // adjust based on your design
-  opacity: 1,
-},
-
+  farmerImg: {
+    width: width * 0.45, // 195 out of 441px ≈ 0.44
+    height: height * 0.245, // adjust based on your design
+    opacity: 1,
+  },
 });
 
 export default Header;

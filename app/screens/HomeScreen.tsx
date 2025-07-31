@@ -21,10 +21,9 @@ import Services from '../components/ServiceCard';
 import { InView, IOScrollView } from 'react-native-intersection-observer';
 import CheckBalanceCard from '../components/profile/checkBalance';
 
-const HomeScreen = ({navigation}:any) => {
+const HomeScreen = ({ navigation }: any) => {
   const [aiVisible, setAiVisible] = useState(false);
   return (
-
     <View style={styles.rootContainer}>
       <IOScrollView style={styles.container}>
         <HeaderGreeting />
@@ -32,20 +31,21 @@ const HomeScreen = ({navigation}:any) => {
         <ProfileStatusBar />
         <Services />
         <FarmerPayUPI />
-        
+
         <InView
-          onChange={(inView) => {
+          onChange={inView => {
             setAiVisible(inView);
           }}
           triggerOnce={false}
-        > <AIAdvisory  inView={aiVisible} navigation={navigation}/></InView>
-     
+        >
+          <AIAdvisory inView={aiVisible} navigation={navigation} />
+        </InView>
+
         <SchemeSlider />
         <InsuranceSlider />
         <AddDetailSlider />
+
         <RecommendedVideoSlider />
-
-
 
         <Image
           source={require('../assets/images/bottomImage.png')}
@@ -66,7 +66,6 @@ const HomeScreen = ({navigation}:any) => {
         />
       </TouchableOpacity>
     </View>
-   
   );
 };
 
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 30, // Replace `top: 779` with bottom for responsive layout
-    right: 10,  // Replace `left: 356` with right for alignment on all screens
+    right: 10, // Replace `left: 356` with right for alignment on all screens
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,

@@ -7,18 +7,16 @@ const ProfileStatusCard = () => {
   const progress = 70;
 
   return (
-
     <View style={styles.container}>
       <Text style={styles.title}>Onboarding</Text>
-      
-          <LinearGradient
-            colors={['#E9EBFC', '#F5F4FA', '#E9EBFC']}
-            locations={[0, 0.5029, 1]}
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            style={styles.card}
-          >
 
+      <LinearGradient
+        colors={['#E9EBFC', '#F5F4FA', '#E9EBFC']}
+        locations={[0, 0.5029, 1]}
+        start={{ x: 0, y: 0.5 }}
+        end={{ x: 1, y: 0.5 }}
+        style={styles.card}
+      >
         <View style={styles.textSection}>
           <Text style={styles.statusTitle}>
             Profile Status: {progress}% Complete
@@ -29,10 +27,8 @@ const ProfileStatusCard = () => {
         </View>
 
         <CircularProgress progress={progress} />
- 
       </LinearGradient>
     </View>
-    
   );
 };
 
@@ -42,19 +38,19 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     marginTop: 24,
-    marginBottom:24
+    marginBottom: 24,
   },
-  title: { 
+  title: {
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 8,
-    color:'#1F077A',
+    color: '#1F077A',
     marginBottom: 12,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    aspectRatio:3.5090,
+    aspectRatio: 3.509,
     justifyContent: 'space-between',
     borderRadius: 16,
     padding: 16,
