@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Clipboard, Image } from 'react-native';
 import CopyIcon from '../../assets/images/Profile/copy.svg';
-import SBIIcon from '../../assets/images/Profile/sbi.png'; // Ensure correct path
+import SBIIcon from '../../assets/images/Profile/sbi.png';
 
 interface BankDetailsCardProps {
   bankName: string;

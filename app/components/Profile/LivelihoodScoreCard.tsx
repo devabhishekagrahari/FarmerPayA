@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SemiCircleProgress  from './SemiCircleProgress';
-// SVGs
 import Productivity from '../../assets/images/Profile/productivity.svg';
 import Financial from '../../assets/images/Profile/rupee.svg';
 import Risk from '../../assets/images/Profile/risk.svg';
 import Engagement from '../../assets/images/Profile/engagement.svg';
 import Sound from '../../assets/images/Profile/sound.svg';
-import MedalIcon from './Livelihood/MedalIcon';
+import MedalIcon from '../../assets/images/Profile/medal.svg';
 import Medal from '../../assets/images/Profile/medal.svg';
+
 interface ScoreSection {
   label: string;
   icon: React.ReactNode;
