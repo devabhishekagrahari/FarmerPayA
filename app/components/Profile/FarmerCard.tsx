@@ -7,7 +7,7 @@ import {
   Alert,
   Image,
 } from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
+// import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CopyIcon from '../../assets/images/Profile/copy.svg';
 
@@ -28,7 +28,7 @@ const FarmerCard: React.FC<FarmerCardProps> = ({
   onAddDetails,
 }) => {
   const copyToClipboard = () => {
-    Clipboard.setString(id);
+    // Clipboard.setString(id);
     //Alert.alert('Copied', 'Farmer ID copied to clipboard.');
   };
 
@@ -79,9 +79,7 @@ const styles = StyleSheet.create({
   backgroundColor: '#F8F8F8',     // light grey for card (not screen)
   borderWidth: 1,
   borderColor: '#C0C0C0',
-  padding: 16,
-  marginVertical: 10,
-  marginHorizontal: 20,
+  padding: 12,
   shadowColor: 'transparent',     // remove shadow if unwanted
   elevation: 0,                   // no Android elevation
 },
@@ -150,11 +148,11 @@ rightSection: {
     marginTop: 4,
   },
   idLabel: {
-    fontSize: 13,
+    fontSize: 10,
     color: '#6E6E6E',
   },
   idValue: {
-    fontSize: 13,
+    fontSize: 10,
     color: '#1A1A1A',
     fontWeight: '600',
     marginRight: 4,

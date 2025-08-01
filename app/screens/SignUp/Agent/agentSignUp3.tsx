@@ -13,6 +13,7 @@ import {
   Pressable,
 } from 'react-native';
 
+import GpsIcon from '../../../assets/images/GpsIcon.svg';
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
@@ -114,7 +115,7 @@ useEffect(() => {
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Pincode</Text>
               <View style={styles.inputBox}>
-                <VillageIcon height={25} width={25} fill="#A0A0A0" />
+                <GpsIcon height={25} width={25} fill="#A0A0A0" />
                 <TextInput
                   placeholder="Turn on gps to drop precise pin"
                   style={styles.input}
@@ -204,7 +205,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF',
   },
   footerText: {

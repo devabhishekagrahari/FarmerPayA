@@ -12,8 +12,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FarmerCard from '../../components/Profile/FarmerCard';
 import LivelihoodScoreCard from '../../components/Profile/LivelihoodScoreCard';
 import BankDetailsCard from '../../components/Profile/BankDetailsCard';
+import CheckBalanceCard from '../../components/Profile/checkBalance';
+import SettingsCompo from '../../components/Profile/settings';
 
-const ProfileScreen = ({ navigation }: any) => {
+const ProfileScreenz = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
@@ -44,6 +46,10 @@ const ProfileScreen = ({ navigation }: any) => {
           upiId="animesh@ybl"
           onManage={() => console.log('Manage bank account')}
         />
+        
+        <CheckBalanceCard/>
+        <SettingsCompo/>
+        <Text style={{fontSize:30, fontWeight:600,color:'#D1BDED'}}>Built with ❤️ for Indian Agriculture</Text>
       </ScrollView>
     </View>
   );
@@ -51,19 +57,19 @@ const ProfileScreen = ({ navigation }: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF', // <-- pure white screen background
-  },
+    flexDirection:'column',
+    backgroundColor: '#FFFFFF',
+    padding:16,
+    paddingTop:8
+    },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 14,
-    paddingBottom: 8,
+    marginBottom: 12,
     backgroundColor: '#FFFFFF', // <-- match background
-    borderBottomWidth: 1,       // optional: subtle border like Figma
-    borderBottomColor: '#FFFFFF',
+       // optional: subtle border like Figma
+    elevation:2
   },
   headerTitle: {
     fontSize: 20,
@@ -74,10 +80,13 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   scrollContainer: {
-    paddingBottom: 20,
-    paddingTop: 10,
+    bottom:20,
+    paddingBottom:100,
+    paddingTop:25,
+    flexDirection:'column',
+    gap:20,
     backgroundColor: '#FFFFFF', // <-- ensure scroll area is also white
   },
 });
 
-export default ProfileScreen;
+export default ProfileScreenz;

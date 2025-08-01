@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import  {VoiceChat}  from '../../components/AiAdvisoryComponents/VoiceBubble';
 import ChatInputBar from '../../components/AiAdvisoryComponents/chatInputBar';
 import CustomTopBar from '../../components/customTopBar';
 import DualAnimatedRows from '../../components/animation';
-import { useRoute } from '@react-navigation/native';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
 
 
 interface historyProps {
@@ -35,12 +35,6 @@ interface historyProps {
   answerVoice?: string;
   answerText?: string;
 };
-
-
-
-
-
-
 
 const options = [
   'Where is nearest seed shop? 🌱',
@@ -83,14 +77,20 @@ const AIChat = ({navigation}:any) => {
 ]);
 
 
-  const [inputText, setInputText] = useState('');
-  const handleSubmit = () => {
-    if (!inputText.trim()) return;
-
+const [inputText, setInputText] = useState('');
+const handleSubmit = (paramInput?: string) => {
+    let prmpt:string;
+    // if (!inputText.trim()) return;
+    if(paramInput){
+        prmpt= paramInput.trim();
+    }else{
+        prmpt= inputText.trim();
+    }
+    
     const newItem: historyProps = {
       id: '4', // unique ID based on timestamp
       type: 'text',
-      prompt: inputText,
+      prompt: prmpt,
       answer: 'Default answer coming soon...Default answer coming soon...Default answer coming soon...Default answer coming soon...', // ⬅️ you can customize this
       onPress: () => console.log(`Edit prompt: ${inputText.trim()}`),
     };
@@ -98,21 +98,28 @@ const AIChat = ({navigation}:any) => {
     setHistory(prev => [ ...prev,newItem]); // add to top of list
     setInputText('');
   };
+  const scrollRef = useRef<ScrollView>(null);
 
-  const route = useRoute<any>();
-  useEffect(()=>{
-    if(route?.params?.inputText){
-      setInputText(route.params.inputText);
+  useEffect(() => {
+    scrollRef.current?.scrollToEnd({ animated: true });
+  }, [history]);
+
+const route = useRoute<any>();
+useFocusEffect(
+  useCallback(() => {
+    const paramInput = route?.params?.inputText || route?.params?.item;
+
+    if (paramInput) {
+      setInputText(paramInput);
+      handleSubmit(paramInput);
+
+      // Optionally clear the param so it doesn't trigger again
+      navigation.setParams({ inputText: undefined, item: undefined });
     }
-  },[route?.params?.inputText]);
-  useEffect(()=>{
-    if(route?.params?.item){
-      setInputText(route.params.item);
-    }
-  },[route?.params?.item]);
-  function alert(arg0: string) {
-    throw new Error('Function not implemented.');
-  }
+  }, [route?.params])
+);
+
+
 
 return (
 
@@ -126,6 +133,7 @@ return (
           </View>
 
           <ScrollView
+            ref={scrollRef}
             contentContainerStyle={styles.optionsContainer}
             showsVerticalScrollIndicator={false}
           >

@@ -23,6 +23,7 @@ import ProfileActive from '../assets/images/nav/active-profile.svg';
 import ProfileInactive from '../assets/images/nav/profile.svg';
 import QrScreen from '../screens/scanner/qr.tsx';
 import ProfileScreen from '../screens/Profile/Profile.tsx'; // Adjust path if needed
+import ProfileScreenz from '../screens/Profile/Profile.tsx';
 
 const { width, height } = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
@@ -96,7 +97,7 @@ const AppNavigator = ({navigation}:any) => (
       }}
     />
     <Tab.Screen name="Weather" component={Language_unavailableScreen} />
-    <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Screen name="Profile" component={ProfileScreenz} />
   </Tab.Navigator>
 );
 

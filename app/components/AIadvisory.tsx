@@ -5,17 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import DualAnimatedRows from './animation';
 import { InView } from 'react-native-intersection-observer';
 const{width,height}=Dimensions.get('window');
-const QUESTIONS = [
-  { text: 'Where is nearest seed shop? 🌱' },
-  { text: 'गेहूँ की MSP क्या है?” 🌾' },
-  { text: 'Aaj ka mausam? ☀️' },
-  { text: 'ಮೇಯುವ ಸರ್ಕಾರ ಯೋಜನೆಗೆ ಅರ್ಹನು? 📚' },
-  { text: 'Which government scheme am I eligible for? 📄' },
-  { text: 'How to get Kisan Card? 📄' },
-  { text: 'बोरवेल गहराई? 💧' },
-  { text: 'गेहूँ की MSP क्या है?” 🌾' },
-  { text: 'Aaj ka mausam? ☀️' }, 
-];
+
 interface AIAdvisoryProps {
   inView: boolean;
   navigation:any;
