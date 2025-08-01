@@ -19,6 +19,7 @@ import AddDetailSlider from '../components/detailsSlider/detailSlider';
 import RecommendedVideoSlider from '../components/recommendedVideoCard.tsx/videoCardSlider';
 import Services from '../components/ServiceCard';
 import { InView, IOScrollView } from 'react-native-intersection-observer';
+import CheckBalanceCard from '../components/Profile/checkBalance';
 
 const HomeScreen = ({navigation}:any) => {
   const [aiVisible, setAiVisible] = useState(false);
@@ -27,6 +28,7 @@ const HomeScreen = ({navigation}:any) => {
     <View style={styles.rootContainer}>
       <IOScrollView style={styles.container}>
         <HeaderGreeting />
+
         <ProfileStatusBar />
         <Services />
         <FarmerPayUPI />

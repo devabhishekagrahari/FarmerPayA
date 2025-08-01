@@ -257,7 +257,7 @@ const AgentSignUp4 = ({ navigation }: any) => {
               </View>
             </View>
 
-            <View style={styles.formGroup}>
+            {/* <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Partner Bank Name</Text>
               <View style={styles.inputBox}>
                 <BankIcon height={25} width={25} />
@@ -283,13 +283,13 @@ const AgentSignUp4 = ({ navigation }: any) => {
                   onChangeText={(text) => setFormData({ ...formData, branchCode: text })}
                 />
               </View>
-            </View>
+            </View> */}
  
         {/* Upload 2 */}
 
 
         <View style={{height:height*0.25 ,backgroundColor:'#fff'}}>
-      
+          <View style={styles.formGroup}>
         <Text style={styles.label}>Upload Cancelled Check</Text> 
         {file2 && <View style={styles.pillBox}>
         <View style={styles.pill}>
@@ -323,7 +323,7 @@ const AgentSignUp4 = ({ navigation }: any) => {
             <Image source={{ uri: file2.uri }} style={styles.preview} resizeMode="cover" />
             <View style={{ flex: 1, backgroundColor:'#fff',marginLeft: 12 }}>
               <View style={{flexDirection:'row' ,alignItems:'center',justifyContent:'space-between'}}>
-                <Text style={styles.fileName}>Employee ID card</Text>  
+                <Text style={styles.fileName}>Canceled Check</Text>  
                 <View style={{flexDirection:'row', alignItems:'center',gap:4}}>
                 <TouchableOpacity onPress={pickAndSimulateUpload2}>
                 <RefreshIcon height={20}/> </TouchableOpacity>         
@@ -340,7 +340,7 @@ const AgentSignUp4 = ({ navigation }: any) => {
           </View>
           </Animated.View>
         )}
-
+        </View>
       </View>
 
             <View style={{ gap: 16 }}>
@@ -351,6 +351,11 @@ const AgentSignUp4 = ({ navigation }: any) => {
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
+              <View style={{justifyContent:'center',flexDirection:'column'}}>
+               <Text style={{textAlign:'center', fontSize:10}}>We collect basic personal and performance info to track your sales, calculate payouts, and deliver rewards. Your data stays secure and is used only as described in our 
+               </Text>
+               <Text style={{textAlign:'center' ,fontSize:10 ,color:'#54219D'}}>Privacy Policy</Text>
+              </View>
             </View>
       </View>
         </ScrollView>
@@ -409,7 +414,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF',
   },
   footerText: {

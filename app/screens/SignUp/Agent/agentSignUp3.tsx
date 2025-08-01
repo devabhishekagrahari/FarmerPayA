@@ -13,6 +13,8 @@ import {
   Pressable,
   Alert,
 } from 'react-native';
+
+import GpsIcon from '../../../assets/images/GpsIcon.svg';
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
@@ -99,7 +101,7 @@ const AgentSignUp3 = ({ navigation }: any) => {
         <ArrowBack />
       </Pressable>
 
-      <Text style={styles.label0}>CORRESPONDENCE ADDRESS</Text>
+      <Text style={styles.label0}>Correspondance  Address</Text>
 
             {/* Checkbox */}
 
@@ -132,7 +134,57 @@ const AgentSignUp3 = ({ navigation }: any) => {
               </View>
               ))}
 
-            
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter Village</Text>
+              <View style={styles.inputBox}>
+                <VillageIcon height={25} width={25} color={'#A0A0A0'} />
+                <TextInput
+                  placeholder="Enter your village/town name"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.villageName}
+                />
+              </View>
+            </View>
+
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter City/District Name</Text>
+              <View style={styles.inputBox}>
+                <VillageIcon height={25} width={25} fill="#A0A0A0" />
+                <TextInput
+                  placeholder="Choose your city"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.city}
+                />
+              </View>
+            </View>
+
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter Pincode</Text>
+              <View style={styles.inputBox}>
+                <GpsIcon height={25} width={25} fill="#A0A0A0" />
+                <TextInput
+                  placeholder="Turn on gps to drop precise pin"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.pincode}
+                />
+              </View>
+            </View>
+
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter State</Text>
+              <View style={styles.inputBox}>
+                <StateIcon height={25} width={25} />
+                <TextInput
+                  placeholder="Choose your state"
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.state} 
+                />
+              </View>
+            </View>
 
             <View style={{ gap: 16 }}>
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
@@ -199,7 +251,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF',
   },
   footerText: {

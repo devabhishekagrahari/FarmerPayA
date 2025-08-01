@@ -22,6 +22,8 @@ import UpiActiveIcon from '../assets/images/nav/active-upi.svg';
 import ProfileActive from '../assets/images/nav/active-profile.svg';
 import ProfileInactive from '../assets/images/nav/profile.svg';
 import QrScreen from '../screens/scanner/qr.tsx';
+import ProfileScreen from '../screens/Profile/Profile.tsx'; // Adjust path if needed
+import ProfileScreenz from '../screens/Profile/Profile.tsx';
 
 const { width, height } = Dimensions.get('window');
 const Tab = createBottomTabNavigator();
@@ -95,7 +97,7 @@ const AppNavigator = ({navigation}:any) => (
       }}
     />
     <Tab.Screen name="Weather" component={Language_unavailableScreen} />
-    <Tab.Screen name="Profile" component={HomeScreen} />
+    <Tab.Screen name="Profile" component={ProfileScreenz} />
   </Tab.Navigator>
 );
 
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 18,
+    bottom: 10,
     alignSelf: 'center',
     padding: 10,
     elevation: 5,

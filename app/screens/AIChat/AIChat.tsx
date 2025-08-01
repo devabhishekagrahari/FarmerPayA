@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import  {VoiceChat}  from '../../components/AiAdvisoryComponents/VoiceBubble';
 import ChatInputBar from '../../components/AiAdvisoryComponents/chatInputBar';
 import CustomTopBar from '../../components/customTopBar';
 import DualAnimatedRows from '../../components/animation';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
 
 
 interface historyProps {
@@ -35,12 +36,6 @@ interface historyProps {
   answerText?: string;
 };
 
-
-
-
-
-
-
 const options = [
   'Where is nearest seed shop? 🌱',
   'How to get Kisan Card? 📄',
@@ -54,7 +49,9 @@ const options = [
 ];
 
 // Mixed chat history: both voice and text
-const history:historyProps[] = [
+ 
+const AIChat = ({navigation}:any) => {
+  const [history, setHistory] = useState<historyProps[]>([
   {
     id:'1',
     type: 'text',
@@ -77,15 +74,52 @@ const history:historyProps[] = [
     answer: `The MSP for wheat in 2024-25 is ₹2,275 per quintal.`,
     onPress: () => console.log('Edit MSP'),
   },
-];
-
-const AIChat = () => {
-  const [inputText, setInputText] = useState('');
+]);
 
 
-  function alert(arg0: string) {
-    throw new Error('Function not implemented.');
-  }
+const [inputText, setInputText] = useState('');
+const handleSubmit = (paramInput?: string) => {
+    let prmpt:string;
+    // if (!inputText.trim()) return;
+    if(paramInput){
+        prmpt= paramInput.trim();
+    }else{
+        prmpt= inputText.trim();
+    }
+    
+    const newItem: historyProps = {
+      id: '4', // unique ID based on timestamp
+      type: 'text',
+      prompt: prmpt,
+      answer: 'Default answer coming soon...Default answer coming soon...Default answer coming soon...Default answer coming soon...', // ⬅️ you can customize this
+      onPress: () => console.log(`Edit prompt: ${inputText.trim()}`),
+    };
+
+    setHistory(prev => [ ...prev,newItem]); // add to top of list
+    setInputText('');
+  };
+  const scrollRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollToEnd({ animated: true });
+  }, [history]);
+
+const route = useRoute<any>();
+useFocusEffect(
+  useCallback(() => {
+    const paramInput = route?.params?.inputText || route?.params?.item;
+
+    if (paramInput) {
+      setInputText(paramInput);
+      handleSubmit(paramInput);
+
+      // Optionally clear the param so it doesn't trigger again
+      navigation.setParams({ inputText: undefined, item: undefined });
+    }
+  }, [route?.params])
+);
+
+
 
 return (
 
@@ -99,6 +133,7 @@ return (
           </View>
 
           <ScrollView
+            ref={scrollRef}
             contentContainerStyle={styles.optionsContainer}
             showsVerticalScrollIndicator={false}
           >
@@ -123,11 +158,13 @@ return (
 
       <View style={{ marginBottom: -14, width: '100%' }}>
         <ChatInputBar
+        navigation={navigation}
           value={inputText}
           onChangeText={(text) => {
             setInputText(text);
             console.log('Typed:', text);
           }}
+          onSubmitEditing={handleSubmit}
           onMicPress={() => Alert.alert('Mic pressed')}
           onGalleryPress={() => Alert.alert('Gallery pressed')}
         />

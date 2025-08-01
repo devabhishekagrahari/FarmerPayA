@@ -33,6 +33,8 @@ import SpicePlantSelection from './app/screens/SignUp/Farmer/SpicePLantSelection
 import FruitPlantSelection from './app/screens/SignUp/Farmer/FruitPlantSelection';
 import VegetableSelectionScreen from './app/screens/SignUp/Farmer/VegetablePlantSelection.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
+import ProfileScreen from './app/screens/profileScreen.tsx';
+import ProfileScreenz from './app/screens/Profile/Profile.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +43,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Splash2" component={SplashScreen2} />
         <Stack.Screen name="primaryRole" component={PrimaryRoleScreen} /> 
         <Stack.Screen name="secondaryRole" component={SecondaryRoleScreen} />
         <Stack.Screen name="selectLanguage" component={SelectLanguageScreen}/>
@@ -53,7 +56,6 @@ const App = () => {
         <Stack.Screen name="Main" component={AppNavigator} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="AiChat" component={AIChat} />
-        <Stack.Screen name="Splash2" component={SplashScreen2} />
         <Stack.Screen name="WhoAreU" component={WhoAreUScreen} />
         <Stack.Screen name="AgentSignUp1" component={AgentSignUp1}/>
         <Stack.Screen name="AgentSignUp2" component={AgentSignUp2}/>

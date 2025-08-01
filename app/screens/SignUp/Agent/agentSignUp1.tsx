@@ -31,9 +31,10 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
-  const [checked, setChecked] = useState({
+   const [checked, setChecked] = useState({
     bankSakhi: false,
-    shg: false,
+    pacs: false,
+    fpo:false,
     csc:false,
     vittaSakhi: false,
     Adathiya:false
@@ -50,56 +51,63 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
   ];
   const designationOptions = [
   { label: 'Bank Sakhi', value: 'Bank Sakhi' },
-  { label: 'Self Help Group', value: 'SHG' },
+  { label: 'PACS Secretary', value: 'PACS' },
+  { label: 'FPO Secretary', value: 'FPO' },
   { label: 'CSC', value: 'CSC' },
   { label: 'Vitta Sakhi', value: 'Vitta Sakhi' },
   { label: 'Adathiya', value: 'Adathiya' },
 ];
-
   
-  const handleRegisterAgent = async()=>{
-    if (!fullName || !gender || !age || !designation || !aadharCard || !panCard) {
-      setErrorMessage('Please fill all fields');
-      return;
-    }
-    try{
-      const response = await axios.post(`${BASE_URL}/agent/`, {
-        user_id,
-        full_name: fullName,
-        gender,
-        age,
-        designation,
-        aadhar_card: aadharCard,
-        pan_card: panCard,
-        mobile,
-        email: "" // optional if you don’t collect it now
+  const handleRegisterAgent = async () => {
+  const selectedDesignation = Object.keys(checked).find(key => checked[key as keyof typeof checked]) || '';
+  
+  if (!fullName || !gender || !age || !selectedDesignation || !aadharCard || !panCard) {
+    setErrorMessage('Please fill all fields');
+    return;
+  }
+
+  try {
+    const response = await axios.post(`${BASE_URL}/agent/`, {
+      user_id,
+      full_name: fullName,
+      gender,
+      age,
+      designation: selectedDesignation, // from radio selection
+      aadhar_card: aadharCard,
+      pan_card: panCard,
+      mobile,
+      email: "" // optional for now
     });
-      console.log('Agent Registered: ', response.data);
-      try {
-        const patchRes = await axios.patch(`${BASE_URL}/user/update-isRegistered/${user_id}`);
-        console.log('Status updated to REGISTERED:', patchRes.data);
-      } catch (patchError) {
-        console.error('Failed to update user status:', patchError);
-      }
-      navigation.navigate('AgentSignUp2', { user_id, mobile });
 
-    }catch(error:any){
-      console.log('Data was:',{
-        user_id,
-        full_name: fullName,
-        gender,
-        age,
-        designation,
-        aadhar_card: aadharCard,
-        pan_card: panCard,
-        mobile,
-        email: ""
-      });
+    console.log('Agent Registered: ', response.data);
 
-      console.error('Error in Registeration :', error);
-      setErrorMessage(error?.response?.data?.message || 'Failed to register. Please try again.');
+    try {
+      const patchRes = await axios.patch(`${BASE_URL}/user/update-isRegistered/${user_id}`);
+      console.log('Status updated to REGISTERED:', patchRes.data);
+    } catch (patchError) {
+      console.error('Failed to update user status:', patchError);
     }
-  };
+
+    navigation.navigate('AgentSignUp2', { user_id, mobile });
+
+  } catch (error: any) {
+    console.log('Data was:', {
+      user_id,
+      full_name: fullName,
+      gender,
+      age,
+      designation: selectedDesignation,
+      aadhar_card: aadharCard,
+      pan_card: panCard,
+      mobile,
+      email: ""
+    });
+
+    console.error('Error in Registration:', error);
+    setErrorMessage(error?.response?.data?.message || 'Failed to register. Please try again.');
+  }
+};
+
 
   return (
     <ScrollView>
@@ -186,36 +194,54 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
     />
           </View>
         </View>
-
+       
         {/* Designation Options */}
-        <Text style={styles.label}>Enter Designation <Text style={{color:'#FF0000'}}>*</Text></Text>
-        <View style={{ gap: 8, flexDirection: 'row', justifyContent: 'space-between' }}>
+<Text style={styles.label}>Choose Your Designation <Text style={{color:'#FF0000'}}>*</Text></Text>
+
+<View style={{ gap: 8, flexDirection: 'row', justifyContent: 'space-between' }}>
   <View style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-    <TouchableOpacity onPress={() => setDesignation('Bank Sakhi')} style={styles.checkItem}>
-      {designation === 'Bank Sakhi' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+    <TouchableOpacity onPress={() => setChecked({
+      bankSakhi: true, pacs: false, fpo: false, csc: false, vittaSakhi: false, Adathiya: false
+    })} style={styles.checkItem}>
+      {checked.bankSakhi ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
       <Text>Bank Sakhi</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => setDesignation('SHG')} style={styles.checkItem}>
-      {designation === 'SHG' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
-      <Text>Self Help Group</Text>
+    <TouchableOpacity onPress={() => setChecked({
+      bankSakhi: false, pacs: true, fpo: false, csc: false, vittaSakhi: false, Adathiya: false
+    })} style={styles.checkItem}>
+      {checked.pacs ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>PACS Secretary</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => setDesignation('CSC')} style={styles.checkItem}>
-      {designation === 'CSC' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
-      <Text>CSC</Text>
+    <TouchableOpacity onPress={() => setChecked({
+      bankSakhi: false, pacs: false, fpo: true, csc: false, vittaSakhi: false, Adathiya: false
+    })} style={styles.checkItem}>
+      {checked.fpo ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>FPO Secretary</Text>
     </TouchableOpacity>
   </View>
 
   <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-    <TouchableOpacity onPress={() => setDesignation('Vitta Sakhi')} style={styles.checkItem}>
-      {designation === 'Vitta Sakhi' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+    <TouchableOpacity onPress={() => setChecked({
+      bankSakhi: false, pacs: false, fpo: false, csc: false, vittaSakhi: true, Adathiya: false
+    })} style={styles.checkItem}>
+      {checked.vittaSakhi ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
       <Text>Vitta Sakhi</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => setDesignation('Adathiya')} style={styles.checkItem}>
-      {designation === 'Adathiya' ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+    <TouchableOpacity onPress={() => setChecked({
+      bankSakhi: false, pacs: false, fpo: false, csc: false, vittaSakhi: false, Adathiya: true
+    })} style={styles.checkItem}>
+      {checked.Adathiya ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
       <Text>Adathiya</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => setChecked({
+      bankSakhi: false, pacs: false, fpo: false, csc: true, vittaSakhi: false, Adathiya: false
+    })} style={styles.checkItem}>
+      {checked.csc ? <View style={styles.checkedCircle} /> : <View style={styles.circleCheck} />}
+      <Text>CSC</Text>
     </TouchableOpacity>
   </View>
 </View>
@@ -337,7 +363,7 @@ const styles = StyleSheet.create({
   },
   continueButtonText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 16,
   },
   footerText: {
     textAlign: 'center',

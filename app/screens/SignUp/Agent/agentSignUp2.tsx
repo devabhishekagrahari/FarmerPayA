@@ -103,7 +103,7 @@ const AgentSignUp2 = ({ navigation, route }: any) => {
          <ArrowBack/>
         </Pressable>
 
-        <Text style={styles.label0}>PERMANENT ADDRESS</Text>
+        <Text style={styles.label0}>Permanent Address</Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF',
   },
   footerText: {
