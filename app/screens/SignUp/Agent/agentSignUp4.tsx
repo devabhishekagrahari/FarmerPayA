@@ -346,7 +346,8 @@ const AgentSignUp4 = ({ navigation }: any) => {
             <View style={{ gap: 16 }}>
               <TouchableOpacity
                 style={styles.button}
-                onPress={handleSubmit}
+                //onPress={handleSubmit}
+                onPress = {()=> navigation.navigate('BankApproval')}
               >
                 <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
