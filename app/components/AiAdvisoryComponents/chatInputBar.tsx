@@ -11,7 +11,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import MicIcon from '../../assets/images/MicIcon.svg'
 import { Text } from 'react-native';
-
+import ArrowIcon from "../../assets/images/Profile/ArrowButton.svg";
 
 interface ChatInputBarProps {
   value: string;
@@ -44,7 +44,12 @@ const ChatInputBar: React.FC<ChatInputBarProps> = ({
         style={[styles.gradientBorder,{width:width*0.75}]}
       >
         <View style={styles.inputBar}>
-             
+          <TouchableOpacity onPress={onGalleryPress}>
+            <Image
+              source={require('../../assets/images/gallery-add.png')}
+              style={styles.iconImg}
+            />
+          </TouchableOpacity>
           <TextInput
             style={styles.input}
             placeholder="Type a message..."
@@ -55,15 +60,10 @@ const ChatInputBar: React.FC<ChatInputBarProps> = ({
             onSubmitEditing={handleSubmit}
           />          
 
-          <TouchableOpacity onPress={onGalleryPress}>
-            <Image
-              source={require('../../assets/images/gallery-add.png')}
-              style={styles.iconImg}
-            />
-          </TouchableOpacity>
+
           {value && (
                     <TouchableOpacity onPress={handleSubmit}>
-            <Text style={{color:'blue'}}>Send</Text>
+             <View style={{ justifyContent:'center', alignItems:'center', borderRadius:48,paddingHorizontal:12,paddingVertical:12}}><ArrowIcon /></View>
           </TouchableOpacity>  
           )}
 

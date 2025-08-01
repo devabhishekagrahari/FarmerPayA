@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// import FarmerCard from '../../components/Profile/FarmerCard';
+import FarmerCard from '../../components/Profile/FarmerCard';
 import LivelihoodScoreCard from '../../components/Profile/LivelihoodScoreCard';
 import BankDetailsCard from '../../components/Profile/BankDetailsCard';
 import CheckBalanceCard from '../../components/Profile/checkBalance';
@@ -29,13 +29,13 @@ const ProfileScreenz = ({ navigation }: any) => {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {/* <FarmerCard
+        <FarmerCard
           name="ABC Kumar"
           role="Crop Farmer"
           location="Nashik"
           id="FX - 1000256"
           onAddDetails={() => console.log('Navigate to add details')}
-        /> */}
+        />
 
         <LivelihoodScoreCard />
 
