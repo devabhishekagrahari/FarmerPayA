@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Clipboard } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Clipboard, Image } from 'react-native';
+import CopyIcon from '../../assets/images/Profile/copy.svg';
+import SBIIcon from '../../assets/images/Profile/sbi.png'; // Ensure correct path
 
 interface BankDetailsCardProps {
   bankName: string;
@@ -24,11 +25,13 @@ const BankDetailsCard: React.FC<BankDetailsCardProps> = ({
 
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>Receiving Money In</Text>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>Receiving Money In</Text>
+      </View>
 
       <View style={styles.bankRow}>
         <View style={styles.bankIconCircle}>
-          <Icon name="bank" size={22} color="#ffffff" />
+          <Image source={SBIIcon} style={styles.bankIcon} resizeMode="contain" />
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.bankName}>{`${bankName} - ${accountSuffix}`}</Text>
@@ -43,7 +46,7 @@ const BankDetailsCard: React.FC<BankDetailsCardProps> = ({
         <Text style={styles.upiLabel}>My UPI ID:</Text>
         <Text style={styles.upiId}>{upiId}</Text>
         <TouchableOpacity onPress={copyUPI}>
-          <Icon name="content-copy" size={16} color="#6E6E6E" />
+          <CopyIcon width={16} height={16} />
         </TouchableOpacity>
       </View>
     </View>
@@ -52,21 +55,24 @@ const BankDetailsCard: React.FC<BankDetailsCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-  borderRadius: 12,
-  backgroundColor: '#F8F8F8',     // light grey for card (not screen)
-  borderWidth: 1,
-  borderColor: '#C0C0C0',
-  padding: 16,
-  marginVertical: 10,
-  marginHorizontal: 20,
-  shadowColor: 'transparent',     // remove shadow if unwanted
-  elevation: 0,                   // no Android elevation
-},
+    borderRadius: 12,
+    backgroundColor: '#F8F8F8',
+    borderWidth: 1,
+    borderColor: '#C0C0C0',
+    padding: 16,
+    marginVertical: 10,
+    marginHorizontal: 20,
+  },
+  titleWrapper: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+    paddingBottom: 8,
+    marginBottom: 16,
+  },
   title: {
-    fontSize: 14,
     fontWeight: '600',
+    fontSize: 16,
     marginBottom: 12,
-    color: '#333',
   },
   bankRow: {
     flexDirection: 'row',
@@ -77,10 +83,14 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: '#1976D2',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
+  },
+  bankIcon: {
+    width: 36,
+    height: 36,
   },
   bankName: {
     fontSize: 15,
@@ -92,16 +102,25 @@ const styles = StyleSheet.create({
     color: '#777',
   },
   manageBtn: {
-    backgroundColor: '#6C00FF',
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 20,
-  },
+  width: 75,
+  height: 40,
+  paddingHorizontal: 14,
+  paddingVertical: 6,
+  borderRadius: 20,
+  borderWidth: 1,
+  borderColor: '#54219D',
+  backgroundColor: '#F8F8F8',
+  alignItems: 'center',         // centers horizontally
+  justifyContent: 'center',     // centers vertically 
+},
+
   manageText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: '600',
-  },
+  color: '#54219D',
+  fontSize: 12,
+  fontWeight: '600',
+  textAlign: 'center',
+},
+
   upiRow: {
     flexDirection: 'row',
     alignItems: 'center',
