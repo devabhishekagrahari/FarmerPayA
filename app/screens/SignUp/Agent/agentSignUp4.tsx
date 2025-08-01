@@ -214,7 +214,7 @@ const [file2, setFile2] = useState<any>(null);
 
 
         <View style={{height:height*0.25 ,backgroundColor:'#fff'}}>
-      
+          <View style={styles.formGroup}>
         <Text style={styles.label}>Upload Cancelled Check</Text> 
         {file2 && <View style={styles.pillBox}>
         <View style={styles.pill}>
@@ -248,7 +248,7 @@ const [file2, setFile2] = useState<any>(null);
             <Image source={{ uri: file2.uri }} style={styles.preview} resizeMode="cover" />
             <View style={{ flex: 1, backgroundColor:'#fff',marginLeft: 12 }}>
               <View style={{flexDirection:'row' ,alignItems:'center',justifyContent:'space-between'}}>
-                <Text style={styles.fileName}>Employee ID card</Text>  
+                <Text style={styles.fileName}>Canceled Check</Text>  
                 <View style={{flexDirection:'row', alignItems:'center',gap:4}}>
                 <TouchableOpacity onPress={pickAndSimulateUpload2}>
                 <RefreshIcon height={20}/> </TouchableOpacity>         
@@ -265,7 +265,7 @@ const [file2, setFile2] = useState<any>(null);
           </View>
           </Animated.View>
         )}
-
+        </View>
       </View>
 
             <View style={{ gap: 16 }}>
