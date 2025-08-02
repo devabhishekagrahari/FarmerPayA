@@ -79,7 +79,7 @@ const OtpVerification = ({
       setError('Incorrect OTP. Please try again.');
     } else {
       setError('');
-      navigation.navigate('WhoAreU');
+      navigation.replace('WhoAreU');
     }
   };
 

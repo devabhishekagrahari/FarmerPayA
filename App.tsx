@@ -12,11 +12,7 @@ import SignUpScreen from './app/screens/SignUp/signUpScreen';
 import SignUpFormScreen1 from './app/screens/SignUp/signUpForm1';
 import SignUpFormScreen2 from './app/screens/SignUp/SignUpForm2';
 import PlantSelectionScreen from './app/screens/SignUp/Farmer/PlantSelectionScreen.tsx';
-import { StatusBar } from 'react-native';
-import NoNotificationScreen from './app/components/emptyState/no-notification'
 import NotificationScreen from './app/screens/NotificationScreen.tsx'
-import DualAnimatedRows from './app/components/animation.tsx';
-import AIAdvisory from './app/components/AIadvisory.tsx';
 import AppNavigator from './app/navigation/AppNavigator';
 import AIChat from './app/screens/AIChat/AIChat';
 import SplashScreen2 from './app/screens/SignUp/splashScreen2';
@@ -28,8 +24,7 @@ import UploadDocumentsScreen from './app/screens/SignUp/Agent/UploadDocumentsScr
 import AgentSignUp4 from './app/screens/SignUp/Agent/agentSignUp4.tsx';
 import BankApproval from './app/screens/SignUp/Agent/bankApproval.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
-import ProfileScreen from './app/screens/profileScreen.tsx';
-import ProfileScreenz from './app/screens/Profile/Profile.tsx';
+
 
 const Stack = createNativeStackNavigator();
 

@@ -14,6 +14,7 @@ import LivelihoodScoreCard from '../../components/Profile/LivelihoodScoreCard';
 import BankDetailsCard from '../../components/Profile/BankDetailsCard';
 import CheckBalanceCard from '../../components/Profile/checkBalance';
 import SettingsCompo from '../../components/Profile/settings';
+import AccountCardSlider from '../../components/Profile/addAccountSlider';
 
 const ProfileScreenz = ({ navigation }: any) => {
   return (
@@ -48,6 +49,7 @@ const ProfileScreenz = ({ navigation }: any) => {
         />
         
         <CheckBalanceCard/>
+        <AccountCardSlider/>
         <SettingsCompo/>
         <Text style={{fontSize:30, fontWeight:600,color:'#D1BDED'}}>Built with ❤️ for Indian Agriculture</Text>
       </ScrollView>
