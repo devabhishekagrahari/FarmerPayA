@@ -30,6 +30,9 @@ import BankApproval from './app/screens/SignUp/Agent/bankApproval.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
 import ProfileScreen from './app/screens/profileScreen.tsx';
 import ProfileScreenz from './app/screens/Profile/Profile.tsx';
+import HelpAndSupport from './app/screens/Profile/HelpandSupport'; 
+import AddNewQuery from './app/screens/Profile/AddNewQuery'; 
+import FAQ from './app/screens/Profile/FAQScreen'; 
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +62,10 @@ const App = () => {
         <Stack.Screen name="BankApproval" component={BankApproval}/>
         <Stack.Screen name="UploadDocumentsScreen" component={UploadDocumentsScreen}/>
         <Stack.Screen name="QrScreen" component={QrScreen}/>
+        <Stack.Screen name="HelpAndSupport" component={HelpAndSupport} /> 
+        <Stack.Screen name="addNewQuery" component={AddNewQuery} /> 
+        
+        <Stack.Screen name="FAQ" component={FAQ} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
