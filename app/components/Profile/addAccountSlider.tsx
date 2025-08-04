@@ -45,10 +45,10 @@ const AccountCard:React.FC<AccountCardProps>=({BankIcon,accountStatus,bankName,a
     );
 }
 
-const AddAccountCard= () => {
+const AddAccountCard= ({navigation}:any) => {
     return (
  <TouchableOpacity
-      onPress={() => console.log('Add new account')}
+      onPress={() =>{navigation.navigate('SelectYourBank')}}
       style={{
         width: width * 0.6,
         borderWidth: 2,
@@ -80,7 +80,7 @@ const AddAccountCard= () => {
   );
     
 };
-const AccountCardSlider=()=>{
+const AccountCardSlider=({navigation}:any)=>{
     return (<View style={{flexDirection:'column',gap:16}}>
         <Text>UPI/Bank Accounts</Text>
         <View style={{height:2,width:width*0.8,backgroundColor:'#DEDEDE'}}/>
@@ -92,7 +92,7 @@ const AccountCardSlider=()=>{
         ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
         renderItem={({ item }) =>{
           if (item.type=== 'add') {
-            return <AddAccountCard />;
+            return <AddAccountCard navigation={navigation} />;
           }   
          return (
           <AccountCard
