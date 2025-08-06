@@ -32,11 +32,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
 
   },
-  title: {
-    fontSize: 12,
-    fontFamily:'Inter',
-    fontWeight: 'bold',
-  },
+title: {
+  fontFamily: 'Inter',
+  fontWeight: '700',         // or 'bold'
+  fontSize: 14,
+  lineHeight: 14,            // 100% of fontSize
+  letterSpacing: -0.72,      // -4% of 18px = -0.72
+  color: '#000000',          // optional, set as needed
+}
+,
   emoji: {
     fontSize: 32,
     alignSelf: 'flex-end',

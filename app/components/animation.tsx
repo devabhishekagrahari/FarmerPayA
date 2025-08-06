@@ -21,8 +21,14 @@ interface AnimatedRowProps {
   onDone: () => void;
 }
 
-const AnimatedRow: React.FC<AnimatedRowProps> = ({ direction, items, onDone }) => {
-  const translateX = useRef(new Animated.Value(direction === 'left' ? -width : width)).current;
+const AnimatedRow: React.FC<AnimatedRowProps> = ({
+  direction,
+  items,
+  onDone,
+}) => {
+  const translateX = useRef(
+    new Animated.Value(direction === 'left' ? -width : width),
+  ).current;
   const scale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -62,7 +68,11 @@ const AnimatedRow: React.FC<AnimatedRowProps> = ({ direction, items, onDone }) =
           style={styles.gradientBorder}
         >
           <View style={styles.pill}>
-            <Text style={styles.pillText} numberOfLines={1} ellipsizeMode="tail">
+            <Text
+              style={styles.pillText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {item}
             </Text>
           </View>
@@ -77,7 +87,10 @@ interface DualAnimatedRowsProps {
   navigation: any;
 }
 
-const DualAnimatedRows: React.FC<DualAnimatedRowsProps> = ({ inView ,navigation}) => {
+const DualAnimatedRows: React.FC<DualAnimatedRowsProps> = ({
+  inView,
+  navigation,
+}) => {
   const [showColumn, setShowColumn] = useState(false);
   const [row1Done, setRow1Done] = useState(false);
   const [row2Done, setRow2Done] = useState(false);
@@ -89,7 +102,7 @@ const DualAnimatedRows: React.FC<DualAnimatedRowsProps> = ({ inView ,navigation}
       setRow1Done(false);
       setRow2Done(false);
       setShowColumn(false);
-      setCycleId((prev) => prev + 1); // force rerender to reset AnimatedRow
+      setCycleId(prev => prev + 1); // force rerender to reset AnimatedRow
     }
   }, [inView]);
 
@@ -116,34 +129,44 @@ const DualAnimatedRows: React.FC<DualAnimatedRowsProps> = ({ inView ,navigation}
   return (
     <>
       {showColumn ? (
-        <View style={{maxHeight:300}}>
-<FlatList
-  data={[...QUESTIONS1, ...QUESTIONS2]}
-  keyExtractor={(item, index) => `${item}-${index}`}
-  renderItem={({ item }) => (
-     <TouchableOpacity onPress={()=>{navigation.navigate('AiChat')}}>
-    <LinearGradient
-      colors={['#FF0000', '#FFA500']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.gradientBorder}
-    >
-     
-      <View style={styles.pill}>
-        {typeof item === 'string' ? (
-          <Text style={styles.pillText} numberOfLines={1} ellipsizeMode="tail">
-            {item}
-          </Text>
-        ) : null}
-      </View>
-
-    </LinearGradient>      </TouchableOpacity>
-  )}
-  horizontal={true}
-  contentContainerStyle={[styles.columnContainer, { paddingBottom: 30 }]}
-  showsVerticalScrollIndicator={true}
-  bounces={true}
-/>
+        <View style={{ maxHeight: 300 }}>
+          <FlatList
+            data={[...QUESTIONS1, ...QUESTIONS2]}
+            keyExtractor={(item, index) => `${item}-${index}`}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('AiChat');
+                }}
+              >
+                <LinearGradient
+                  colors={['#FF0000', '#FFA500']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.gradientBorder}
+                >
+                  <View style={styles.pill}>
+                    {typeof item === 'string' ? (
+                      <Text
+                        style={styles.pillText}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                      >
+                        {item}
+                      </Text>
+                    ) : null}
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            )}
+            horizontal={true}
+            contentContainerStyle={[
+              styles.columnContainer,
+              { paddingBottom: 30 },
+            ]}
+            showsVerticalScrollIndicator={true}
+            bounces={true}
+          />
         </View>
       ) : (
         <>
@@ -192,11 +215,10 @@ const styles = StyleSheet.create({
     color: '#1F077A',
   },
   columnContainer: {
-  flexDirection: 'column',
-  flexWrap:'wrap',
-  paddingVertical: 16,
-  paddingHorizontal: 10,
-  
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    paddingVertical: 16,
+    paddingHorizontal: 10,
   },
   gradientBorder: {
     padding: 1,

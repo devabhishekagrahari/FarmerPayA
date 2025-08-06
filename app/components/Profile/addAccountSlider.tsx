@@ -96,7 +96,7 @@ const AccountCardSlider=({navigation}:any)=>{
           }   
          return (
           <AccountCard
-            BankIcon={item.BankIcon}
+            BankIcon={item.BankIcon?item.BankIcon:SbiIcon}
             accountStatus={item.accountStatus? item.accountStatus : 'Primary'}
             bankName={item.bankName? item.bankName:'Bank Name'}
             accountSuffix={item.accountSuffix? item.accountSuffix:'0000'}

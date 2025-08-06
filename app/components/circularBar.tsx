@@ -64,8 +64,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  progressText: {
-    color: '#4506A0',
-    fontWeight: 'bold',
-  },
+progressText: {
+  fontFamily: 'Inter-Medium',     // Make sure this matches actual internal font name
+  fontWeight: '500',
+  fontSize: 15.04,
+  lineHeight: 15.04,
+  letterSpacing: -0.6,            // Rounded from -0.6016
+  color: '#4506A0',
+},
+
 });

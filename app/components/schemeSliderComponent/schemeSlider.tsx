@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 import SchemeCard from './schemeCard';
 import { Scheme } from './scheme';
+import textStyles from '../../utils/constants/textStyles';
+
 
 const schemes: Scheme[] = [
   {
@@ -16,21 +18,55 @@ const schemes: Scheme[] = [
     image: require('../../assets/images/kcc.png'),
     buttonText: 'Apply',
   },
+    {
+    title: 'Get Zero-Interest Crop Loans!',
+    subtitle: 'Special seasonal credit for small and marginal farmers.',
+    image: require('../../assets/images/kcc.png'),
+    buttonText: 'Apply',
+  },
+    {
+    title: 'Get Zero-Interest Crop Loans!',
+    subtitle: 'Special seasonal credit for small and marginal farmers.',
+    image: require('../../assets/images/kcc.png'),
+    buttonText: 'Apply',
+  },
+    {
+    title: 'Get Zero-Interest Crop Loans!',
+    subtitle: 'Special seasonal credit for small and marginal farmers.',
+    image: require('../../assets/images/kcc.png'),
+    buttonText: 'Apply',
+  },
   // More cards can be added here
 ];
 
 const SchemeSlider: React.FC = () => {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const width = Dimensions.get('window').width;
+  const isFirst = 0;
+  const isLast = schemes.length - 1;
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.heading}>Find Schemes for you</Text>
+      <Text style={[textStyles.title,{paddingLeft:16}]}>Find Schemes for you</Text>
 
       <FlatList
         data={schemes}
         keyExtractor={(_, index) => index.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <SchemeCard {...item} />}
-        contentContainerStyle={styles.slider}
+        onScroll={(event) => {
+          const index = Math.round(event.nativeEvent.contentOffset.x / width);
+          setActiveIndex(index);
+        }}
+        renderItem={({ item, index }) => (
+          <View
+            style={[styles.slider,
+              index === isFirst && styles.isFirstSlider,
+              index === isLast && styles.isLastSlider,
+            ]}
+          >
+            <SchemeCard {...item} activeIndex={index === activeIndex} />
+          </View>
+        )}
       />
     </View>
   );
@@ -40,7 +76,6 @@ export default SchemeSlider;
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingHorizontal: 16,
     width: '100%',
   },
   heading: {
@@ -49,7 +84,14 @@ const styles = StyleSheet.create({
     color: '#2E0B8C',
     marginBottom: 12,
   },
-  slider: {
+  slider:{
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  isFirstSlider: {
+    paddingLeft: 16,
+  },
+  isLastSlider: {
     paddingRight: 16,
   },
 });

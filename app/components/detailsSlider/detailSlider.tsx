@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import DetailCard from './detailCard';
+import textStyles from '../../utils/constants/textStyles';
 
 const AddDetailSlider = () => {
   return (
     <View >
       <ImageBackground source={require('../../assets/images/Union.png')} style={styles.container}>
-      <Text style={styles.heading}>Add your details</Text>
+      <Text style={[textStyles.title,{letterSpacing:-0.8}]}>Add your details</Text>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <DetailCard
