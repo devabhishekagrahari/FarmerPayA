@@ -26,7 +26,7 @@ import BankApproval from './app/screens/SignUp/Agent/bankApproval.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
 import selectYourBankScreen from './app/screens/Profile/selectYourBankScreen.tsx';
 
-import ProfileScreen from './app/screens/profileScreen.tsx';
+//import ProfileScreen from './app/screens/profileScreen.tsx';
 import ProfileScreenz from './app/screens/Profile/Profile.tsx';
 import HelpAndSupport from './app/screens/Profile/HelpandSupport'; 
 import AddNewQuery from './app/screens/Profile/AddNewQuery'; 
