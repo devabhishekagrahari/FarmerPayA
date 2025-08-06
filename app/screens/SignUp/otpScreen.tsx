@@ -79,7 +79,7 @@ const OtpVerification = ({
       setError('Incorrect OTP. Please try again.');
     } else {
       setError('');
-      navigation.navigate('WhoAreU');
+      navigation.replace('WhoAreU');
     }
   };
 
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
     color: '#121212',
     marginTop:40,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     color: '#797979',
-    borderWidth:2
+    borderWidth:2,
   },
   otpBoxActive: {
     borderWidth: 2,
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf:'center',
     alignItems: 'center',
+    marginTop:40,
   },
   verifyText: {
     color: '#FFFFFF',

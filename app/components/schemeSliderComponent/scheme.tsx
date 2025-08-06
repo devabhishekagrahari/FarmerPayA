@@ -3,4 +3,5 @@ export interface Scheme {
   subtitle: string;
   image: any; // require('../assets/...')
   buttonText: string;
+  activeIndex?: Boolean;
 }

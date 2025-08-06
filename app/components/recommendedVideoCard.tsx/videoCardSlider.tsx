@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import VideoCard from './videoCard';
+import textStyles from '../../utils/constants/textStyles';
 
 const { width } = Dimensions.get('window');
 const ITEM_WIDTH = 280 + 16; // card width + marginRight
@@ -25,7 +26,7 @@ const RecommendedVideoSlider: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recommended Videos for you</Text>
+      <Text style={[textStyles.title,{letterSpacing:-0.8, paddingHorizontal:10}]}>Recommended Videos for you</Text>
 
       <Animated.FlatList
         data={videoData}

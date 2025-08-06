@@ -27,7 +27,6 @@ const LoginScreen = ({navigation}:any) => {
     else{
         navigation.navigate('OtpScreen');
     }
-    
   };
 
   return (
