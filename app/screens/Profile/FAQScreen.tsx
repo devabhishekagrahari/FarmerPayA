@@ -126,7 +126,7 @@ const FAQScreen = () => {
                     </TouchableOpacity>
                     {isOpen && <Text style={styles.answerText}>{answerText}</Text>}
                     <View style={styles.divider} />
-                  </View>
+                    </View>
                 );
               })}
             </View>

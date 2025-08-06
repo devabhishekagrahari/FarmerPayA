@@ -229,16 +229,19 @@ micInnerCircle: {
 },
 
   nextButton: {
-    flex: 1,
-    marginLeft: 16,
-    backgroundColor: '#54219D',
-    paddingVertical: 14,
-    borderRadius: 25,
+    flex: 1, 
+    marginLeft: 16, 
+    backgroundColor: '#6929C4',
+    paddingVertical: 14, 
+    borderRadius: 25, 
     alignItems: 'center',
+    height:48,
   },
-  nextText: {
-    color: '#fff',
-    fontWeight: 'bold',
+  nextText: { 
+    color: '#fff', 
+    fontWeight: 'medium',
+    fontSize:16, 
+
   },
   warningText: {
   color: 'red',

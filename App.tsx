@@ -33,6 +33,7 @@ import ProfileScreenz from './app/screens/Profile/Profile.tsx';
 import HelpAndSupport from './app/screens/Profile/HelpandSupport'; 
 import AddNewQuery from './app/screens/Profile/AddNewQuery'; 
 import FAQ from './app/screens/Profile/FAQScreen'; 
+import PaymentsSettings from './app/screens/Profile/PaymentsSettings';
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,7 @@ const App = () => {
         <Stack.Screen name="QrScreen" component={QrScreen}/>
         <Stack.Screen name="HelpAndSupport" component={HelpAndSupport} /> 
         <Stack.Screen name="addNewQuery" component={AddNewQuery} /> 
+        <Stack.Screen name="PaymentsSettings" component={PaymentsSettings} /> 
         
         <Stack.Screen name="FAQ" component={FAQ} /> 
       </Stack.Navigator>

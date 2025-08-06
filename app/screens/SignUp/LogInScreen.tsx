@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   button: {
-    backgroundColor: '#54219D',
+    backgroundColor: '#6929C4',
     borderRadius: 48,
     height: 60,
     minWidth: '100%',

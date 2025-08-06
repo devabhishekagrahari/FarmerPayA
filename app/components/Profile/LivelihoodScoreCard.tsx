@@ -76,17 +76,15 @@ const LivelihoodScoreCard: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    borderRadius: 12,
-    backgroundColor: '#F8F8F8',
-    borderWidth: 1,
-    borderColor: '#C0C0C0',
-    padding: 16,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    shadowColor: 'transparent',
-    elevation: 0,
-  },
+    card: {
+  borderRadius: 12,
+  backgroundColor: '#F8F8F8',     // light grey for card (not screen)
+  borderWidth: 1,
+  borderColor: '#C0C0C0',
+  padding: 12,
+  shadowColor: 'transparent',     // remove shadow if unwanted
+  elevation: 0, 
+},
   titleWrapper: {
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
