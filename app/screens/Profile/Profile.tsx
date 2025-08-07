@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   StatusBar,
+  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -14,6 +15,7 @@ import LivelihoodScoreCard from '../../components/Profile/LivelihoodScoreCard';
 import BankDetailsCard from '../../components/Profile/BankDetailsCard';
 import CheckBalanceCard from '../../components/Profile/checkBalance';
 import SettingsCompo from '../../components/Profile/settings';
+import AccountCardSlider from '../../components/Profile/addAccountSlider';
 
 const ProfileScreenz = ({ navigation }: any) => {
   return (
@@ -48,9 +50,22 @@ const ProfileScreenz = ({ navigation }: any) => {
         />
         
         <CheckBalanceCard/>
+        <AccountCardSlider navigation={navigation}/>
         <SettingsCompo/>
         <Text style={{fontSize:30, fontWeight:600,color:'#D1BDED'}}>Built with ❤️ for Indian Agriculture</Text>
       </ScrollView>
+              {/* Floating Icon */}
+              <TouchableOpacity
+                onPress={() => {
+                  console.log('Floating icon pressed');
+                }}
+                style={styles.floatingButton}
+              >
+                <Image
+                  source={require('../../assets/images/mic.png')}
+                  style={styles.floatingIcon}
+                />
+              </TouchableOpacity>
     </View>
   );
 };
@@ -86,6 +101,27 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     gap:20,
     backgroundColor: '#FFFFFF', // <-- ensure scroll area is also white
+  },
+    floatingButton: {
+    position: 'absolute',
+    width: 71,
+    height: 71,
+    borderRadius: 35.5,
+    backgroundColor: '#6929C4', // or use a gradient if needed
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 60, // Replace `top: 779` with bottom for responsive layout
+    right: 20,  // Replace `left: 356` with right for alignment on all screens
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+    floatingIcon: {
+    width: 32,
+    height: 32,
+    tintColor: '#fff',
   },
 });
 

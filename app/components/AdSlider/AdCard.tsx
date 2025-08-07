@@ -17,19 +17,7 @@ type Props = AdCardProps & {
   index: number;
   total: number;
 };
-
-const LoanCard: React.FC<Props> = ({ title, subtitle, image, onPress, isActive, index, total }) => {
-  const renderDots = () => (
-    <View style={styles.dotsContainer}>
-      {Array.from({ length: total }).map((_, i) => (
-        <View
-          key={i}
-          style={i === index ? styles.activeDot : styles.inactiveDot}
-        />
-      ))}
-    </View>
-  );
-
+const LoanCard: React.FC<Props> = ({ title, subtitle, image, onPress }) => {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -37,20 +25,14 @@ const LoanCard: React.FC<Props> = ({ title, subtitle, image, onPress, isActive, 
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
-        <View style={{width:'20%',right:16,bottom:-4}}>
-          <Image
-          source={image}
-          style={styles.image}
-          resizeMode="contain"
-        />
+        <View style={{ width: '20%', right: 16, bottom: -4 }}>
+          <Image source={image} style={styles.image} resizeMode="contain" />
         </View>
-   
       </View>
-
-      {renderDots()}
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

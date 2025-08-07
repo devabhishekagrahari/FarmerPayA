@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 import InsuranceCard from './insuranceCard';
 import { Insurance } from './insurance';
+import textStyles from '../../utils/constants/textStyles';
 
 const insurances: Insurance[] = [
   {
@@ -75,7 +76,7 @@ const InsuranceSlider: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Featured Insurances</Text>
+      <Text style={[textStyles.title,{letterSpacing:-0.8}]}>Featured Insurances</Text>
 
       <FlatList
         data={grouped}

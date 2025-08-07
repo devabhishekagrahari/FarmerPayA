@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CircularProgress from './circularBar';
 import LinearGradient from 'react-native-linear-gradient';
+import textStyles from '../utils/constants/textStyles';
 
 const ProfileStatusCard = () => {
   const progress = 70;
@@ -9,7 +10,7 @@ const ProfileStatusCard = () => {
   return (
 
     <View style={styles.container}>
-      <Text style={styles.title}>Onboarding</Text>
+      <Text style={textStyles.title}>Onboarding</Text>
       
           <LinearGradient
             colors={['#E9EBFC', '#F5F4FA', '#E9EBFC']}
@@ -41,16 +42,10 @@ export default ProfileStatusCard;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    marginTop: 24,
+    marginTop: 16,
     marginBottom:24
   },
-  title: { 
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginVertical: 8,
-    color:'#1F077A',
-    marginBottom: 12,
-  },
+
   card: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -64,14 +59,22 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingRight: 12,
   },
-  statusTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1F077A',
-    marginBottom: 4,
-  },
-  description: {
-    fontSize: 12,
-    color: '#1F077AB2',
-  },
+statusTitle: {
+  fontFamily: 'Inter-SemiBold',    // Must match internal font name from .ttf
+  fontWeight: '600',               // Optional if font handles it
+  fontSize: 14.96,  //line height change from 18.96 to 14.96 to make sutiable with the screen 
+  lineHeight: 14.96,
+  letterSpacing: -0.76,            // Rounded from -0.7584
+  color: '#1F077A',
+  marginBottom: 4,
+},
+description: {
+  fontFamily: 'Inter-Regular',      // Must match actual internal font name
+  fontWeight: '400',
+  fontSize: 11,
+  lineHeight: 13,
+  letterSpacing: -0.59,             // Rounded from -0.5896
+  color: '#1F077AB2',               // Semi-transparent indigo
+},
+
 });

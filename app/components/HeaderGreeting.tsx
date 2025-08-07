@@ -12,18 +12,25 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-
+import FarmerBigImg from '../assets/images/HomeScreen/Header/farmerBigImage.svg';
+import FarmerLogo from '../assets/images/HomeScreen/Header/farmerLogo.svg';
+import TranslatorIcon from '../assets/images/Icons/translatorIcon.svg';
+import NotificationIcon from '../assets/images/Icons/notificationIcon.svg';
 const { width, height } = Dimensions.get('window');
 
-const Header = () => {
-  const navigation = useNavigation();
+const Header = ({ navigation }: any) => {
   return (
     <LinearGradient
-      colors={[ '#6929C4','#4506A0']}
+      colors={['#6929C4', '#4506A0']}
       start={{ x: 0.15, y: 0.5 }}
       end={{ x: 1, y: 0.5 }}
       style={styles.container}
-      >
+    >
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content" // or "dark-content" based on your gradient
+      />
       <ImageBackground
         source={require('../assets/images/grid.png')} // use your image path
         resizeMode="cover"
@@ -31,18 +38,20 @@ const Header = () => {
       >
         <View style={styles.topRow}>
           <View style={styles.logoRow}>
-            <Image source={require('../assets/images/smLogo.png')} style={styles.logo} />
+            <FarmerLogo />
             <Text style={styles.appName}>Farme₹Pay</Text>
           </View>
           <View style={styles.iconsRow}>
-            <TouchableOpacity 
-              style={styles.iconButton} 
-              onPress={() => navigation.navigate('Notification')}
-            >
-              <Image source={require('../assets/images/notificationIcon.png')}/>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Image source={require('../assets/images/signIcon.png')}/>
+              <TranslatorIcon />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => {
+                navigation.navigate('Notification');
+              }}
+            >
+              <NotificationIcon />
             </TouchableOpacity>
           </View>
         </View>
@@ -53,11 +62,12 @@ const Header = () => {
             <Text style={styles.username}>Animesh 🙏</Text>
             <Text style={styles.subText}>How can we help you today?</Text>
           </View>
-          <Image
+          {/* <Image
             source={require('../assets/images/farmer.png')} // illustration image
             style={styles.farmerImg}
             resizeMode="contain"
-          />
+          /> */}
+          <FarmerBigImg />
         </View>
       </ImageBackground>
     </LinearGradient>
@@ -66,16 +76,13 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: height * 0.30,
-    resizeMode:'contain'
+    width: width,
   },
   grid: {
-    flex: 1,
-    paddingHorizontal: 16,
-    aspectRatio:1.6,
-    paddingTop: 20,
-
+    width: width,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: StatusBar.currentHeight || 40,
   },
   topRow: {
     flexDirection: 'row',
@@ -86,17 +93,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   appName: {
+    fontFamily: 'Inter-Medium', // This must match the internal name in the TTF
+    fontWeight: '500', // Optional if font file handles the weight
+    fontSize: 24,
+    lineHeight: 24, // 100% of font size
+    letterSpacing: -0.96, // -4% of 24px
     color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
     marginLeft: 8,
   },
+
   logo: {
     width: 30,
     height: 40,
-    opacity:2,
-    resizeMode:'contain'
+    opacity: 2,
+    resizeMode: 'contain',
   },
   iconsRow: {
     flexDirection: 'row',
@@ -105,36 +117,47 @@ const styles = StyleSheet.create({
   iconButton: {
     backgroundColor: 'white',
     borderRadius: 12,
-    padding: 6,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
   },
   contentRow: {
+    width: width,
     flexDirection: 'row',
-
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginTop: 16,
   },
   textBlock: {
-   top:height*0.09,
-   height: height*0.2,
+    paddingTop: 16,
+    paddingBottom: 8,
   },
   greeting: {
-    fontSize: 14,
+    fontSize: 20,
     color: 'white',
+    fontFamily: 'Inter-SemiBold', // or just 'Inter' depending on how fonts are linked
+    fontWeight: '600', // optional if font file is specific weight
+    lineHeight: 20, // 100% of fontSize
+    letterSpacing: 0, // default is 0
+    textAlignVertical: 'center', // only supported on Android
   },
   username: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Inter-SemiBold', // Must be correctly linked
+    fontWeight: '600', // Optional if font file handles weight
+    fontSize: 28,
+    lineHeight:35,
+    letterSpacing: 0,
     color: '#FFAB00',
     marginVertical: 2,
   },
+
   subText: {
-    fontSize: 12,
+    fontFamily: 'Inter-Light', // depends on how font is loaded
+    fontWeight: '300', // optional if font file handles it
+    fontSize: 14,
+    lineHeight: 16.72, // 16 * 1.17
+    letterSpacing: -0.64, // -4% of 16
     color: 'white',
   },
-farmerImg: {
-  width: width * 0.45,    // 195 out of 441px ≈ 0.44
-  height: height * 0.245,  // adjust based on your design
-  opacity: 1,
-},
-
 });
 
 export default Header;

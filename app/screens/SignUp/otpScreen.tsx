@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
     color: '#121212',
     marginTop: 40,
@@ -294,6 +294,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
+    marginTop:40,
   },
   verifyText: {
     color: '#FFFFFF',

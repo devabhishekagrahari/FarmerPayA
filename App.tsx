@@ -12,11 +12,7 @@ import SignUpScreen from './app/screens/SignUp/signUpScreen';
 import SignUpFormScreen1 from './app/screens/SignUp/signUpForm1';
 import SignUpFormScreen2 from './app/screens/SignUp/SignUpForm2';
 import PlantSelectionScreen from './app/screens/SignUp/Farmer/PlantSelectionScreen.tsx';
-import { StatusBar } from 'react-native';
-import NoNotificationScreen from './app/components/emptyState/no-notification'
 import NotificationScreen from './app/screens/NotificationScreen.tsx'
-import DualAnimatedRows from './app/components/animation.tsx';
-import AIAdvisory from './app/components/AIadvisory.tsx';
 import AppNavigator from './app/navigation/AppNavigator';
 import AIChat from './app/screens/AIChat/AIChat';
 import SplashScreen2 from './app/screens/SignUp/splashScreen2';
@@ -33,8 +29,9 @@ import SpicePlantSelection from './app/screens/SignUp/Farmer/SpicePLantSelection
 import FruitPlantSelection from './app/screens/SignUp/Farmer/FruitPlantSelection';
 import VegetableSelectionScreen from './app/screens/SignUp/Farmer/VegetablePlantSelection.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
-import ProfileScreen from './app/screens/profileScreen.tsx';
-import ProfileScreenz from './app/screens/Profile/Profile.tsx';
+import selectYourBankScreen from './app/screens/Profile/selectYourBankScreen.tsx';
+import addCardDetails from './app/screens/Profile/addCardScreen.tsx';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +40,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Splash2" component={SplashScreen2} />
+        <Stack.Screen name="Splash2" component={selectYourBankScreen} />
         <Stack.Screen name="primaryRole" component={PrimaryRoleScreen} /> 
         <Stack.Screen name="secondaryRole" component={SecondaryRoleScreen} />
         <Stack.Screen name="selectLanguage" component={SelectLanguageScreen}/>
@@ -69,6 +66,8 @@ const App = () => {
         <Stack.Screen name="FruitPlantSelection" component={FruitPlantSelection} />
         <Stack.Screen name="VegetablePlantSelection" component={VegetableSelectionScreen} />
         <Stack.Screen name="QrScreen" component={QrScreen}/>
+        <Stack.Screen name="SelectYourBank" component={selectYourBankScreen} />
+        <Stack.Screen name="AddCard" component={addCardDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

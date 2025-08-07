@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 
 import HeaderGreeting from '../components/HeaderGreeting';
@@ -20,7 +21,7 @@ import RecommendedVideoSlider from '../components/recommendedVideoCard.tsx/video
 import Services from '../components/ServiceCard';
 import { InView, IOScrollView } from 'react-native-intersection-observer';
 import CheckBalanceCard from '../components/Profile/checkBalance';
-
+const { width } = Dimensions.get('window');
 const HomeScreen = ({navigation}:any) => {
   const [aiVisible, setAiVisible] = useState(false);
   return (
@@ -72,10 +73,10 @@ const HomeScreen = ({navigation}:any) => {
 
 const styles = StyleSheet.create({
   rootContainer: {
-    flex: 1,
+    width:width,
   },
   container: {
-    flex: 1,
+    width:width,
     backgroundColor: '#fff',
   },
   image: {
