@@ -35,7 +35,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Splash2" component={addCardDetails} />
+        <Stack.Screen name="Splash2" component={selectYourBankScreen} />
         <Stack.Screen name="primaryRole" component={PrimaryRoleScreen} /> 
         <Stack.Screen name="secondaryRole" component={SecondaryRoleScreen} />
         <Stack.Screen name="selectLanguage" component={SelectLanguageScreen}/>
