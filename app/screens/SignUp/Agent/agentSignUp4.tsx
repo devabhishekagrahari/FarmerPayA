@@ -15,19 +15,17 @@ import {
   Animated,
   Image,
 } from 'react-native';
-
 import VillageIcon from '../../../assets/images/VillageIcon.svg';
 import BankIcon from '../../../assets/images/BankIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import UserIcon from '../../../assets/images/agentSignUp/UserIcon.svg';
 import Upload from '../../../assets/images/Button.svg'; 
 import { pick, types } from '@react-native-documents/picker';
-
 import DeleteIcon from '../../../assets/images/agentSignUp/DeleteIcon.svg';
 import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
-
 import * as Progress from 'react-native-progress';
 import { useRoute } from '@react-navigation/native';
+import LargeButton from '../../../utils/customs/LargeButton';
 
 const {width , height}= Dimensions.get('window');
 
@@ -269,12 +267,8 @@ const [file2, setFile2] = useState<any>(null);
       </View>
 
             <View style={{ gap: 16 }}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('BankApproval')}
-              >
-                <Text style={styles.buttonText}>Sign Up</Text>
-              </TouchableOpacity>
+              
+               <LargeButton title="Sign Up" onPress={() => navigation.navigate('BankApproval')} />
               <View style={{justifyContent:'center',flexDirection:'column'}}>
                <Text style={{textAlign:'center', fontSize:10}}>We collect basic personal and performance info to track your sales, calculate payouts, and deliver rewards. Your data stays secure and is used only as described in our 
                </Text>

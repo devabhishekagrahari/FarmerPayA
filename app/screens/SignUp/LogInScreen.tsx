@@ -13,6 +13,8 @@ import {
   Dimensions,
 } from 'react-native';
 import Call from "../../assets/images/Call.svg";
+import LargeButton from '../../utils/customs/LargeButton';
+
 const{width,height}=Dimensions.get('window');
 const LoginScreen = ({navigation}:any) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -76,9 +78,7 @@ const LoginScreen = ({navigation}:any) => {
         </View>
 
         {/* Get OTP Button */}
-        <TouchableOpacity style={styles.button} onPress={handleGetOtp}>
-          <Text style={styles.buttonText}>Get OTP</Text>
-        </TouchableOpacity>
+        <LargeButton title="Get OTP" onPress={handleGetOtp} />
 
         {/* Terms */}
         <TouchableOpacity>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '400',
+    fontWeight: '500',
   },
   termsText: {
     fontSize: 12,

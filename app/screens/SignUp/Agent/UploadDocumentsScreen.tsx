@@ -15,6 +15,7 @@ import DeleteIcon from '../../../assets/images/agentSignUp/DeleteIcon.svg';
 import RefreshIcon from '../../../assets/images/agentSignUp/refreshIcon.svg';
 import Upload from '../../../assets/images/Button.svg';
 import * as Progress from 'react-native-progress';
+import LargeButton from '../../../utils/customs/LargeButton';
 
 const { width,height } = Dimensions.get('window');
 
@@ -385,6 +386,6 @@ const styles = StyleSheet.create({
   saveText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '500',
   },
 })

@@ -13,6 +13,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Feather';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import CardIcon from '../../../assets/images/agentSignUp/CardIcon.svg';
+import LargeButton from '../../../utils/customs/LargeButton';
 const { width, height } = Dimensions.get('window');
 
 const AgentSignUp1 = ({ navigation }: any) => {
@@ -45,9 +46,9 @@ const AgentSignUp1 = ({ navigation }: any) => {
   return (
     <ScrollView>
     <View style={styles.container}>
-              <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
-               <ArrowBack/>
-              </Pressable>
+      <Pressable onPress={()=>{navigation.goBack()}} style={{marginBottom:40}}>
+        <ArrowBack/>
+      </Pressable>
       <View style={styles.headerContainer}>
         <Text style={styles.heading}>Hello! Agent</Text>
         <Text style={styles.subheading}>Create your account to continue</Text>
@@ -57,7 +58,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
         {/* Full Name */}
         <Text style={{color:'#FF0000'}}>* Indicates Required</Text>
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Full Name <Text style={{color:'#FF0000'}}>*</Text></Text>
+          <Text style={styles.label}>Enter Full Name<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
             <Icon name="user" size={20} color="#C0C0C0" />
             <TextInput
@@ -70,7 +71,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
           </View>
         </View>
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Age <Text style={{color:'#FF0000'}}>*</Text></Text>
+          <Text style={styles.label}>Enter Age<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.pickerContainer}>
           <RNPickerSelect
             onValueChange={setAge}
@@ -98,7 +99,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
         </View>
                 {/* Gender Drop Down */}
                         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Gender <Text style={{color:'#FF0000'}}>*</Text></Text>
+          <Text style={styles.label}>Enter Gender<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.pickerContainer}>
           <RNPickerSelect
             onValueChange={setGender}
@@ -177,7 +178,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
         </View>
 
         <View style={styles.inputGroup}>
-         <Text style={styles.label}>Enter Adhaar Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
+         <Text style={styles.label}>Enter Adhaar Card Number<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
             <CardIcon height={20} width={20}/>
             <TextInput
@@ -192,7 +193,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
 
         {/* Father's Name */}
         <View style={styles.inputGroup}>
-        <Text style={styles.label}>Enter PAN Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
+        <Text style={styles.label}>Enter PAN Card Number<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
             <CardIcon height={20} width={20}/>
             <TextInput
@@ -207,9 +208,7 @@ const AgentSignUp1 = ({ navigation }: any) => {
      </View>
 
       {/* Continue Button */}
-      <TouchableOpacity style={styles.continueButton} onPress={()=>{navigation.navigate('AgentSignUp2')}}>
-        <Text style={styles.continueButtonText}>Continue</Text>
-      </TouchableOpacity>
+      <LargeButton title="Continue" onPress={()=>{navigation.navigate('AgentSignUp2')}} />
 
       {/* Log In Footer */}
       <Text style={styles.footerText}>
@@ -227,11 +226,9 @@ const AgentSignUp1 = ({ navigation }: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingTop: 40,
+    padding: 16,
     flex: 1,
     backgroundColor:'#fff'
- 
   },
   headerContainer: {
     marginBottom: 8,
@@ -287,6 +284,7 @@ const styles = StyleSheet.create({
   continueButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontWeight: '500',
   },
   footerText: {
     textAlign: 'center',

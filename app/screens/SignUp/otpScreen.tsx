@@ -8,6 +8,8 @@ import {
   Alert,
   Image,
 } from 'react-native';
+import BackArrow from '../../assets/images/back-arrow.svg';
+import LargeButton from '../../utils/customs/LargeButton';
 
 export default function LoginOtpVerification({ navigation }: any) {
   const onBackPress = () => {
@@ -94,8 +96,8 @@ const OtpVerification = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-        <Image source={require('../../assets/images/arrowButton.png')}/>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <BackArrow/>
       </TouchableOpacity>
 
       <Text style={styles.label}>Enter the 6 digit code sent to your number</Text>
@@ -135,10 +137,7 @@ const OtpVerification = ({
           <Text style={[styles.resendText, { color: '#79BBA8' }]}>Resend OTP</Text>
         </TouchableOpacity>
       )}
-
-      <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
-        <Text style={styles.verifyText}>Verify</Text>
-      </TouchableOpacity>
+        <LargeButton title="Verify" onPress={handleVerify} />
     </View>
   );
 };
@@ -214,5 +213,6 @@ const styles = StyleSheet.create({
   verifyText: {
     color: '#FFFFFF',
     fontSize: 18,
+    fontWeight: '500',
   },
 });

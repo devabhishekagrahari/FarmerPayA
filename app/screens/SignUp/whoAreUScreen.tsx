@@ -8,8 +8,8 @@ import {
   SafeAreaView,
   Dimensions,
 } from 'react-native';
-
-
+import LargeButton from '../../utils/customs/LargeButton';
+import LargeWhiteButton from '../../utils/customs/LargeWhiteButton';
 import BankFarmer from '../../assets/images/BankFarmer.svg'
 
 
@@ -30,15 +30,11 @@ const WhoAreUScreen = ({navigation}:any) => {
       </View>
 
       {/* Buttons */}
-      <TouchableOpacity style={styles.primaryButton} onPress={()=>{navigation.navigate('AgentSignUp1')}}>
-        <Text style={styles.primaryText}>I’m a Bank / CSC Agent</Text>
-      </TouchableOpacity>
+      <LargeButton title="I’m a Bank / CSC Agent" onPress={()=>{navigation.navigate('AgentSignUp1')}} />
 
       <Text style={styles.orText}>OR</Text>
 
-      <TouchableOpacity style={styles.secondaryButton} onPress={()=>{navigation.navigate('SignUpForm1')}}>
-        <Text style={styles.secondaryText}>I’m a Farmer</Text>
-      </TouchableOpacity>
+      <LargeWhiteButton title="I’m a Farmer" onPress={()=>{navigation.navigate('SignUpForm1')}} />
     </SafeAreaView>
   );
 };
@@ -58,7 +54,7 @@ const styles = StyleSheet.create({
   },
   textBox: {
     
-    marginBottom: 16,
+    marginBottom: 32,
   },
   title: {
     fontSize: 24,

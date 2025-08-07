@@ -19,6 +19,7 @@ import StateIcon from '../../../assets/images/StateIcon.svg';
 import ArrowBack from '../../../assets/images/ArrowBack.svg';
 import HomeIcon from '../../../assets/images/HomeIcon.svg';
 import { useRoute } from '@react-navigation/native';
+import LargeButton from '../../../utils/customs/LargeButton';
 
 interface FormData {
   houseNo?: string;
@@ -54,23 +55,16 @@ useEffect(() => {
 
   
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1, paddingTop: 40, backgroundColor: '#fff' }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={60}
-    >
-      <Pressable onPress={() => navigation.goBack()} style={{ marginHorizontal: 24 }}>
+    <ScrollView>
+      <View style={styles.container}>
+      <Pressable onPress={() => navigation.goBack()} style={{ marginBottom: 40 }}>
         <ArrowBack />
       </Pressable>
 
       <Text style={styles.label0}>Correspondance  Address</Text>
 
             {/* Checkbox */}
-
-
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
-          <View style={styles.container}>
+          <View style={styles.formContainer}>
 
             {/* Inputs */}
             <View style={styles.formGroup}>
@@ -139,44 +133,38 @@ useEffect(() => {
             </View>
 
             <View style={{ gap: 16 }}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('UploadDocumentsScreen')}
-              >
-                <Text style={styles.buttonText}>Continue</Text>
-              </TouchableOpacity>
-
-
+              <LargeButton title="Continue" onPress={()=>{navigation.navigate('UploadDocumentsScreen')}} />
             </View>
           </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      </View>
+    </ScrollView>
   );
 };
 export default AgentSignUp3;
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-    paddingTop: 24,
-    padding: 24,
+  formContainer: {
+    gap: 24,
+   marginBottom: 24,
+   marginTop:24
   },
   label0: {
-    marginHorizontal: 24,
+    //marginHorizontal: 24,
     color: '#797979',
-    paddingTop: 40,
+    paddingTop: 20,
     fontSize: 14,
+    alignItems: 'center',
   },
   container: {
     flex: 1,
-    gap: 24,
+    padding: 16,
+    backgroundColor:'#fff'
   },
   formGroup: {
     gap: 8,
   },
   label: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
     color: 'rgba(18, 18, 18, 0.87)',
   },
@@ -207,6 +195,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: '#FFFFFF',
+    fontWeight: '500',
   },
   footerText: {
     fontSize: 12,
