@@ -37,7 +37,7 @@ title: {
   fontWeight: '700',         // or 'bold'
   fontSize: 14,
   lineHeight: 14,            // 100% of fontSize
-  letterSpacing: -0.72,      // -4% of 18px = -0.72
+  letterSpacing: 0,      // -4% of 18px = -0.72
   color: '#000000',          // optional, set as needed
 }
 ,

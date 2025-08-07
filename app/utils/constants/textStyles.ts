@@ -70,7 +70,7 @@ const textStyles = StyleSheet.create<TextStyles>({
     color: '#e63946',
   },
   title: {
-    fontFamily: 'Inter-Bold', 
+    fontFamily: 'Inter-Italic', 
     fontWeight: '600', // Optional if font handles it
     fontSize: 16,
     lineHeight: 16, // 100% of 20px

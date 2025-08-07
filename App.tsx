@@ -25,6 +25,7 @@ import AgentSignUp4 from './app/screens/SignUp/Agent/agentSignUp4.tsx';
 import BankApproval from './app/screens/SignUp/Agent/bankApproval.tsx';
 import QrScreen from './app/screens/scanner/qr.tsx';
 import selectYourBankScreen from './app/screens/Profile/selectYourBankScreen.tsx';
+import addCardDetails from './app/screens/Profile/addCardScreen.tsx';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,7 +35,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Splash2" component={SplashScreen2} />
+        <Stack.Screen name="Splash2" component={addCardDetails} />
         <Stack.Screen name="primaryRole" component={PrimaryRoleScreen} /> 
         <Stack.Screen name="secondaryRole" component={SecondaryRoleScreen} />
         <Stack.Screen name="selectLanguage" component={SelectLanguageScreen}/>
@@ -56,6 +57,7 @@ const App = () => {
         <Stack.Screen name="UploadDocumentsScreen" component={UploadDocumentsScreen}/>
         <Stack.Screen name="QrScreen" component={QrScreen}/>
         <Stack.Screen name="SelectYourBank" component={selectYourBankScreen} />
+        <Stack.Screen name="AddCard" component={addCardDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
