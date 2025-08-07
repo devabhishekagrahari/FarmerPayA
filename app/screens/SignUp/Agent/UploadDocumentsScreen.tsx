@@ -18,6 +18,7 @@ import * as Progress from 'react-native-progress';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/api';
+import LargeButton from '../../../utils/customs/LargeButton';
 
 const { width,height } = Dimensions.get('window');
 
@@ -452,7 +453,6 @@ const styles = StyleSheet.create({
   saveText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '500',
   },
-}
-);
+});

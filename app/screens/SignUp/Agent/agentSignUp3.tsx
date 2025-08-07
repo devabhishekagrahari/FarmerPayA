@@ -23,6 +23,15 @@ import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/api';
 import { KeyboardTypeOptions } from 'react-native';
+import LargeButton from '../../../utils/customs/LargeButton';
+
+interface FormData {
+  houseNo?: string;
+  villageName?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
+}
 
 const AgentSignUp3 = ({ navigation }: any) => {
     const route = useRoute<any>();
@@ -92,47 +101,31 @@ const AgentSignUp3 = ({ navigation }: any) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1, paddingTop: 40, backgroundColor: '#fff' }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={60}
-    >
-      <Pressable onPress={() => navigation.goBack()} style={{ marginHorizontal: 24 }}>
+    <ScrollView>
+      <View style={styles.container}>
+      <Pressable onPress={() => navigation.goBack()} style={{ marginBottom: 40 }}>
         <ArrowBack />
       </Pressable>
 
       <Text style={styles.label0}>Correspondance  Address</Text>
 
             {/* Checkbox */}
+          <View style={styles.formContainer}>
 
-
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
-          <View style={styles.container}>
-            {/* Input Fields */}
-            {[
-              { label: 'Enter House Number', key: 'houseNo', icon: <HomeIcon height={20} width={20} /> },
-              { label: 'Enter Village', key: 'villageName', icon: <VillageIcon height={25} width={25} /> },
-              { label: 'Enter City/District Name', key: 'city', icon: <VillageIcon height={25} width={25} /> },
-              { label: 'Enter Pincode', key: 'pincode', icon: <VillageIcon height={25} width={25} />, keyboardType: 'number-pad' },
-              { label: 'Enter State', key: 'state', icon: <StateIcon height={25} width={25} /> },
-            ].map(({ label, key, icon, keyboardType }) => (
-              <View style={styles.formGroup} key={key}>
-                <Text style={styles.label}>{label}</Text>
-                <View style={styles.inputBox}>
-                  {icon}
-                  <TextInput
-                    placeholder={label}
-                    placeholderTextColor="#C0C0C0"
-                    style={styles.input}
-                    value={formData[key as keyof typeof formData]}
-                    onChangeText={(text) => setFormData({ ...formData, [key]: text })}
-                    keyboardType={keyboardType as KeyboardTypeOptions || 'default'}
-                    maxLength={key === 'pincode' ? 6 : undefined}
-                  />
-                </View>
+            {/* Inputs */}
+            <View style={styles.formGroup}>
+              <Text style={styles.label}>Enter House Number</Text>
+              <View style={styles.inputBox}>
+                <HomeIcon height={20} width={20} color={'#A0A0A0'} />
+                <TextInput
+                  placeholder="Enter your house, flat, apartment no."
+                  style={styles.input}
+                  placeholderTextColor="#C0C0C0"
+                  value={formData.houseNo}
+                />
               </View>
-              ))}
+            </View>
+          
 
             <View style={styles.formGroup}>
               <Text style={styles.label}>Enter Village</Text>
@@ -187,42 +180,40 @@ const AgentSignUp3 = ({ navigation }: any) => {
             </View>
 
             <View style={{ gap: 16 }}>
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Continue</Text>
-              </TouchableOpacity>
-
-
+               <LargeButton title="Continue"  onPress={handleSubmit}/>
             </View>
           </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      </View>
+    </ScrollView>
   );
 };
 
 export default AgentSignUp3;
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-    paddingTop: 24,
-    padding: 24,
+  formContainer: {
+    gap: 24,
+   marginBottom: 24,
+   marginTop:24
   },
   label0: {
     marginHorizontal: 22,
+    //marginHorizontal: 24,
     color: '#797979',
-    paddingTop: 40,
+    paddingTop: 20,
     fontSize: 14,
+    alignItems: 'center',
   },
   container: {
     flex: 1,
-    gap: 24,
+    padding: 16,
+    backgroundColor:'#fff'
   },
   formGroup: {
     gap: 8,
   },
   label: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
     color: 'rgba(18, 18, 18, 0.87)',
   },
@@ -244,7 +235,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 60,
-    backgroundColor: '#54219D',
+    backgroundColor: '#6929C4',
     borderRadius: 48,
     justifyContent: 'center',
     alignItems: 'center',
@@ -253,6 +244,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: '#FFFFFF',
+    fontWeight: '500',
   },
   footerText: {
     fontSize: 12,

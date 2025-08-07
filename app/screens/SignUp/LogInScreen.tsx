@@ -15,6 +15,7 @@ import {
 import Call from "../../assets/images/Call.svg";
 import axios from 'axios';
 import { BASE_URL } from '../../utils/api';
+import LargeButton from '../../utils/customs/LargeButton';
 
 const{width,height}=Dimensions.get('window');
 
@@ -96,9 +97,7 @@ const LoginScreen = ({navigation}:any) => {
         </View>
 
         {/* Get OTP Button */}
-        <TouchableOpacity style={styles.button} onPress={handleGetOtp}>
-          <Text style={styles.buttonText}>Get OTP</Text>
-        </TouchableOpacity>
+        <LargeButton title="Get OTP" onPress={handleGetOtp} />
 
         {/* Terms */}
         <TouchableOpacity>
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   button: {
-    backgroundColor: '#54219D',
+    backgroundColor: '#6929C4',
     borderRadius: 48,
     height: 60,
     minWidth: '100%',
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '400',
+    fontWeight: '500',
   },
   termsText: {
     fontSize: 12,

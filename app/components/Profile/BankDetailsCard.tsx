@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Clipboard, Image } from 'react-native';
 import CopyIcon from '../../assets/images/Profile/copy.svg';
-import SBIIcon from '../../assets/images/Profile/sbi.png'; // Ensure correct path
+import SBIIcon from '../../assets/images/Profile/sbi.png';
+import {useNavigation} from '@react-navigation/native';
 
 interface BankDetailsCardProps {
   bankName: string;
@@ -22,6 +23,7 @@ const BankDetailsCard: React.FC<BankDetailsCardProps> = ({
     Clipboard.setString(upiId);
     Alert.alert('Copied', 'UPI ID copied to clipboard');
   };
+  const navigation = useNavigation();
 
   return (
     <View style={styles.card}>
@@ -37,7 +39,7 @@ const BankDetailsCard: React.FC<BankDetailsCardProps> = ({
           <Text style={styles.bankName}>{`${bankName} - ${accountSuffix}`}</Text>
           <Text style={styles.accountType}>{accountType}</Text>
         </View>
-        <TouchableOpacity style={styles.manageBtn} onPress={onManage}>
+        <TouchableOpacity style={styles.manageBtn} onPress={()=> navigation.navigate('PaymentsSettings')}>
           <Text style={styles.manageText}>Manage</Text>
         </TouchableOpacity>
       </View>
@@ -55,14 +57,16 @@ const BankDetailsCard: React.FC<BankDetailsCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 12,
-    backgroundColor: '#F8F8F8',
-    borderWidth: 1,
-    borderColor: '#C0C0C0',
-    padding: 16,
-    marginVertical: 10,
-    marginHorizontal: 20,
-  },
+  borderRadius: 12,
+  backgroundColor: '#F8F8F8',     // light grey for card (not screen)
+  borderWidth: 1,
+  borderColor: '#C0C0C0',
+  padding: 12,
+  shadowColor: 'transparent',     // remove shadow if unwanted
+  elevation: 0,                   // no Android elevation
+  //marginVertical: 10,
+  //marginHorizontal: 20,
+},
   titleWrapper: {
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',

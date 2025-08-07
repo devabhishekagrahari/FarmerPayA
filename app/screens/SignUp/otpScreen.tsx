@@ -8,9 +8,11 @@ import {
   Alert,
   Image,
 } from 'react-native';
+
 import axios from 'axios';
 import { BASE_URL } from '../../utils/api';
-
+import BackArrow from '../../assets/images/back-arrow.svg';
+import LargeButton from '../../utils/customs/LargeButton';
 export default function LoginOtpVerification({ navigation, route }: any) {
   const { mobile } = route.params;
 
@@ -162,8 +164,8 @@ const handleVerify = async () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-        <Image source={require('../../assets/images/arrowButton.png')} />
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <BackArrow/>
       </TouchableOpacity>
 
       <Text style={styles.label}>
@@ -219,9 +221,8 @@ const handleVerify = async () => {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity style={styles.verifyButton} onPress={ handleVerify}>
-        <Text style={styles.verifyText}>Verify</Text>
-      </TouchableOpacity>
+
+      <LargeButton title="Verify"  onPress={ handleVerify}/>
     </View>
   );
 };
@@ -287,7 +288,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   verifyButton: {
-    backgroundColor: '#54219D',
+    backgroundColor: '#6929C4',
     height: 60,
     borderRadius: 48,
     width: '90%',
@@ -299,5 +300,6 @@ const styles = StyleSheet.create({
   verifyText: {
     color: '#FFFFFF',
     fontSize: 18,
+    fontWeight: '500',
   },
 });

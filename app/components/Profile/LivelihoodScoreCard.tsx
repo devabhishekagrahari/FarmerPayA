@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SemiCircleProgress  from './SemiCircleProgress';
-// SVGs
 import Productivity from '../../assets/images/Profile/productivity.svg';
 import Financial from '../../assets/images/Profile/rupee.svg';
 import Risk from '../../assets/images/Profile/risk.svg';
 import Engagement from '../../assets/images/Profile/engagement.svg';
 import Sound from '../../assets/images/Profile/sound.svg';
-import MedalIcon from './Livelihood/MedalIcon';
+import MedalIcon from '../../assets/images/Profile/medal.svg';
 import Medal from '../../assets/images/Profile/medal.svg';
+
 interface ScoreSection {
   label: string;
   icon: React.ReactNode;
@@ -76,17 +76,15 @@ const LivelihoodScoreCard: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    borderRadius: 12,
-    backgroundColor: '#F8F8F8',
-    borderWidth: 1,
-    borderColor: '#C0C0C0',
-    padding: 16,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    shadowColor: 'transparent',
-    elevation: 0,
-  },
+    card: {
+  borderRadius: 12,
+  backgroundColor: '#F8F8F8',     // light grey for card (not screen)
+  borderWidth: 1,
+  borderColor: '#C0C0C0',
+  padding: 12,
+  shadowColor: 'transparent',     // remove shadow if unwanted
+  elevation: 0, 
+},
   titleWrapper: {
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',

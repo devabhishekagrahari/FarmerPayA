@@ -18,6 +18,7 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/api';
 
+import LargeButton from '../../../utils/customs/LargeButton';
 const { width, height } = Dimensions.get('window');
 
 const AgentSignUp1 = ({ navigation , route}: any) => {
@@ -125,7 +126,7 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
         {/* Full Name 
         <Text style={{color:'#FF0000'}}>* Indicates Required</Text>*/}
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Full Name <Text style={{color:'#FF0000'}}>*</Text></Text>
+          <Text style={styles.label}>Enter Full Name<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
             <Icon name="user" size={20} color="#C0C0C0" />
             <TextInput
@@ -139,8 +140,8 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
         </View>
 
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Age <Text style={{color:'#FF0000'}}>*</Text></Text>
-          <View style={styles.inputBox}>
+          <Text style={styles.label}>Enter Age<Text style={{color:'#FF0000'}}>*</Text></Text>
+          <View style={styles.pickerContainer}>
           <RNPickerSelect
             onValueChange={setAge}
             value={age}
@@ -165,10 +166,9 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
           />
           </View>
         </View>
-
-        {/* Gender Drop Down */}
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter Gender <Text style={{color:'#FF0000'}}>*</Text></Text>
+                {/* Gender Drop Down */}
+                        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Enter Gender<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.pickerContainer}>
           <RNPickerSelect
             onValueChange={setGender}
@@ -249,7 +249,7 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
 
         {/* Adhaar Card */}
         <View style={styles.inputGroup}>
-         <Text style={styles.label}>Enter Adhaar Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
+         <Text style={styles.label}>Enter Adhaar Card Number<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
             <CardIcon height={20} width={20}/>
             <TextInput
@@ -266,7 +266,7 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
 
         {/* PAN Card Number */}
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Enter PAN Card Number <Text style={{color:'#FF0000'}}>*</Text></Text>
+        <Text style={styles.label}>Enter PAN Card Number<Text style={{color:'#FF0000'}}>*</Text></Text>
           <View style={styles.inputBox}>
           <CardIcon height={20} width={20}/>
           <TextInput
@@ -282,9 +282,7 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
         </View>
 
         {/* Continue Button */}
-        <TouchableOpacity style={styles.continueButton} onPress={handleRegisterAgent}>
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </TouchableOpacity>
+        <LargeButton title="Continue" onPress={handleRegisterAgent}/>
 
         {/* Log In Footer */}
         <Text style={styles.footerText}>
@@ -304,11 +302,9 @@ const AgentSignUp1 = ({ navigation , route}: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingTop: 40,
+    padding: 16,
     flex: 1,
     backgroundColor:'#fff'
- 
   },
   headerContainer: {
     marginBottom: 8,
@@ -353,7 +349,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   continueButton: {
-    backgroundColor: '#54219D',
+    backgroundColor: '#6929C4',
     height: 60,
     borderRadius: 48,
     justifyContent: 'center',
@@ -364,6 +360,7 @@ const styles = StyleSheet.create({
   continueButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontWeight: '500',
   },
   footerText: {
     textAlign: 'center',

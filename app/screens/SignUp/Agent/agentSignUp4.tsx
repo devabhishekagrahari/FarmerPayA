@@ -27,6 +27,7 @@ import * as Progress from 'react-native-progress';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/api';
+import LargeButton from '../../../utils/customs/LargeButton';
 
 const {width , height}= Dimensions.get('window');
 
@@ -344,18 +345,11 @@ const AgentSignUp4 = ({ navigation }: any) => {
       </View>
 
             <View style={{ gap: 16 }}>
-              <TouchableOpacity
-                style={styles.button}
+              <LargeButton title="Sign Up" 
                 //onPress={handleSubmit}
                 onPress = {()=> navigation.navigate('BankApproval')}
-              >
-                <Text style={styles.buttonText}>Sign Up</Text>
-              </TouchableOpacity>
-              <View style={{justifyContent:'center',flexDirection:'column'}}>
-               <Text style={{textAlign:'center', fontSize:10}}>We collect basic personal and performance info to track your sales, calculate payouts, and deliver rewards. Your data stays secure and is used only as described in our 
-               </Text>
-               <Text style={{textAlign:'center' ,fontSize:10 ,color:'#54219D'}}>Privacy Policy</Text>
-              </View>
+              />
+                
             </View>
       </View>
         </ScrollView>
@@ -407,7 +401,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 60,
-    backgroundColor: '#54219D',
+    backgroundColor: '#6929C4',
     borderRadius: 48,
     justifyContent: 'center',
     alignItems: 'center',
